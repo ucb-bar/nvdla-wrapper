@@ -1,4 +1,3 @@
-`define XSDB_SLV_DIS
 `define FPGA
 `define SYNTHESIS
 `define DESIGNWARE_NOEXIST

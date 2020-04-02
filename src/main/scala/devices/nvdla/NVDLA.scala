@@ -1,7 +1,7 @@
 // See LICENSE for license details.
 package nvidia.blocks.dla
 
-import Chisel._
+import chisel3._
 import freechips.rocketchip.config._
 import freechips.rocketchip.diplomacy._
 import freechips.rocketchip.amba.axi4._
@@ -17,7 +17,7 @@ case class NVDLAParams(
   raddress: BigInt
 )
 
-class NVDLA(params: NVDLAParams, val crossing: ClockCrossingType = AsynchronousCrossing(8, 3))(implicit p: Parameters) extends LazyModule with HasCrossing {
+class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
   val blackboxName = "nvdla_" + params.config
   val hasSecondAXI = params.config == "large"
@@ -84,12 +84,11 @@ class NVDLA(params: NVDLAParams, val crossing: ClockCrossingType = AsynchronousC
 
   lazy val module = new LazyModuleImp(this) {
 
-    val u_nvdla = Module(new nvdla(blackboxName, hasSecondAXI, dataWidthAXI))
+    val u_nvdla = Module(new nvdla(params.config, blackboxName, hasSecondAXI, dataWidthAXI))
 
     u_nvdla.io.core_clk    := clock
-    u_nvdla.io.csb_clk     := clock
-    u_nvdla.io.rstn        := ~reset
-    u_nvdla.io.csb_rstn    := ~reset
+    u_nvdla.io.rstn        := ~reset.asBool
+    u_nvdla.io.csb_rstn    := ~reset.asBool
 
     val (dbb, _) = dbb_axi_node.out(0)
 
@@ -166,7 +165,7 @@ class NVDLA(params: NVDLAParams, val crossing: ClockCrossingType = AsynchronousC
     u_nvdla.io.pwdata       := cfg.pwdata
     cfg.prdata              := u_nvdla.io.prdata
     cfg.pready              := u_nvdla.io.pready
-    cfg.pslverr             := Bool(false)
+    cfg.pslverr             := false.B
 
     val (io_int, _) = int_node.out(0)
 

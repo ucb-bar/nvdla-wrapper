@@ -1,7 +1,7 @@
 // See LICENSE for license details.
 package nvidia.blocks.dla
 
-import Chisel._
+import chisel3._
 import freechips.rocketchip.config.Field
 import freechips.rocketchip.subsystem.BaseSubsystem
 import freechips.rocketchip.diplomacy.{LazyModule,BufferParams}

@@ -1,92 +1,99 @@
 // See LICENSE for license details.
 package nvidia.blocks.ip.dla
 
-import Chisel._
+import sys.process._
+
+import chisel3._
+import chisel3.util._
 
 //scalastyle:off
 //turn off linter: blackbox name must match verilog module
-class nvdla(blackboxName: String, hasSecondAXI: Boolean, dataWidthAXI: Int) extends BlackBox {
+class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dataWidthAXI: Int) extends BlackBox with HasBlackBoxResource {
 
   override def desiredName = blackboxName
 
-  val io = new Bundle {
+  val io = IO(new Bundle {
 
-    val core_clk = Clock(INPUT)
-    val csb_clk = Clock(INPUT)
-    val rstn = Bool(INPUT)
-    val csb_rstn = Bool(INPUT)
+    val core_clk = Input(Clock())
+    val rstn = Input(Bool())
+    val csb_rstn = Input(Bool())
 
-    val dla_intr = Bool(OUTPUT)
+    val dla_intr = Output(Bool())
     // dbb AXI
-    val nvdla_core2dbb_aw_awvalid = Bool(OUTPUT)
-    val nvdla_core2dbb_aw_awready = Bool(INPUT)
-    val nvdla_core2dbb_aw_awid = Bits(OUTPUT,8)
-    val nvdla_core2dbb_aw_awlen = Bits(OUTPUT,4)
-    val nvdla_core2dbb_aw_awsize = Bits(OUTPUT,3)
-    val nvdla_core2dbb_aw_awaddr = Bits(OUTPUT,64)
+    val nvdla_core2dbb_aw_awvalid = Output(Bool())
+    val nvdla_core2dbb_aw_awready = Input(Bool())
+    val nvdla_core2dbb_aw_awid = Output(UInt((8).W))
+    val nvdla_core2dbb_aw_awlen = Output(UInt((4).W))
+    val nvdla_core2dbb_aw_awsize = Output(UInt((3).W))
+    val nvdla_core2dbb_aw_awaddr = Output(UInt((64).W))
 
-    val nvdla_core2dbb_w_wvalid = Bool(OUTPUT)
-    val nvdla_core2dbb_w_wready = Bool(INPUT)
-    val nvdla_core2dbb_w_wdata = Bits(OUTPUT,dataWidthAXI)
-    val nvdla_core2dbb_w_wstrb = Bits(OUTPUT,dataWidthAXI/8)
-    val nvdla_core2dbb_w_wlast = Bool(OUTPUT)
+    val nvdla_core2dbb_w_wvalid = Output(Bool())
+    val nvdla_core2dbb_w_wready = Input(Bool())
+    val nvdla_core2dbb_w_wdata = Output(UInt((dataWidthAXI).W))
+    val nvdla_core2dbb_w_wstrb = Output(UInt((dataWidthAXI/8).W))
+    val nvdla_core2dbb_w_wlast = Output(Bool())
 
-    val nvdla_core2dbb_ar_arvalid = Bool(OUTPUT)
-    val nvdla_core2dbb_ar_arready = Bool(INPUT)
-    val nvdla_core2dbb_ar_arid = Bits(OUTPUT,8)
-    val nvdla_core2dbb_ar_arlen = Bits(OUTPUT,4)
-    val nvdla_core2dbb_ar_arsize = Bits(OUTPUT,3)
-    val nvdla_core2dbb_ar_araddr = Bits(OUTPUT,64)
+    val nvdla_core2dbb_ar_arvalid = Output(Bool())
+    val nvdla_core2dbb_ar_arready = Input(Bool())
+    val nvdla_core2dbb_ar_arid = Output(UInt((8).W))
+    val nvdla_core2dbb_ar_arlen = Output(UInt((4).W))
+    val nvdla_core2dbb_ar_arsize = Output(UInt((3).W))
+    val nvdla_core2dbb_ar_araddr = Output(UInt((64).W))
 
-    val nvdla_core2dbb_b_bvalid = Bool(INPUT)
-    val nvdla_core2dbb_b_bready = Bool(OUTPUT)
-    val nvdla_core2dbb_b_bid = Bits(INPUT,8)
+    val nvdla_core2dbb_b_bvalid = Input(Bool())
+    val nvdla_core2dbb_b_bready = Output(Bool())
+    val nvdla_core2dbb_b_bid = Input(UInt((8).W))
 
-    val nvdla_core2dbb_r_rvalid = Bool(INPUT)
-    val nvdla_core2dbb_r_rready = Bool(OUTPUT)
-    val nvdla_core2dbb_r_rid = Bits(INPUT,8)
-    val nvdla_core2dbb_r_rlast = Bool(INPUT)
-    val nvdla_core2dbb_r_rdata = Bits(INPUT,dataWidthAXI)
+    val nvdla_core2dbb_r_rvalid = Input(Bool())
+    val nvdla_core2dbb_r_rready = Output(Bool())
+    val nvdla_core2dbb_r_rid = Input(UInt((8).W))
+    val nvdla_core2dbb_r_rlast = Input(Bool())
+    val nvdla_core2dbb_r_rdata = Input(UInt((dataWidthAXI).W))
     // cvsram AXI
     val nvdla_core2cvsram = if (hasSecondAXI) Some(new Bundle {
 
-      val aw_awvalid = Bool(OUTPUT)
-      val aw_awready = Bool(INPUT)
-      val aw_awid = Bits(OUTPUT,8)
-      val aw_awlen = Bits(OUTPUT,4)
-      val aw_awsize = Bits(OUTPUT,3)
-      val aw_awaddr = Bits(OUTPUT,64)
+      val aw_awvalid = Output(Bool())
+      val aw_awready = Input(Bool())
+      val aw_awid = Output(UInt((8).W))
+      val aw_awlen = Output(UInt((4).W))
+      val aw_awsize = Output(UInt((3).W))
+      val aw_awaddr = Output(UInt((64).W))
 
-      val w_wvalid = Bool(OUTPUT)
-      val w_wready = Bool(INPUT)
-      val w_wdata = Bits(OUTPUT,dataWidthAXI)
-      val w_wstrb = Bits(OUTPUT,dataWidthAXI/8)
-      val w_wlast = Bool(OUTPUT)
+      val w_wvalid = Output(Bool())
+      val w_wready = Input(Bool())
+      val w_wdata = Output(UInt((dataWidthAXI).W))
+      val w_wstrb = Output(UInt((dataWidthAXI/8).W))
+      val w_wlast = Output(Bool())
 
-      val ar_arvalid = Bool(OUTPUT)
-      val ar_arready = Bool(INPUT)
-      val ar_arid = Bits(OUTPUT,8)
-      val ar_arlen = Bits(OUTPUT,4)
-      val ar_arsize = Bits(OUTPUT,3)
-      val ar_araddr = Bits(OUTPUT,64)
+      val ar_arvalid = Output(Bool())
+      val ar_arready = Input(Bool())
+      val ar_arid = Output(UInt((8).W))
+      val ar_arlen = Output(UInt((4).W))
+      val ar_arsize = Output(UInt((3).W))
+      val ar_araddr = Output(UInt((64).W))
 
-      val b_bvalid = Bool(INPUT)
-      val b_bready = Bool(OUTPUT)
-      val b_bid = Bits(INPUT,8)
+      val b_bvalid = Input(Bool())
+      val b_bready = Output(Bool())
+      val b_bid = Input(UInt((8).W))
 
-      val r_rvalid = Bool(INPUT)
-      val r_rready = Bool(OUTPUT)
-      val r_rid = Bits(INPUT,8)
-      val r_rlast = Bool(INPUT)
-      val r_rdata = Bits(INPUT,dataWidthAXI)
+      val r_rvalid = Input(Bool())
+      val r_rready = Output(Bool())
+      val r_rid = Input(UInt((8).W))
+      val r_rlast = Input(Bool())
+      val r_rdata = Input(UInt((dataWidthAXI).W))
     }) else None
     // cfg APB
-    val psel = Bool(INPUT)
-    val penable = Bool(INPUT)
-    val pwrite = Bool(INPUT)
-    val paddr = Bits(INPUT,32)
-    val pwdata = Bits(INPUT,32)
-    val prdata = Bits(OUTPUT,32)
-    val pready = Bool(OUTPUT)
-  }
+    val psel = Input(Bool())
+    val penable = Input(Bool())
+    val pwrite = Input(Bool())
+    val paddr = Input(UInt((32).W))
+    val pwdata = Input(UInt((32).W))
+    val prdata = Output(UInt((32).W))
+    val pready = Output(Bool())
+  })
+
+  val make = s"make -C generators/nvdla default NVDLA_TYPE=${configName}"
+  require (make.! == 0, "Failed to run pre-processing step")
+
+  addResource("/nvdla.preprocessed.v")
 }

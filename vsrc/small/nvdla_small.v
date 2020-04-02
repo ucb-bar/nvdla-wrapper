@@ -9,7 +9,6 @@
 module nvdla_small
 (
     input core_clk,
-    input csb_clk,
     input rstn,
     input csb_rstn,
 
@@ -59,6 +58,8 @@ wire        m_csb2nvdla_nposted;
 wire        m_nvdla2csb_valid;
 wire [31:0] m_nvdla2csb_data;
 
+wire csb_clk;
+assign csb_clk = core_clk;
 
 NV_NVDLA_apb2csb apb2csb (
    .pclk                  (csb_clk)
@@ -100,7 +101,7 @@ NV_nvdla nvdla_top (
   ,.nvdla2csb_wr_complete           () //FIXME: no such port in apb2csb
   ,.nvdla_core2dbb_aw_awvalid       (nvdla_core2dbb_aw_awvalid)
   ,.nvdla_core2dbb_aw_awready       (nvdla_core2dbb_aw_awready)
-  ,.nvdla_core2dbb_aw_awaddr        (nvdla_core2dbb_aw_awaddr)
+  ,.nvdla_core2dbb_aw_awaddr        (nvdla_core2dbb_aw_awaddr[31:0])
   ,.nvdla_core2dbb_aw_awid          (nvdla_core2dbb_aw_awid)
   ,.nvdla_core2dbb_aw_awlen         (nvdla_core2dbb_aw_awlen)
   ,.nvdla_core2dbb_w_wvalid         (nvdla_core2dbb_w_wvalid)
@@ -113,7 +114,7 @@ NV_nvdla nvdla_top (
   ,.nvdla_core2dbb_b_bid            (nvdla_core2dbb_b_bid)
   ,.nvdla_core2dbb_ar_arvalid       (nvdla_core2dbb_ar_arvalid)
   ,.nvdla_core2dbb_ar_arready       (nvdla_core2dbb_ar_arready)
-  ,.nvdla_core2dbb_ar_araddr        (nvdla_core2dbb_ar_araddr)
+  ,.nvdla_core2dbb_ar_araddr        (nvdla_core2dbb_ar_araddr[31:0])
   ,.nvdla_core2dbb_ar_arid          (nvdla_core2dbb_ar_arid)
   ,.nvdla_core2dbb_ar_arlen         (nvdla_core2dbb_ar_arlen)
   ,.nvdla_core2dbb_r_rvalid         (nvdla_core2dbb_r_rvalid)

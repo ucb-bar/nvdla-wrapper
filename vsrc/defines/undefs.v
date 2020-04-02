@@ -1,4 +1,3 @@
-`undef XSDB_SLV_DIS
 `undef FPGA
 `undef SYNTHESIS
 `undef DESIGNWARE_NOEXIST
