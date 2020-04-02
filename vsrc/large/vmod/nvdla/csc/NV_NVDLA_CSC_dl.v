@@ -8,9 +8,9 @@
 // File Name: NV_NVDLA_CSC_dl.v
 // ================================================================
 // NVDLA Open Source Project
-// 
+//
 // Copyright(c) 2016 - 2017 NVIDIA Corporation.  Licensed under the
-// NVDLA Open Hardware License; Check "LICENSE" which comes with 
+// NVDLA Open Hardware License; Check "LICENSE" which comes with
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CSC.h
@@ -29,9 +29,9 @@
 //batch keep 1
 // ================================================================
 // NVDLA Open Source Project
-// 
+//
 // Copyright(c) 2016 - 2017 NVIDIA Corporation.  Licensed under the
-// NVDLA Open Hardware License; Check "LICENSE" which comes with 
+// NVDLA Open Hardware License; Check "LICENSE" which comes with
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CBUF.h
@@ -68,70 +68,70 @@ module NV_NVDLA_CSC_dl (
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-,sc2mac_dat_a_data0 //|> o 
-,sc2mac_dat_a_data1 //|> o 
-,sc2mac_dat_a_data2 //|> o 
-,sc2mac_dat_a_data3 //|> o 
-,sc2mac_dat_a_data4 //|> o 
-,sc2mac_dat_a_data5 //|> o 
-,sc2mac_dat_a_data6 //|> o 
-,sc2mac_dat_a_data7 //|> o 
-,sc2mac_dat_a_data8 //|> o 
-,sc2mac_dat_a_data9 //|> o 
-,sc2mac_dat_a_data10 //|> o 
-,sc2mac_dat_a_data11 //|> o 
-,sc2mac_dat_a_data12 //|> o 
-,sc2mac_dat_a_data13 //|> o 
-,sc2mac_dat_a_data14 //|> o 
-,sc2mac_dat_a_data15 //|> o 
-,sc2mac_dat_a_data16 //|> o 
-,sc2mac_dat_a_data17 //|> o 
-,sc2mac_dat_a_data18 //|> o 
-,sc2mac_dat_a_data19 //|> o 
-,sc2mac_dat_a_data20 //|> o 
-,sc2mac_dat_a_data21 //|> o 
-,sc2mac_dat_a_data22 //|> o 
-,sc2mac_dat_a_data23 //|> o 
-,sc2mac_dat_a_data24 //|> o 
-,sc2mac_dat_a_data25 //|> o 
-,sc2mac_dat_a_data26 //|> o 
-,sc2mac_dat_a_data27 //|> o 
-,sc2mac_dat_a_data28 //|> o 
-,sc2mac_dat_a_data29 //|> o 
-,sc2mac_dat_a_data30 //|> o 
-,sc2mac_dat_a_data31 //|> o 
-,sc2mac_dat_a_data32 //|> o 
-,sc2mac_dat_a_data33 //|> o 
-,sc2mac_dat_a_data34 //|> o 
-,sc2mac_dat_a_data35 //|> o 
-,sc2mac_dat_a_data36 //|> o 
-,sc2mac_dat_a_data37 //|> o 
-,sc2mac_dat_a_data38 //|> o 
-,sc2mac_dat_a_data39 //|> o 
-,sc2mac_dat_a_data40 //|> o 
-,sc2mac_dat_a_data41 //|> o 
-,sc2mac_dat_a_data42 //|> o 
-,sc2mac_dat_a_data43 //|> o 
-,sc2mac_dat_a_data44 //|> o 
-,sc2mac_dat_a_data45 //|> o 
-,sc2mac_dat_a_data46 //|> o 
-,sc2mac_dat_a_data47 //|> o 
-,sc2mac_dat_a_data48 //|> o 
-,sc2mac_dat_a_data49 //|> o 
-,sc2mac_dat_a_data50 //|> o 
-,sc2mac_dat_a_data51 //|> o 
-,sc2mac_dat_a_data52 //|> o 
-,sc2mac_dat_a_data53 //|> o 
-,sc2mac_dat_a_data54 //|> o 
-,sc2mac_dat_a_data55 //|> o 
-,sc2mac_dat_a_data56 //|> o 
-,sc2mac_dat_a_data57 //|> o 
-,sc2mac_dat_a_data58 //|> o 
-,sc2mac_dat_a_data59 //|> o 
-,sc2mac_dat_a_data60 //|> o 
-,sc2mac_dat_a_data61 //|> o 
-,sc2mac_dat_a_data62 //|> o 
-,sc2mac_dat_a_data63 //|> o 
+,sc2mac_dat_a_data0 //|> o
+,sc2mac_dat_a_data1 //|> o
+,sc2mac_dat_a_data2 //|> o
+,sc2mac_dat_a_data3 //|> o
+,sc2mac_dat_a_data4 //|> o
+,sc2mac_dat_a_data5 //|> o
+,sc2mac_dat_a_data6 //|> o
+,sc2mac_dat_a_data7 //|> o
+,sc2mac_dat_a_data8 //|> o
+,sc2mac_dat_a_data9 //|> o
+,sc2mac_dat_a_data10 //|> o
+,sc2mac_dat_a_data11 //|> o
+,sc2mac_dat_a_data12 //|> o
+,sc2mac_dat_a_data13 //|> o
+,sc2mac_dat_a_data14 //|> o
+,sc2mac_dat_a_data15 //|> o
+,sc2mac_dat_a_data16 //|> o
+,sc2mac_dat_a_data17 //|> o
+,sc2mac_dat_a_data18 //|> o
+,sc2mac_dat_a_data19 //|> o
+,sc2mac_dat_a_data20 //|> o
+,sc2mac_dat_a_data21 //|> o
+,sc2mac_dat_a_data22 //|> o
+,sc2mac_dat_a_data23 //|> o
+,sc2mac_dat_a_data24 //|> o
+,sc2mac_dat_a_data25 //|> o
+,sc2mac_dat_a_data26 //|> o
+,sc2mac_dat_a_data27 //|> o
+,sc2mac_dat_a_data28 //|> o
+,sc2mac_dat_a_data29 //|> o
+,sc2mac_dat_a_data30 //|> o
+,sc2mac_dat_a_data31 //|> o
+,sc2mac_dat_a_data32 //|> o
+,sc2mac_dat_a_data33 //|> o
+,sc2mac_dat_a_data34 //|> o
+,sc2mac_dat_a_data35 //|> o
+,sc2mac_dat_a_data36 //|> o
+,sc2mac_dat_a_data37 //|> o
+,sc2mac_dat_a_data38 //|> o
+,sc2mac_dat_a_data39 //|> o
+,sc2mac_dat_a_data40 //|> o
+,sc2mac_dat_a_data41 //|> o
+,sc2mac_dat_a_data42 //|> o
+,sc2mac_dat_a_data43 //|> o
+,sc2mac_dat_a_data44 //|> o
+,sc2mac_dat_a_data45 //|> o
+,sc2mac_dat_a_data46 //|> o
+,sc2mac_dat_a_data47 //|> o
+,sc2mac_dat_a_data48 //|> o
+,sc2mac_dat_a_data49 //|> o
+,sc2mac_dat_a_data50 //|> o
+,sc2mac_dat_a_data51 //|> o
+,sc2mac_dat_a_data52 //|> o
+,sc2mac_dat_a_data53 //|> o
+,sc2mac_dat_a_data54 //|> o
+,sc2mac_dat_a_data55 //|> o
+,sc2mac_dat_a_data56 //|> o
+,sc2mac_dat_a_data57 //|> o
+,sc2mac_dat_a_data58 //|> o
+,sc2mac_dat_a_data59 //|> o
+,sc2mac_dat_a_data60 //|> o
+,sc2mac_dat_a_data61 //|> o
+,sc2mac_dat_a_data62 //|> o
+,sc2mac_dat_a_data63 //|> o
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   ,sc2mac_dat_a_pd //|> o
   ,sc2mac_dat_b_pvld //|> o
@@ -142,70 +142,70 @@ module NV_NVDLA_CSC_dl (
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-,sc2mac_dat_b_data0 //|> o 
-,sc2mac_dat_b_data1 //|> o 
-,sc2mac_dat_b_data2 //|> o 
-,sc2mac_dat_b_data3 //|> o 
-,sc2mac_dat_b_data4 //|> o 
-,sc2mac_dat_b_data5 //|> o 
-,sc2mac_dat_b_data6 //|> o 
-,sc2mac_dat_b_data7 //|> o 
-,sc2mac_dat_b_data8 //|> o 
-,sc2mac_dat_b_data9 //|> o 
-,sc2mac_dat_b_data10 //|> o 
-,sc2mac_dat_b_data11 //|> o 
-,sc2mac_dat_b_data12 //|> o 
-,sc2mac_dat_b_data13 //|> o 
-,sc2mac_dat_b_data14 //|> o 
-,sc2mac_dat_b_data15 //|> o 
-,sc2mac_dat_b_data16 //|> o 
-,sc2mac_dat_b_data17 //|> o 
-,sc2mac_dat_b_data18 //|> o 
-,sc2mac_dat_b_data19 //|> o 
-,sc2mac_dat_b_data20 //|> o 
-,sc2mac_dat_b_data21 //|> o 
-,sc2mac_dat_b_data22 //|> o 
-,sc2mac_dat_b_data23 //|> o 
-,sc2mac_dat_b_data24 //|> o 
-,sc2mac_dat_b_data25 //|> o 
-,sc2mac_dat_b_data26 //|> o 
-,sc2mac_dat_b_data27 //|> o 
-,sc2mac_dat_b_data28 //|> o 
-,sc2mac_dat_b_data29 //|> o 
-,sc2mac_dat_b_data30 //|> o 
-,sc2mac_dat_b_data31 //|> o 
-,sc2mac_dat_b_data32 //|> o 
-,sc2mac_dat_b_data33 //|> o 
-,sc2mac_dat_b_data34 //|> o 
-,sc2mac_dat_b_data35 //|> o 
-,sc2mac_dat_b_data36 //|> o 
-,sc2mac_dat_b_data37 //|> o 
-,sc2mac_dat_b_data38 //|> o 
-,sc2mac_dat_b_data39 //|> o 
-,sc2mac_dat_b_data40 //|> o 
-,sc2mac_dat_b_data41 //|> o 
-,sc2mac_dat_b_data42 //|> o 
-,sc2mac_dat_b_data43 //|> o 
-,sc2mac_dat_b_data44 //|> o 
-,sc2mac_dat_b_data45 //|> o 
-,sc2mac_dat_b_data46 //|> o 
-,sc2mac_dat_b_data47 //|> o 
-,sc2mac_dat_b_data48 //|> o 
-,sc2mac_dat_b_data49 //|> o 
-,sc2mac_dat_b_data50 //|> o 
-,sc2mac_dat_b_data51 //|> o 
-,sc2mac_dat_b_data52 //|> o 
-,sc2mac_dat_b_data53 //|> o 
-,sc2mac_dat_b_data54 //|> o 
-,sc2mac_dat_b_data55 //|> o 
-,sc2mac_dat_b_data56 //|> o 
-,sc2mac_dat_b_data57 //|> o 
-,sc2mac_dat_b_data58 //|> o 
-,sc2mac_dat_b_data59 //|> o 
-,sc2mac_dat_b_data60 //|> o 
-,sc2mac_dat_b_data61 //|> o 
-,sc2mac_dat_b_data62 //|> o 
-,sc2mac_dat_b_data63 //|> o 
+,sc2mac_dat_b_data0 //|> o
+,sc2mac_dat_b_data1 //|> o
+,sc2mac_dat_b_data2 //|> o
+,sc2mac_dat_b_data3 //|> o
+,sc2mac_dat_b_data4 //|> o
+,sc2mac_dat_b_data5 //|> o
+,sc2mac_dat_b_data6 //|> o
+,sc2mac_dat_b_data7 //|> o
+,sc2mac_dat_b_data8 //|> o
+,sc2mac_dat_b_data9 //|> o
+,sc2mac_dat_b_data10 //|> o
+,sc2mac_dat_b_data11 //|> o
+,sc2mac_dat_b_data12 //|> o
+,sc2mac_dat_b_data13 //|> o
+,sc2mac_dat_b_data14 //|> o
+,sc2mac_dat_b_data15 //|> o
+,sc2mac_dat_b_data16 //|> o
+,sc2mac_dat_b_data17 //|> o
+,sc2mac_dat_b_data18 //|> o
+,sc2mac_dat_b_data19 //|> o
+,sc2mac_dat_b_data20 //|> o
+,sc2mac_dat_b_data21 //|> o
+,sc2mac_dat_b_data22 //|> o
+,sc2mac_dat_b_data23 //|> o
+,sc2mac_dat_b_data24 //|> o
+,sc2mac_dat_b_data25 //|> o
+,sc2mac_dat_b_data26 //|> o
+,sc2mac_dat_b_data27 //|> o
+,sc2mac_dat_b_data28 //|> o
+,sc2mac_dat_b_data29 //|> o
+,sc2mac_dat_b_data30 //|> o
+,sc2mac_dat_b_data31 //|> o
+,sc2mac_dat_b_data32 //|> o
+,sc2mac_dat_b_data33 //|> o
+,sc2mac_dat_b_data34 //|> o
+,sc2mac_dat_b_data35 //|> o
+,sc2mac_dat_b_data36 //|> o
+,sc2mac_dat_b_data37 //|> o
+,sc2mac_dat_b_data38 //|> o
+,sc2mac_dat_b_data39 //|> o
+,sc2mac_dat_b_data40 //|> o
+,sc2mac_dat_b_data41 //|> o
+,sc2mac_dat_b_data42 //|> o
+,sc2mac_dat_b_data43 //|> o
+,sc2mac_dat_b_data44 //|> o
+,sc2mac_dat_b_data45 //|> o
+,sc2mac_dat_b_data46 //|> o
+,sc2mac_dat_b_data47 //|> o
+,sc2mac_dat_b_data48 //|> o
+,sc2mac_dat_b_data49 //|> o
+,sc2mac_dat_b_data50 //|> o
+,sc2mac_dat_b_data51 //|> o
+,sc2mac_dat_b_data52 //|> o
+,sc2mac_dat_b_data53 //|> o
+,sc2mac_dat_b_data54 //|> o
+,sc2mac_dat_b_data55 //|> o
+,sc2mac_dat_b_data56 //|> o
+,sc2mac_dat_b_data57 //|> o
+,sc2mac_dat_b_data58 //|> o
+,sc2mac_dat_b_data59 //|> o
+,sc2mac_dat_b_data60 //|> o
+,sc2mac_dat_b_data61 //|> o
+,sc2mac_dat_b_data62 //|> o
+,sc2mac_dat_b_data63 //|> o
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   ,sc2mac_dat_b_pd //|> o
   ,nvdla_core_ng_clk //|< i
@@ -263,70 +263,70 @@ output [64 -1:0] sc2mac_dat_a_mask;
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-output [8 -1:0] sc2mac_dat_a_data0; 
-output [8 -1:0] sc2mac_dat_a_data1; 
-output [8 -1:0] sc2mac_dat_a_data2; 
-output [8 -1:0] sc2mac_dat_a_data3; 
-output [8 -1:0] sc2mac_dat_a_data4; 
-output [8 -1:0] sc2mac_dat_a_data5; 
-output [8 -1:0] sc2mac_dat_a_data6; 
-output [8 -1:0] sc2mac_dat_a_data7; 
-output [8 -1:0] sc2mac_dat_a_data8; 
-output [8 -1:0] sc2mac_dat_a_data9; 
-output [8 -1:0] sc2mac_dat_a_data10; 
-output [8 -1:0] sc2mac_dat_a_data11; 
-output [8 -1:0] sc2mac_dat_a_data12; 
-output [8 -1:0] sc2mac_dat_a_data13; 
-output [8 -1:0] sc2mac_dat_a_data14; 
-output [8 -1:0] sc2mac_dat_a_data15; 
-output [8 -1:0] sc2mac_dat_a_data16; 
-output [8 -1:0] sc2mac_dat_a_data17; 
-output [8 -1:0] sc2mac_dat_a_data18; 
-output [8 -1:0] sc2mac_dat_a_data19; 
-output [8 -1:0] sc2mac_dat_a_data20; 
-output [8 -1:0] sc2mac_dat_a_data21; 
-output [8 -1:0] sc2mac_dat_a_data22; 
-output [8 -1:0] sc2mac_dat_a_data23; 
-output [8 -1:0] sc2mac_dat_a_data24; 
-output [8 -1:0] sc2mac_dat_a_data25; 
-output [8 -1:0] sc2mac_dat_a_data26; 
-output [8 -1:0] sc2mac_dat_a_data27; 
-output [8 -1:0] sc2mac_dat_a_data28; 
-output [8 -1:0] sc2mac_dat_a_data29; 
-output [8 -1:0] sc2mac_dat_a_data30; 
-output [8 -1:0] sc2mac_dat_a_data31; 
-output [8 -1:0] sc2mac_dat_a_data32; 
-output [8 -1:0] sc2mac_dat_a_data33; 
-output [8 -1:0] sc2mac_dat_a_data34; 
-output [8 -1:0] sc2mac_dat_a_data35; 
-output [8 -1:0] sc2mac_dat_a_data36; 
-output [8 -1:0] sc2mac_dat_a_data37; 
-output [8 -1:0] sc2mac_dat_a_data38; 
-output [8 -1:0] sc2mac_dat_a_data39; 
-output [8 -1:0] sc2mac_dat_a_data40; 
-output [8 -1:0] sc2mac_dat_a_data41; 
-output [8 -1:0] sc2mac_dat_a_data42; 
-output [8 -1:0] sc2mac_dat_a_data43; 
-output [8 -1:0] sc2mac_dat_a_data44; 
-output [8 -1:0] sc2mac_dat_a_data45; 
-output [8 -1:0] sc2mac_dat_a_data46; 
-output [8 -1:0] sc2mac_dat_a_data47; 
-output [8 -1:0] sc2mac_dat_a_data48; 
-output [8 -1:0] sc2mac_dat_a_data49; 
-output [8 -1:0] sc2mac_dat_a_data50; 
-output [8 -1:0] sc2mac_dat_a_data51; 
-output [8 -1:0] sc2mac_dat_a_data52; 
-output [8 -1:0] sc2mac_dat_a_data53; 
-output [8 -1:0] sc2mac_dat_a_data54; 
-output [8 -1:0] sc2mac_dat_a_data55; 
-output [8 -1:0] sc2mac_dat_a_data56; 
-output [8 -1:0] sc2mac_dat_a_data57; 
-output [8 -1:0] sc2mac_dat_a_data58; 
-output [8 -1:0] sc2mac_dat_a_data59; 
-output [8 -1:0] sc2mac_dat_a_data60; 
-output [8 -1:0] sc2mac_dat_a_data61; 
-output [8 -1:0] sc2mac_dat_a_data62; 
-output [8 -1:0] sc2mac_dat_a_data63; 
+output [8 -1:0] sc2mac_dat_a_data0;
+output [8 -1:0] sc2mac_dat_a_data1;
+output [8 -1:0] sc2mac_dat_a_data2;
+output [8 -1:0] sc2mac_dat_a_data3;
+output [8 -1:0] sc2mac_dat_a_data4;
+output [8 -1:0] sc2mac_dat_a_data5;
+output [8 -1:0] sc2mac_dat_a_data6;
+output [8 -1:0] sc2mac_dat_a_data7;
+output [8 -1:0] sc2mac_dat_a_data8;
+output [8 -1:0] sc2mac_dat_a_data9;
+output [8 -1:0] sc2mac_dat_a_data10;
+output [8 -1:0] sc2mac_dat_a_data11;
+output [8 -1:0] sc2mac_dat_a_data12;
+output [8 -1:0] sc2mac_dat_a_data13;
+output [8 -1:0] sc2mac_dat_a_data14;
+output [8 -1:0] sc2mac_dat_a_data15;
+output [8 -1:0] sc2mac_dat_a_data16;
+output [8 -1:0] sc2mac_dat_a_data17;
+output [8 -1:0] sc2mac_dat_a_data18;
+output [8 -1:0] sc2mac_dat_a_data19;
+output [8 -1:0] sc2mac_dat_a_data20;
+output [8 -1:0] sc2mac_dat_a_data21;
+output [8 -1:0] sc2mac_dat_a_data22;
+output [8 -1:0] sc2mac_dat_a_data23;
+output [8 -1:0] sc2mac_dat_a_data24;
+output [8 -1:0] sc2mac_dat_a_data25;
+output [8 -1:0] sc2mac_dat_a_data26;
+output [8 -1:0] sc2mac_dat_a_data27;
+output [8 -1:0] sc2mac_dat_a_data28;
+output [8 -1:0] sc2mac_dat_a_data29;
+output [8 -1:0] sc2mac_dat_a_data30;
+output [8 -1:0] sc2mac_dat_a_data31;
+output [8 -1:0] sc2mac_dat_a_data32;
+output [8 -1:0] sc2mac_dat_a_data33;
+output [8 -1:0] sc2mac_dat_a_data34;
+output [8 -1:0] sc2mac_dat_a_data35;
+output [8 -1:0] sc2mac_dat_a_data36;
+output [8 -1:0] sc2mac_dat_a_data37;
+output [8 -1:0] sc2mac_dat_a_data38;
+output [8 -1:0] sc2mac_dat_a_data39;
+output [8 -1:0] sc2mac_dat_a_data40;
+output [8 -1:0] sc2mac_dat_a_data41;
+output [8 -1:0] sc2mac_dat_a_data42;
+output [8 -1:0] sc2mac_dat_a_data43;
+output [8 -1:0] sc2mac_dat_a_data44;
+output [8 -1:0] sc2mac_dat_a_data45;
+output [8 -1:0] sc2mac_dat_a_data46;
+output [8 -1:0] sc2mac_dat_a_data47;
+output [8 -1:0] sc2mac_dat_a_data48;
+output [8 -1:0] sc2mac_dat_a_data49;
+output [8 -1:0] sc2mac_dat_a_data50;
+output [8 -1:0] sc2mac_dat_a_data51;
+output [8 -1:0] sc2mac_dat_a_data52;
+output [8 -1:0] sc2mac_dat_a_data53;
+output [8 -1:0] sc2mac_dat_a_data54;
+output [8 -1:0] sc2mac_dat_a_data55;
+output [8 -1:0] sc2mac_dat_a_data56;
+output [8 -1:0] sc2mac_dat_a_data57;
+output [8 -1:0] sc2mac_dat_a_data58;
+output [8 -1:0] sc2mac_dat_a_data59;
+output [8 -1:0] sc2mac_dat_a_data60;
+output [8 -1:0] sc2mac_dat_a_data61;
+output [8 -1:0] sc2mac_dat_a_data62;
+output [8 -1:0] sc2mac_dat_a_data63;
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 output [8:0] sc2mac_dat_a_pd;
 output sc2mac_dat_b_pvld; /* data valid */
@@ -337,70 +337,70 @@ output [64 -1:0] sc2mac_dat_b_mask;
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-output [8 -1:0] sc2mac_dat_b_data0; 
-output [8 -1:0] sc2mac_dat_b_data1; 
-output [8 -1:0] sc2mac_dat_b_data2; 
-output [8 -1:0] sc2mac_dat_b_data3; 
-output [8 -1:0] sc2mac_dat_b_data4; 
-output [8 -1:0] sc2mac_dat_b_data5; 
-output [8 -1:0] sc2mac_dat_b_data6; 
-output [8 -1:0] sc2mac_dat_b_data7; 
-output [8 -1:0] sc2mac_dat_b_data8; 
-output [8 -1:0] sc2mac_dat_b_data9; 
-output [8 -1:0] sc2mac_dat_b_data10; 
-output [8 -1:0] sc2mac_dat_b_data11; 
-output [8 -1:0] sc2mac_dat_b_data12; 
-output [8 -1:0] sc2mac_dat_b_data13; 
-output [8 -1:0] sc2mac_dat_b_data14; 
-output [8 -1:0] sc2mac_dat_b_data15; 
-output [8 -1:0] sc2mac_dat_b_data16; 
-output [8 -1:0] sc2mac_dat_b_data17; 
-output [8 -1:0] sc2mac_dat_b_data18; 
-output [8 -1:0] sc2mac_dat_b_data19; 
-output [8 -1:0] sc2mac_dat_b_data20; 
-output [8 -1:0] sc2mac_dat_b_data21; 
-output [8 -1:0] sc2mac_dat_b_data22; 
-output [8 -1:0] sc2mac_dat_b_data23; 
-output [8 -1:0] sc2mac_dat_b_data24; 
-output [8 -1:0] sc2mac_dat_b_data25; 
-output [8 -1:0] sc2mac_dat_b_data26; 
-output [8 -1:0] sc2mac_dat_b_data27; 
-output [8 -1:0] sc2mac_dat_b_data28; 
-output [8 -1:0] sc2mac_dat_b_data29; 
-output [8 -1:0] sc2mac_dat_b_data30; 
-output [8 -1:0] sc2mac_dat_b_data31; 
-output [8 -1:0] sc2mac_dat_b_data32; 
-output [8 -1:0] sc2mac_dat_b_data33; 
-output [8 -1:0] sc2mac_dat_b_data34; 
-output [8 -1:0] sc2mac_dat_b_data35; 
-output [8 -1:0] sc2mac_dat_b_data36; 
-output [8 -1:0] sc2mac_dat_b_data37; 
-output [8 -1:0] sc2mac_dat_b_data38; 
-output [8 -1:0] sc2mac_dat_b_data39; 
-output [8 -1:0] sc2mac_dat_b_data40; 
-output [8 -1:0] sc2mac_dat_b_data41; 
-output [8 -1:0] sc2mac_dat_b_data42; 
-output [8 -1:0] sc2mac_dat_b_data43; 
-output [8 -1:0] sc2mac_dat_b_data44; 
-output [8 -1:0] sc2mac_dat_b_data45; 
-output [8 -1:0] sc2mac_dat_b_data46; 
-output [8 -1:0] sc2mac_dat_b_data47; 
-output [8 -1:0] sc2mac_dat_b_data48; 
-output [8 -1:0] sc2mac_dat_b_data49; 
-output [8 -1:0] sc2mac_dat_b_data50; 
-output [8 -1:0] sc2mac_dat_b_data51; 
-output [8 -1:0] sc2mac_dat_b_data52; 
-output [8 -1:0] sc2mac_dat_b_data53; 
-output [8 -1:0] sc2mac_dat_b_data54; 
-output [8 -1:0] sc2mac_dat_b_data55; 
-output [8 -1:0] sc2mac_dat_b_data56; 
-output [8 -1:0] sc2mac_dat_b_data57; 
-output [8 -1:0] sc2mac_dat_b_data58; 
-output [8 -1:0] sc2mac_dat_b_data59; 
-output [8 -1:0] sc2mac_dat_b_data60; 
-output [8 -1:0] sc2mac_dat_b_data61; 
-output [8 -1:0] sc2mac_dat_b_data62; 
-output [8 -1:0] sc2mac_dat_b_data63; 
+output [8 -1:0] sc2mac_dat_b_data0;
+output [8 -1:0] sc2mac_dat_b_data1;
+output [8 -1:0] sc2mac_dat_b_data2;
+output [8 -1:0] sc2mac_dat_b_data3;
+output [8 -1:0] sc2mac_dat_b_data4;
+output [8 -1:0] sc2mac_dat_b_data5;
+output [8 -1:0] sc2mac_dat_b_data6;
+output [8 -1:0] sc2mac_dat_b_data7;
+output [8 -1:0] sc2mac_dat_b_data8;
+output [8 -1:0] sc2mac_dat_b_data9;
+output [8 -1:0] sc2mac_dat_b_data10;
+output [8 -1:0] sc2mac_dat_b_data11;
+output [8 -1:0] sc2mac_dat_b_data12;
+output [8 -1:0] sc2mac_dat_b_data13;
+output [8 -1:0] sc2mac_dat_b_data14;
+output [8 -1:0] sc2mac_dat_b_data15;
+output [8 -1:0] sc2mac_dat_b_data16;
+output [8 -1:0] sc2mac_dat_b_data17;
+output [8 -1:0] sc2mac_dat_b_data18;
+output [8 -1:0] sc2mac_dat_b_data19;
+output [8 -1:0] sc2mac_dat_b_data20;
+output [8 -1:0] sc2mac_dat_b_data21;
+output [8 -1:0] sc2mac_dat_b_data22;
+output [8 -1:0] sc2mac_dat_b_data23;
+output [8 -1:0] sc2mac_dat_b_data24;
+output [8 -1:0] sc2mac_dat_b_data25;
+output [8 -1:0] sc2mac_dat_b_data26;
+output [8 -1:0] sc2mac_dat_b_data27;
+output [8 -1:0] sc2mac_dat_b_data28;
+output [8 -1:0] sc2mac_dat_b_data29;
+output [8 -1:0] sc2mac_dat_b_data30;
+output [8 -1:0] sc2mac_dat_b_data31;
+output [8 -1:0] sc2mac_dat_b_data32;
+output [8 -1:0] sc2mac_dat_b_data33;
+output [8 -1:0] sc2mac_dat_b_data34;
+output [8 -1:0] sc2mac_dat_b_data35;
+output [8 -1:0] sc2mac_dat_b_data36;
+output [8 -1:0] sc2mac_dat_b_data37;
+output [8 -1:0] sc2mac_dat_b_data38;
+output [8 -1:0] sc2mac_dat_b_data39;
+output [8 -1:0] sc2mac_dat_b_data40;
+output [8 -1:0] sc2mac_dat_b_data41;
+output [8 -1:0] sc2mac_dat_b_data42;
+output [8 -1:0] sc2mac_dat_b_data43;
+output [8 -1:0] sc2mac_dat_b_data44;
+output [8 -1:0] sc2mac_dat_b_data45;
+output [8 -1:0] sc2mac_dat_b_data46;
+output [8 -1:0] sc2mac_dat_b_data47;
+output [8 -1:0] sc2mac_dat_b_data48;
+output [8 -1:0] sc2mac_dat_b_data49;
+output [8 -1:0] sc2mac_dat_b_data50;
+output [8 -1:0] sc2mac_dat_b_data51;
+output [8 -1:0] sc2mac_dat_b_data52;
+output [8 -1:0] sc2mac_dat_b_data53;
+output [8 -1:0] sc2mac_dat_b_data54;
+output [8 -1:0] sc2mac_dat_b_data55;
+output [8 -1:0] sc2mac_dat_b_data56;
+output [8 -1:0] sc2mac_dat_b_data57;
+output [8 -1:0] sc2mac_dat_b_data58;
+output [8 -1:0] sc2mac_dat_b_data59;
+output [8 -1:0] sc2mac_dat_b_data60;
+output [8 -1:0] sc2mac_dat_b_data61;
+output [8 -1:0] sc2mac_dat_b_data62;
+output [8 -1:0] sc2mac_dat_b_data63;
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 output [8:0] sc2mac_dat_b_pd;
 input nvdla_core_ng_clk;
@@ -876,70 +876,70 @@ wire [512 -1:0] dbg_csc_dat;
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-wire [8 -1:0] dbg_csc_dat_0; 
-wire [8 -1:0] dbg_csc_dat_1; 
-wire [8 -1:0] dbg_csc_dat_2; 
-wire [8 -1:0] dbg_csc_dat_3; 
-wire [8 -1:0] dbg_csc_dat_4; 
-wire [8 -1:0] dbg_csc_dat_5; 
-wire [8 -1:0] dbg_csc_dat_6; 
-wire [8 -1:0] dbg_csc_dat_7; 
-wire [8 -1:0] dbg_csc_dat_8; 
-wire [8 -1:0] dbg_csc_dat_9; 
-wire [8 -1:0] dbg_csc_dat_10; 
-wire [8 -1:0] dbg_csc_dat_11; 
-wire [8 -1:0] dbg_csc_dat_12; 
-wire [8 -1:0] dbg_csc_dat_13; 
-wire [8 -1:0] dbg_csc_dat_14; 
-wire [8 -1:0] dbg_csc_dat_15; 
-wire [8 -1:0] dbg_csc_dat_16; 
-wire [8 -1:0] dbg_csc_dat_17; 
-wire [8 -1:0] dbg_csc_dat_18; 
-wire [8 -1:0] dbg_csc_dat_19; 
-wire [8 -1:0] dbg_csc_dat_20; 
-wire [8 -1:0] dbg_csc_dat_21; 
-wire [8 -1:0] dbg_csc_dat_22; 
-wire [8 -1:0] dbg_csc_dat_23; 
-wire [8 -1:0] dbg_csc_dat_24; 
-wire [8 -1:0] dbg_csc_dat_25; 
-wire [8 -1:0] dbg_csc_dat_26; 
-wire [8 -1:0] dbg_csc_dat_27; 
-wire [8 -1:0] dbg_csc_dat_28; 
-wire [8 -1:0] dbg_csc_dat_29; 
-wire [8 -1:0] dbg_csc_dat_30; 
-wire [8 -1:0] dbg_csc_dat_31; 
-wire [8 -1:0] dbg_csc_dat_32; 
-wire [8 -1:0] dbg_csc_dat_33; 
-wire [8 -1:0] dbg_csc_dat_34; 
-wire [8 -1:0] dbg_csc_dat_35; 
-wire [8 -1:0] dbg_csc_dat_36; 
-wire [8 -1:0] dbg_csc_dat_37; 
-wire [8 -1:0] dbg_csc_dat_38; 
-wire [8 -1:0] dbg_csc_dat_39; 
-wire [8 -1:0] dbg_csc_dat_40; 
-wire [8 -1:0] dbg_csc_dat_41; 
-wire [8 -1:0] dbg_csc_dat_42; 
-wire [8 -1:0] dbg_csc_dat_43; 
-wire [8 -1:0] dbg_csc_dat_44; 
-wire [8 -1:0] dbg_csc_dat_45; 
-wire [8 -1:0] dbg_csc_dat_46; 
-wire [8 -1:0] dbg_csc_dat_47; 
-wire [8 -1:0] dbg_csc_dat_48; 
-wire [8 -1:0] dbg_csc_dat_49; 
-wire [8 -1:0] dbg_csc_dat_50; 
-wire [8 -1:0] dbg_csc_dat_51; 
-wire [8 -1:0] dbg_csc_dat_52; 
-wire [8 -1:0] dbg_csc_dat_53; 
-wire [8 -1:0] dbg_csc_dat_54; 
-wire [8 -1:0] dbg_csc_dat_55; 
-wire [8 -1:0] dbg_csc_dat_56; 
-wire [8 -1:0] dbg_csc_dat_57; 
-wire [8 -1:0] dbg_csc_dat_58; 
-wire [8 -1:0] dbg_csc_dat_59; 
-wire [8 -1:0] dbg_csc_dat_60; 
-wire [8 -1:0] dbg_csc_dat_61; 
-wire [8 -1:0] dbg_csc_dat_62; 
-wire [8 -1:0] dbg_csc_dat_63; 
+wire [8 -1:0] dbg_csc_dat_0;
+wire [8 -1:0] dbg_csc_dat_1;
+wire [8 -1:0] dbg_csc_dat_2;
+wire [8 -1:0] dbg_csc_dat_3;
+wire [8 -1:0] dbg_csc_dat_4;
+wire [8 -1:0] dbg_csc_dat_5;
+wire [8 -1:0] dbg_csc_dat_6;
+wire [8 -1:0] dbg_csc_dat_7;
+wire [8 -1:0] dbg_csc_dat_8;
+wire [8 -1:0] dbg_csc_dat_9;
+wire [8 -1:0] dbg_csc_dat_10;
+wire [8 -1:0] dbg_csc_dat_11;
+wire [8 -1:0] dbg_csc_dat_12;
+wire [8 -1:0] dbg_csc_dat_13;
+wire [8 -1:0] dbg_csc_dat_14;
+wire [8 -1:0] dbg_csc_dat_15;
+wire [8 -1:0] dbg_csc_dat_16;
+wire [8 -1:0] dbg_csc_dat_17;
+wire [8 -1:0] dbg_csc_dat_18;
+wire [8 -1:0] dbg_csc_dat_19;
+wire [8 -1:0] dbg_csc_dat_20;
+wire [8 -1:0] dbg_csc_dat_21;
+wire [8 -1:0] dbg_csc_dat_22;
+wire [8 -1:0] dbg_csc_dat_23;
+wire [8 -1:0] dbg_csc_dat_24;
+wire [8 -1:0] dbg_csc_dat_25;
+wire [8 -1:0] dbg_csc_dat_26;
+wire [8 -1:0] dbg_csc_dat_27;
+wire [8 -1:0] dbg_csc_dat_28;
+wire [8 -1:0] dbg_csc_dat_29;
+wire [8 -1:0] dbg_csc_dat_30;
+wire [8 -1:0] dbg_csc_dat_31;
+wire [8 -1:0] dbg_csc_dat_32;
+wire [8 -1:0] dbg_csc_dat_33;
+wire [8 -1:0] dbg_csc_dat_34;
+wire [8 -1:0] dbg_csc_dat_35;
+wire [8 -1:0] dbg_csc_dat_36;
+wire [8 -1:0] dbg_csc_dat_37;
+wire [8 -1:0] dbg_csc_dat_38;
+wire [8 -1:0] dbg_csc_dat_39;
+wire [8 -1:0] dbg_csc_dat_40;
+wire [8 -1:0] dbg_csc_dat_41;
+wire [8 -1:0] dbg_csc_dat_42;
+wire [8 -1:0] dbg_csc_dat_43;
+wire [8 -1:0] dbg_csc_dat_44;
+wire [8 -1:0] dbg_csc_dat_45;
+wire [8 -1:0] dbg_csc_dat_46;
+wire [8 -1:0] dbg_csc_dat_47;
+wire [8 -1:0] dbg_csc_dat_48;
+wire [8 -1:0] dbg_csc_dat_49;
+wire [8 -1:0] dbg_csc_dat_50;
+wire [8 -1:0] dbg_csc_dat_51;
+wire [8 -1:0] dbg_csc_dat_52;
+wire [8 -1:0] dbg_csc_dat_53;
+wire [8 -1:0] dbg_csc_dat_54;
+wire [8 -1:0] dbg_csc_dat_55;
+wire [8 -1:0] dbg_csc_dat_56;
+wire [8 -1:0] dbg_csc_dat_57;
+wire [8 -1:0] dbg_csc_dat_58;
+wire [8 -1:0] dbg_csc_dat_59;
+wire [8 -1:0] dbg_csc_dat_60;
+wire [8 -1:0] dbg_csc_dat_61;
+wire [8 -1:0] dbg_csc_dat_62;
+wire [8 -1:0] dbg_csc_dat_63;
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 wire dl_block_end;
 wire dl_channel_end;
@@ -1213,39 +1213,39 @@ assign pixel_x_byte_stride_w = {1'b0, pixel_x_stride_w};
 //: if($kk=5) {
 //: print qq(
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_1
-//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 //: `endif
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_2
-//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 //: `endif
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_4
-//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.
 //: `endif
 //: )
 //: }
 //: else {
 //: print qq(
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_1
-//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 //: `endif
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_2
-//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 //: `endif
 //: `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_4
-//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.  
+//: assign pixel_ch_stride_w = {{5-5{1'b0}},pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.
 //: `endif
 //: )
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_1
-assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 `endif
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_2
-assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.  
+assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +1{1'b0}}}; //stick to 2*atomK  no matter which config.
 `endif
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_4
-assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.  
+assign pixel_ch_stride_w = {pixel_x_stride_w, {5 +2{1'b0}}}; //stick to 4*atomK  no matter which config.
 `endif
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
@@ -2703,7 +2703,7 @@ assign {mon_pixel_w_cnt_w,pixel_w_cnt_w} = (layer_st_d1) ? {{11{1'b0}}, pixel_x_
                         (is_stripe_end & dl_block_end & ~next_is_last_channel) ? (pixel_w_ori + 8'h40  ) :
                         (is_stripe_end & ~dl_block_end) ? {1'b0, pixel_w_ori} :
                         (pixel_w_cnt + pixel_x_cnt_add);
-assign pixel_w_cur = {{6 -1{1'b0}},pixel_w_cnt[15:6]}; //by entry 
+assign pixel_w_cur = {{6 -1{1'b0}},pixel_w_cnt[15:6]}; //by entry
 assign pixel_w_cnt_reg_en = layer_st_d1 | (dat_exec_valid & is_img_d1[2] & (is_sub_h_end | is_w_end));
 assign pixel_w_ori_reg_en = layer_st_d1 | (dat_exec_valid & is_img_d1[3] & is_stripe_end & dl_block_end);
 assign pixel_ch_ori_reg_en = layer_st_d1 | (dat_exec_valid & is_img_d1[4] & is_stripe_end & dl_block_end & dl_channel_end);
@@ -3053,20 +3053,20 @@ assign h_bias_reg_en[0] = dat_exec_valid;
 assign h_bias_reg_en[1] = layer_st | (dat_exec_valid & (is_winograd_d1[7] | is_img_d1[9]));
 //width bias, by entry in image, by element in feature data
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_1
-assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image 
+assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image
                      is_winograd_d1[8] ? {1'b0, datain_w_cnt} :
                      (~is_last_channel | datain_c_cnt[0] | is_winograd_d1[8]) ? {2'b0,datain_w_cur[12:0]} ://by element
                      {2'b0, datain_w_cur[12:0]}; //by element, last channel and current c is even, atomC=atomM
 `endif
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_2
-assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image 
+assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image
                      is_winograd_d1[8] ? {1'b0, datain_w_cnt} :
                      (~is_last_channel | is_winograd_d1[8]) ? {2'b0,datain_w_cur[12:0]} ://not last channel, by element
                      (dat_req_bytes > 8'h20) ? {2'b0,datain_w_cur[12:0]} : //last channel & request >1/2*entry
                      {3'b0, datain_w_cur[12:1]}; //last channel & request<=1/2*entry
 `endif
 `ifdef CC_ATOMC_DIV_ATOMK_EQUAL_4
-assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image 
+assign w_bias_int8 = is_img_d1[10] ? {pixel_w_cur} : //by entry in image
                      is_winograd_d1[8] ? {1'b0, datain_w_cnt} :
                      (~is_last_channel | is_winograd_d1[8]) ? {2'b0,datain_w_cur[12:0]} ://not last channel, by element
                      (dat_req_bytes > 8'h20) ? {2'b0,datain_w_cur[12:0]} : //last channel & request >1/2*entry
@@ -3198,7 +3198,7 @@ assign is_dat_req_addr_wrap = (dat_req_addr_sum >= {1'b0,data_bank, {9{1'b0}}});
 assign {mon_dat_req_addr_wrap,dat_req_addr_wrap} = dat_req_addr_sum[13:0] - {1'b0,data_bank, {9{1'b0}}};
 assign dat_req_addr_w = (layer_st | dat_req_dummy_d1) ? {13{1'b1}} : is_dat_req_addr_wrap ? dat_req_addr_wrap : dat_req_addr_sum[13 -1:0]; //get the adress sends to cbuf
 assign {mon_dat_req_addr_minus1,dat_req_addr_minus1} = dat_req_addr_w-1'b1;
-assign is_dat_req_addr_minus1_wrap = (dat_req_addr_minus1 >= {data_bank, {9{1'b0}}}); //only one case: 0-1=ffff would introduce wrap  
+assign is_dat_req_addr_minus1_wrap = (dat_req_addr_minus1 >= {data_bank, {9{1'b0}}}); //only one case: 0-1=ffff would introduce wrap
 assign dat_req_addr_minus1_wrap = {data_bank, {9{1'b1}}};
 assign dat_req_addr_minus1_real = is_dat_req_addr_minus1_wrap ? dat_req_addr_minus1_wrap : dat_req_addr_minus1;
 assign sc2buf_dat_rd_en_w = dat_req_valid_d1 & ((dat_req_addr_last != dat_req_addr_w) | pixel_force_fetch_d1);
@@ -3213,7 +3213,7 @@ assign dat_req_sub_h_3_addr_en = layer_st | ((dat_req_valid_d1 | dat_req_dummy_d
 `ifdef CBUF_NO_SUPPORT_READ_JUMPING
 wire sc2buf_dat_rd_next1_en = 1'b0;
 wire sc2buf_dat_rd_next1_en_w = 1'b0;
-wire sc2buf_dat_rd_shift = {10{1'b0}};
+wire [10 -1:0] sc2buf_dat_rd_shift = {10{1'b0}};
 `endif
 `ifdef CBUF_SUPPORT_READ_JUMPING
 wire [10 -1:0] sc2buf_dat_rd_shift_w;
@@ -3267,7 +3267,7 @@ assign pixel_w_cnt_plus1 = pixel_w_cnt[6 -1:0]+1'b1;
 //for no y_ext cases,the entry read form cbuf must make sure low byte aligned. High Bytes may dropped, low bytes will always be used.
 //for y_ext cases, cbuf do no shift, csc will take this job.
 //assign sc2buf_dat_rd_shift_w = sc2buf_dat_rd_next1_en_w ? pixel_w_cnt_plus1_d1[6 -1:0]+ 7'h40 - dat_req_pipe_bytes: //image read jump
-// is_img_d1[10]&&stripe_begin_disable_jump ? {10{1'd0}}: //image read no jump,stripe's start need no shift 
+// is_img_d1[10]&&stripe_begin_disable_jump ? {10{1'd0}}: //image read no jump,stripe's start need no shift
 // is_img_d1[10]&&(reg2dp_y_extension!=2'b0)? {10{1'd0}}: //y_ext,no need to shift,csc will shift
 // //image read no jump, not image's start, not y_ext,then not all bytes are used,need shift out low bytes
 // is_img_d1[10]&&(pixel_w_cnt_plus1_d1[6:0]> dat_req_pipe_bytes)&&(pixel_x_byte_stride > 8'h40  )?
