@@ -92,8 +92,8 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
     val pready = Output(Bool())
   })
 
-  val make = s"make -C generators/nvdla default NVDLA_TYPE=${configName}"
+  val make = s"make -C generators/nvdla NVDLA_TYPE=${configName} default"
   require (make.! == 0, "Failed to run pre-processing step")
 
-  addResource("/nvdla.preprocessed.v")
+  addResource(s"/nvdla_${configName}.preprocessed.v")
 }

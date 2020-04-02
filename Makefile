@@ -7,21 +7,22 @@ include $(abspath .)/vsrc.mk
 
 nvdla_dir=$(nvdla_blocks_dir)
 
+# either "large" or "small"
+NVDLA_TYPE ?= large
+NVDLA_NAME = nvdla_$(NVDLA_TYPE)
+
 # name of output pre-processed verilog file
 PREPROC_VERILOG_DIR = $(nvdla_dir)/src/main/resources
-PREPROC_VERILOG = $(PREPROC_VERILOG_DIR)/nvdla.preprocessed.v
+PREPROC_VERILOG = $(PREPROC_VERILOG_DIR)/$(NVDLA_NAME).preprocessed.v
 
 .PHONY: default $(PREPROC_VERILOG)
 default: $(PREPROC_VERILOG)
-
-# either "large" or "small"
-NVDLA_TYPE ?= large
 
 #########################################################################################
 # includes and vsrcs
 #########################################################################################
 
-ALL_VSRCS = $(filter-out %.vh,$(nvdla_$(NVDLA_TYPE)_vsrcs))
+ALL_VSRCS = $(filter-out %.vh,$($(NVDLA_NAME)_vsrcs))
 INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
 
 #########################################################################################
@@ -29,7 +30,7 @@ INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
 #########################################################################################
 
 # default nvdla top module
-TOP = nvdla_$(NVDLA_TYPE)
+TOP = $(NVDLA_NAME)
 
 PREPROC_VERILATOR_OPTS = \
 	-E \
