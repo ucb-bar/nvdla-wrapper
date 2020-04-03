@@ -16,12 +16,17 @@ PROJECTS := nv_small
 ##Linux Environment Setup 										  
 ##======================= 										  
   																  
-DESIGNWARE_NOEXIST  := 1
+USE_DESIGNWARE  := 0
+DESIGNWARE_DIR  :=
 CPP  := cpp
 GCC  := gcc
 CXX  := g++
 PERL := perl
 JAVA := java
-PYTHON := python
+SYSTEMC := /usr/local/systemc-2.3.3
+PYTHON := python3
+VCS_HOME := 
+NOVAS_HOME := 
+VERDI_HOME := 
 VERILATOR := verilator
 CLANG := clang

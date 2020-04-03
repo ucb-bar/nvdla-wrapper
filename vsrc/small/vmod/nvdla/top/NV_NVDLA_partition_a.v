@@ -16,6 +16,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define LARGE_MEMBUS
+//#endif
 `include "NV_HWACC_NVDLA_tick_defines.vh"
 // ================================================================
 // NVDLA Open Source Project
@@ -33,6 +39,7 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
+`define DESIGNWARE_NOEXIST 1
 module NV_NVDLA_partition_a (
    cacc2sdp_ready
   ,csb2cacc_req_pvld

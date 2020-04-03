@@ -17,6 +17,12 @@
 //#define CDMA_SBUF_SDATA_BITS            256
 //DorisL-S----------------
 //
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE  ==  32 )
+//     #define IMG_LARGE
+// #endif
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE == 8 )
+//     #define IMG_SMALL
+// #endif
 //DorisL-E----------------
 //--------------------------------------------------
 module NV_NVDLA_cdma (
@@ -176,9 +182,6 @@ output [16:0] cdma2buf_dat_wr_addr;
 output [64-1:0] cdma2buf_dat_wr_data;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-// output [11:0] cdma2buf_dat_wr_addr;
-// output [1:0] cdma2buf_dat_wr_hsel;
-// output [1023:0] cdma2buf_dat_wr_data;
 output cdma2buf_wt_wr_en;
 //: my $dmaif=64;
 //: my $atmc=8*8;
@@ -381,12 +384,7 @@ wire [8*16-1:0] img2cvt_mn_wr_data;
 wire [8-1:0] img2cvt_dat_wr_pad_mask;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//wire [11:0] img2cvt_dat_wr_addr;
-//wire [1023:0] img2cvt_dat_wr_data;
-//wire img2cvt_dat_wr_hsel;
 wire [11:0] img2cvt_dat_wr_info_pd;
-//wire [127:0] img2cvt_dat_wr_pad_mask;
-//wire [1023:0] img2cvt_mn_wr_data;
 //: my $dmaif=64;
 //: my $atmm = 8*8; ##atomic_m BW
 //: my $M = $dmaif/$atmm; ##atomic_m number per dma transaction
@@ -410,19 +408,6 @@ wire [7:0] img2sbuf_p0_rd_addr;
 wire [64-1:0] img2sbuf_p0_rd_data;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//wire [7:0] img2sbuf_p0_rd_addr;
-//wire [255:0] img2sbuf_p0_rd_data;
-//wire img2sbuf_p0_rd_en;
-//wire [7:0] img2sbuf_p0_wr_addr;
-//wire [255:0] img2sbuf_p0_wr_data;
-//wire img2sbuf_p0_wr_en;
-//wire [7:0] img2sbuf_p1_rd_addr;
-//wire [255:0] img2sbuf_p1_rd_data;
-//wire [8*8 -1:0] img2sbuf_p1_rd_data;
-//wire img2sbuf_p1_rd_en;
-//wire [7:0] img2sbuf_p1_wr_addr;
-//wire [255:0] img2sbuf_p1_wr_data;
-//wire img2sbuf_p1_wr_en;
 wire [14:0] img2status_dat_entries;
 wire [13:0] img2status_dat_slices;
 wire img2status_dat_updt;
@@ -676,9 +661,6 @@ NV_NVDLA_CDMA_wt u_wt (
 ,.cdma2buf_wt_wr_data (cdma2buf_wt_wr_data )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//,.cdma2buf_wt_wr_addr (cdma2buf_wt_wr_addr )
-//,.cdma2buf_wt_wr_hsel (cdma2buf_wt_wr_hsel)
-//,.cdma2buf_wt_wr_data (cdma2buf_wt_wr_data )
   ,.status2dma_fsm_switch (status2dma_fsm_switch)
   ,.wt2status_state (wt2status_state[1:0])
   ,.cdma2sc_wt_updt (cdma2sc_wt_updt)
@@ -789,9 +771,6 @@ NV_NVDLA_CDMA_dc u_dc (
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   ,.dc2cvt_dat_wr_info_pd (dc2cvt_dat_wr_info_pd[11:0])
-// ,.dc2cvt_dat_wr_addr (dc2cvt_dat_wr_addr)
-// ,.dc2cvt_dat_wr_sel (dc2cvt_dat_wr_hsel)
-// ,.dc2cvt_dat_wr_data (dc2cvt_dat_wr_data)
   ,.status2dma_fsm_switch (status2dma_fsm_switch)
   ,.dc2status_state (dc2status_state[1:0])
   ,.dc2status_dat_updt (dc2status_dat_updt)
@@ -823,18 +802,6 @@ NV_NVDLA_CDMA_dc u_dc (
 ,.dc2sbuf_p0_rd_data (dc2sbuf_p0_rd_data )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-// ,.dc2sbuf_p0_wr_en (dc2sbuf_p0_wr_en)
-// ,.dc2sbuf_p0_wr_addr (dc2sbuf_p0_wr_addr)
-// ,.dc2sbuf_p0_wr_data (dc2sbuf_p0_wr_data)
-// ,.dc2sbuf_p0_rd_en (dc2sbuf_p0_rd_en)
-// ,.dc2sbuf_p0_rd_addr (dc2sbuf_p0_rd_addr)
-// ,.dc2sbuf_p0_rd_data (dc2sbuf_p0_rd_data)
-// ,.dc2sbuf_p1_wr_en (dc2sbuf_p1_wr_en)
-// ,.dc2sbuf_p1_wr_addr (dc2sbuf_p1_wr_addr)
-// ,.dc2sbuf_p1_wr_data (dc2sbuf_p1_wr_data)
-// ,.dc2sbuf_p1_rd_en (dc2sbuf_p1_rd_en)
-// ,.dc2sbuf_p1_rd_addr (dc2sbuf_p1_rd_addr)
-// ,.dc2sbuf_p1_rd_data (dc2sbuf_p1_rd_data)
   ,.sc2cdma_dat_pending_req (sc2cdma_dat_pending_req)
   ,.nvdla_core_ng_clk (nvdla_core_clk)
   ,.reg2dp_op_en (reg2dp_op_en[0])
@@ -946,11 +913,6 @@ NV_NVDLA_CDMA_img u_img (
 ,.img2cvt_dat_wr_pad_mask (img2cvt_dat_wr_pad_mask )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//,.img2cvt_dat_wr_en (img2cvt_dat_wr_en) //|> w
-//,.img2cvt_dat_wr_addr (img2cvt_dat_wr_addr[11:0]) //|> w
-//,.img2cvt_dat_wr_sel (img2cvt_dat_wr_hsel) //|> w
-//,.img2cvt_dat_wr_data (img2cvt_dat_wr_data[1023:0]) //|> w
-//,.img2cvt_mn_wr_data (img2cvt_mn_wr_data[1023:0]) //|> w
   ,.img2cvt_dat_wr_info_pd (img2cvt_dat_wr_info_pd[11:0]) //|> w
   ,.status2dma_fsm_switch (status2dma_fsm_switch) //|< w
   ,.img2status_state (img2status_state[1:0]) //|> w
@@ -983,18 +945,6 @@ NV_NVDLA_CDMA_img u_img (
 ,.img2sbuf_p0_rd_data (img2sbuf_p0_rd_data )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//,.img2sbuf_p0_wr_en (img2sbuf_p0_wr_en) //|> w
-//,.img2sbuf_p0_wr_addr (img2sbuf_p0_wr_addr[7:0]) //|> w
-//,.img2sbuf_p0_wr_data (img2sbuf_p0_wr_data[255:0]) //|> w
-//,.img2sbuf_p0_rd_en (img2sbuf_p0_rd_en) //|> w
-//,.img2sbuf_p0_rd_addr (img2sbuf_p0_rd_addr[7:0]) //|> w
-//,.img2sbuf_p0_rd_data (img2sbuf_p0_rd_data[255:0]) //|< w
-//,.img2sbuf_p1_wr_en (img2sbuf_p1_wr_en) //|> w
-//,.img2sbuf_p1_wr_addr (img2sbuf_p1_wr_addr[7:0]) //|> w
-//,.img2sbuf_p1_wr_data (img2sbuf_p1_wr_data[255:0]) //|> w
-//,.img2sbuf_p1_rd_en (img2sbuf_p1_rd_en) //|> w
-//,.img2sbuf_p1_rd_addr (img2sbuf_p1_rd_addr[7:0]) //|> w
-//,.img2sbuf_p1_rd_data (img2sbuf_p1_rd_data[255:0]) //|< w
   ,.sc2cdma_dat_pending_req (sc2cdma_dat_pending_req) //|< i
   ,.nvdla_core_ng_clk (nvdla_core_clk) //|< i
   ,.reg2dp_op_en (reg2dp_op_en[0]) //|< w
@@ -1040,6 +990,7 @@ NV_NVDLA_CDMA_img u_img (
 //,.img2cvt_dat_wr_pad_mask (img2cvt_dat_wr_pad_mask[127:0]) //|> w
   );
 //
+//#ifdef IMG_SMALL
 wire img2sbuf_p1_wr_en;
 wire [7:0] img2sbuf_p1_wr_addr;
 wire [8*8 -1:0] img2sbuf_p1_wr_data;
@@ -1050,6 +1001,7 @@ wire [7:0] img2sbuf_p1_rd_addr;
   assign img2sbuf_p1_wr_data = 64'b0;
   assign img2sbuf_p1_rd_en = 1'b0;
   assign img2sbuf_p1_rd_addr = 8'b0;
+//#endif
 //-------------- SLCG for IMG DMA --------------//
 NV_NVDLA_CDMA_slcg u_slcg_img (
    .dla_clk_ovr_on_sync (dla_clk_ovr_on_sync)
@@ -1138,9 +1090,6 @@ NV_NVDLA_CDMA_cvt u_cvt (
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   ,.dc2cvt_dat_wr_info_pd (dc2cvt_dat_wr_info_pd[11:0])
-//,.dc2cvt_dat_wr_addr (dc2cvt_dat_wr_addr)
-//,.dc2cvt_dat_wr_hsel (dc2cvt_dat_wr_hsel)
-//,.dc2cvt_dat_wr_data (dc2cvt_dat_wr_data)
   ,.img2cvt_dat_wr_en (img2cvt_dat_wr_en)
 //: my $dmaif=64;
 //: my $Bnum = $dmaif / 8;
@@ -1183,10 +1132,6 @@ NV_NVDLA_CDMA_cvt u_cvt (
 ,.img2cvt_dat_wr_pad_mask (img2cvt_dat_wr_pad_mask )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//,.img2cvt_dat_wr_addr (img2cvt_dat_wr_addr)
-//,.img2cvt_dat_wr_hsel (img2cvt_dat_wr_hsel)
-//,.img2cvt_dat_wr_data (img2cvt_dat_wr_data)
-//,.img2cvt_mn_wr_data (img2cvt_mn_wr_data)
   ,.img2cvt_dat_wr_info_pd (img2cvt_dat_wr_info_pd[11:0])
   ,.cdma2buf_dat_wr_en (cdma2buf_dat_wr_en)
 //: my $dmaif=64;
@@ -1221,9 +1166,6 @@ NV_NVDLA_CDMA_cvt u_cvt (
 ,.cdma2buf_dat_wr_data (cdma2buf_dat_wr_data )
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//,.cdma2buf_dat_wr_addr (cdma2buf_dat_wr_addr)
-//,.cdma2buf_dat_wr_hsel (cdma2buf_dat_wr_hsel)
-//,.cdma2buf_dat_wr_data (cdma2buf_dat_wr_data)
   ,.nvdla_hls_clk (nvdla_hls_gated_clk_cvt)
   ,.slcg_hls_en (slcg_hls_en)
   ,.nvdla_core_ng_clk (nvdla_core_clk)
@@ -1237,7 +1179,6 @@ NV_NVDLA_CDMA_cvt u_cvt (
   ,.reg2dp_nan_to_zero (reg2dp_nan_to_zero[0])
   ,.reg2dp_pad_value (reg2dp_pad_value[15:0])
   ,.dp2reg_done (dp2reg_done)
-//,.img2cvt_dat_wr_pad_mask (img2cvt_dat_wr_pad_mask)
   ,.dp2reg_nan_data_num (dp2reg_nan_data_num[31:0])
   ,.dp2reg_inf_data_num (dp2reg_inf_data_num[31:0])
   ,.dp2reg_dat_flush_done (dp2reg_dat_flush_done)

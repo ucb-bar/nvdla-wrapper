@@ -544,7 +544,11 @@ always @(posedge nvdla_core_clk) begin
 end
 assign select_bdma = 1'b0;
 //////////////// for CDMA ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cdma = ((core_byte_addr & addr_mask) == 32'h00005000);
+//#else
 assign select_cdma = ((core_byte_addr & addr_mask) == 32'h00003000);
+//#endif
 assign cdma_req_pvld_w = (core_req_pop_valid & select_cdma) ? 1'b1 :
                          (csb2cdma_req_prdy | ~csb2cdma_req_pvld) ? 1'b0 :
                          cdma_req_pvld;
@@ -585,7 +589,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CSC ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_csc = ((core_byte_addr & addr_mask) == 32'h00006000);
+//#else
 assign select_csc = ((core_byte_addr & addr_mask) == 32'h00004000);
+//#endif
 assign csc_req_pvld_w = (core_req_pop_valid & select_csc) ? 1'b1 :
                         (csb2csc_req_prdy | ~csb2csc_req_pvld) ? 1'b0 :
                         csc_req_pvld;
@@ -626,7 +634,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CMAC_A ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cmac_a = ((core_byte_addr & addr_mask) == 32'h00007000);
+//#else
 assign select_cmac_a = ((core_byte_addr & addr_mask) == 32'h00005000);
+//#endif
 assign cmac_a_req_pvld_w = (core_req_pop_valid & select_cmac_a) ? 1'b1 :
                            (csb2cmac_a_req_prdy | ~csb2cmac_a_req_pvld) ? 1'b0 :
                            cmac_a_req_pvld;
@@ -667,7 +679,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CMAC_B ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cmac_b = ((core_byte_addr & addr_mask) == 32'h00008000);
+//#else
 assign select_cmac_b = ((core_byte_addr & addr_mask) == 32'h00006000);
+//#endif
 assign cmac_b_req_pvld_w = (core_req_pop_valid & select_cmac_b) ? 1'b1 :
                            (csb2cmac_b_req_prdy | ~csb2cmac_b_req_pvld) ? 1'b0 :
                            cmac_b_req_pvld;
@@ -708,7 +724,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CACC ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cacc = ((core_byte_addr & addr_mask) == 32'h00009000);
+//#else
 assign select_cacc = ((core_byte_addr & addr_mask) == 32'h00007000);
+//#endif
 assign cacc_req_pvld_w = (core_req_pop_valid & select_cacc) ? 1'b1 :
                          (csb2cacc_req_prdy | ~csb2cacc_req_pvld) ? 1'b0 :
                          cacc_req_pvld;
@@ -749,7 +769,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for SDP_RDMA ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_sdp_rdma = ((core_byte_addr & addr_mask) == 32'h0000a000);
+//#else
 assign select_sdp_rdma = ((core_byte_addr & addr_mask) == 32'h00008000);
+//#endif
 assign sdp_rdma_req_pvld_w = (core_req_pop_valid & select_sdp_rdma) ? 1'b1 :
                              (csb2sdp_rdma_req_prdy | ~csb2sdp_rdma_req_pvld) ? 1'b0 :
                              sdp_rdma_req_pvld;
@@ -790,7 +814,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for SDP ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_sdp = ((core_byte_addr & addr_mask) == 32'h0000b000);
+//#else
 assign select_sdp = ((core_byte_addr & addr_mask) == 32'h00009000);
+//#endif
 assign sdp_req_pvld_w = (core_req_pop_valid & select_sdp) ? 1'b1 :
                         (csb2sdp_req_prdy | ~csb2sdp_req_pvld) ? 1'b0 :
                         sdp_req_pvld;
@@ -831,7 +859,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for PDP_RDMA ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_pdp_rdma = ((core_byte_addr & addr_mask) == 32'h0000c000);
+//#else
 assign select_pdp_rdma = ((core_byte_addr & addr_mask) == 32'h0000a000);
+//#endif
 assign pdp_rdma_req_pvld_w = (core_req_pop_valid & select_pdp_rdma) ? 1'b1 :
                              (csb2pdp_rdma_req_prdy | ~csb2pdp_rdma_req_pvld) ? 1'b0 :
                              pdp_rdma_req_pvld;
@@ -872,7 +904,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for PDP ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_pdp = ((core_byte_addr & addr_mask) == 32'h0000d000);
+//#else
 assign select_pdp = ((core_byte_addr & addr_mask) == 32'h0000b000);
+//#endif
 assign pdp_req_pvld_w = (core_req_pop_valid & select_pdp) ? 1'b1 :
                         (csb2pdp_req_prdy | ~csb2pdp_req_pvld) ? 1'b0 :
                         pdp_req_pvld;
@@ -913,7 +949,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CDP_RDMA ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cdp_rdma = ((core_byte_addr & addr_mask) == 32'h0000e000);
+//#else
 assign select_cdp_rdma = ((core_byte_addr & addr_mask) == 32'h0000c000);
+//#endif
 assign cdp_rdma_req_pvld_w = (core_req_pop_valid & select_cdp_rdma) ? 1'b1 :
                              (csb2cdp_rdma_req_prdy | ~csb2cdp_rdma_req_pvld) ? 1'b0 :
                              cdp_rdma_req_pvld;
@@ -954,7 +994,11 @@ always @(posedge nvdla_core_clk) begin
     end
 end
 //////////////// for CDP ////////////////
+//#ifdef BASEADDR_FOR_FULL
+//assign select_cdp = ((core_byte_addr & addr_mask) == 32'h0000f000);
+//#else
 assign select_cdp = ((core_byte_addr & addr_mask) == 32'h0000d000);
+//#endif
 assign cdp_req_pvld_w = (core_req_pop_valid & select_cdp) ? 1'b1 :
                         (csb2cdp_req_prdy | ~csb2cdp_req_pvld) ? 1'b0 :
                         cdp_req_pvld;

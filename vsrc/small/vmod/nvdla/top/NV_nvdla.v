@@ -16,6 +16,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define LARGE_MEMBUS
+//#endif
 `include "NV_HWACC_NVDLA_tick_defines.vh"
 // ================================================================
 // NVDLA Open Source Project
@@ -25,6 +31,7 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
+`define DESIGNWARE_NOEXIST 1
 // ================================================================
 // NVDLA Open Source Project
 // 
@@ -42,8 +49,10 @@
     //atomK
     //atomK
     //atomK*2
+    //atomK*4
+//notice, for image case, first atom OP within one strip OP must fetch from entry align place, in the middle of an entry is not supported.
+//thus, when atomC/atomK=4, stripe=4*atomK, feature data still keeps atomK*2
     `define CC_ATOMC_DIV_ATOMK_EQUAL_1
-//image stripe keep 2*atomK
 //batch keep 1
 module NV_nvdla (
    dla_core_clk //|< i

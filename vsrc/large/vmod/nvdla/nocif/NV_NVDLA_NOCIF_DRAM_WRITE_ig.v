@@ -82,7 +82,7 @@ module NV_NVDLA_NOCIF_DRAM_WRITE_ig (
 //:print qq(
 //:input client${i}2mcif_wr_req_valid;
 //:output client${i}2mcif_wr_req_ready;
-//:input [256 +1:0] client${i}2mcif_wr_req_pd;
+//:input [256 +(( 256 )/8/32):0] client${i}2mcif_wr_req_pd;
 //:input [7:0] client${i}2mcif_wr_wt;
 //:input [3:0] client${i}2mcif_wr_axid;
 //:);
@@ -91,19 +91,19 @@ module NV_NVDLA_NOCIF_DRAM_WRITE_ig (
 
 input client02mcif_wr_req_valid;
 output client02mcif_wr_req_ready;
-input [256 +1:0] client02mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client02mcif_wr_req_pd;
 input [7:0] client02mcif_wr_wt;
 input [3:0] client02mcif_wr_axid;
 
 input client12mcif_wr_req_valid;
 output client12mcif_wr_req_ready;
-input [256 +1:0] client12mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client12mcif_wr_req_pd;
 input [7:0] client12mcif_wr_wt;
 input [3:0] client12mcif_wr_axid;
 
 input client22mcif_wr_req_valid;
 output client22mcif_wr_req_ready;
-input [256 +1:0] client22mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client22mcif_wr_req_pd;
 input [7:0] client22mcif_wr_wt;
 input [3:0] client22mcif_wr_axid;
 

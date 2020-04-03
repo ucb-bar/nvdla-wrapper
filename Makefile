@@ -2,17 +2,14 @@
 # pre-process nvdla into a single blackbox file
 #########################################################################################
 
-# import srcs
-include $(abspath .)/vsrc.mk
-
-nvdla_dir=$(nvdla_blocks_dir)
+nvdla_blocks_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # either "large" or "small"
 NVDLA_TYPE ?= large
 NVDLA_NAME = nvdla_$(NVDLA_TYPE)
 
 # name of output pre-processed verilog file
-PREPROC_VERILOG_DIR = $(nvdla_dir)/src/main/resources
+PREPROC_VERILOG_DIR = $(nvdla_blocks_dir)/src/main/resources
 PREPROC_VERILOG = $(PREPROC_VERILOG_DIR)/$(NVDLA_NAME).preprocessed.v
 
 .PHONY: default $(PREPROC_VERILOG)
@@ -22,27 +19,23 @@ default: $(PREPROC_VERILOG)
 # includes and vsrcs
 #########################################################################################
 
-ALL_VSRCS = $(filter-out %.vh,$($(NVDLA_NAME)_vsrcs))
+lookup_srcs = $(shell find -L $(1)/ -name target -prune -o -iname "*.$(2)" -print 2> /dev/null)
+ALL_VSRCS = \
+	$(nvdla_blocks_dir)/vsrc/defines/defs.v \
+	$(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/$(NVDLA_NAME).v \
+	$(call lookup_srcs,$(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/nvdla,v) \
+	$(nvdla_blocks_dir)/vsrc/defines/undefs.v
 INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
 
 #########################################################################################
-# pre-process using verilator
+# pre-process using custom script to replace the includes (but leave rest unaffected)
 #########################################################################################
 
-# default nvdla top module
-TOP = $(NVDLA_NAME)
-
-PREPROC_VERILATOR_OPTS = \
-	-E \
-	+incdir+$(INC_DIR)
-
-# preprocess with Verilator
 $(PREPROC_VERILOG): $(ALL_VSRCS)
 	mkdir -p $(dir $(PREPROC_VERILOG))
-	cat $(ALL_VSRCS) > combined.sv
-	verilator --cc --exe $(PREPROC_VERILATOR_OPTS) combined.sv -Mdir $(nvdla_dir)/NVDLA.preprocess --top-module $(TOP) > $@
-	sed -i '/^`line/d' $@
-	rm -rf combined.sv $(nvdla_dir)/NVDLA.preprocess
+	cat $(ALL_VSRCS) > combined.v
+	./insert-includes.py combined.v $@ $(INC_DIR)
+	rm -rf combined.v
 
 clean:
-	rm -rf $(PREPROC_VERILOG)
+	rm -rf $(nvdla_blocks_dir)/src/main/resources

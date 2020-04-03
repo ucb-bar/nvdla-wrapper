@@ -17,6 +17,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define SMALL_MEMBUS
+//#endif
 module NV_NVDLA_NOCIF_DRAM_read (
   nvdla_core_clk
   ,nvdla_core_rstn
@@ -123,7 +129,7 @@ module NV_NVDLA_NOCIF_DRAM_read (
 input nvdla_core_clk;
 input nvdla_core_rstn;
 //:my $k=7;
-//:my $w = 64 +1 -1;
+//:my $w = 64 +(( 64 )/8/8)-1;
 //:my $i;
 //:for ($i=0;$i<$k;$i++) {
 //: print("input client${i}2mcif_rd_cdt_lat_fifo_pop;\n");
@@ -303,7 +309,6 @@ output [7:0] mcif2noc_axi_ar_arid;
 output [3:0] mcif2noc_axi_ar_arlen;
 output [32 -1:0] mcif2noc_axi_ar_araddr;
 input [31:0] pwrbus_ram_pd;
-wire eg2ig_axi_vld;
 wire [3:0] cq_wr_thread_id;
 wire [6:0] cq_wr_pd;
 wire cq_wr_pvld;
@@ -481,7 +486,7 @@ NV_NVDLA_NOCIF_DRAM_READ_cq u_cq (
 //: );
 //:}
 //:my $i;
-//:for($i=7;$i<10;$i++) {
+//:for($i=7;$i<16;$i++) {
 //: print qq(
 //: ,.cq_rd${i}_prdy(1'b1)
 //:);
@@ -521,6 +526,18 @@ NV_NVDLA_NOCIF_DRAM_READ_cq u_cq (
 ,.cq_rd8_prdy(1'b1)
 
 ,.cq_rd9_prdy(1'b1)
+
+,.cq_rd10_prdy(1'b1)
+
+,.cq_rd11_prdy(1'b1)
+
+,.cq_rd12_prdy(1'b1)
+
+,.cq_rd13_prdy(1'b1)
+
+,.cq_rd14_prdy(1'b1)
+
+,.cq_rd15_prdy(1'b1)
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   ,.pwrbus_ram_pd (pwrbus_ram_pd[31:0]) //|< i

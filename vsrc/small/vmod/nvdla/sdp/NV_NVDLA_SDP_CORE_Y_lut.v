@@ -94,22 +94,27 @@ output [31:0] dp2reg_lut_oflow;
 output [31:0] dp2reg_lut_uflow;
 input [31:0] pwrbus_ram_pd;
 input op_en_load;
-reg idx2lut_prdy;
-reg [185*0 -1:0] lut2inp_pd;
-reg lut2inp_pvld;
-reg [81*0 -1:0] lut_in_pd;
-reg lut_in_pvld;
+wire idx2lut_prdy;
+wire [185*0 -1:0] lut2inp_pd;
+wire lut2inp_pvld;
+wire [81*0 -1:0] lut_in_pd;
+wire lut_in_pvld;
 wire lut_in_prdy;
 wire [185*0 -1:0] lut_out_pd;
 wire lut_out_pvld;
-reg lut_out_prdy;
-//: my $k = 0;
-//: my $m = 257;
-//: foreach my $lut (qw(le lo)) {
+wire lut_out_prdy;
+//: my $m = 65;
+//: my $n = 257;
 //: foreach my $i (0..${m}-1) {
-//: print "reg     [15:0] REG_${lut}_${i}; \n";
+//: print "reg     [15:0] REG_le_${i}; \n";
 //: }
+//: foreach my $i (${m}..${n}-1) {
+//: print "wire   [15:0] REG_le_${i}; \n";
 //: }
+//: foreach my $i (0..${n}-1) {
+//: print "reg     [15:0] REG_lo_${i}; \n";
+//: }
+//: my $k = 0;
 //: foreach my $lut (qw(le lo)) {
 //: foreach my $j (0..1) {
 //: foreach my $i (0..${k}-1) {
@@ -183,198 +188,198 @@ reg     [15:0] REG_le_61;
 reg     [15:0] REG_le_62; 
 reg     [15:0] REG_le_63; 
 reg     [15:0] REG_le_64; 
-reg     [15:0] REG_le_65; 
-reg     [15:0] REG_le_66; 
-reg     [15:0] REG_le_67; 
-reg     [15:0] REG_le_68; 
-reg     [15:0] REG_le_69; 
-reg     [15:0] REG_le_70; 
-reg     [15:0] REG_le_71; 
-reg     [15:0] REG_le_72; 
-reg     [15:0] REG_le_73; 
-reg     [15:0] REG_le_74; 
-reg     [15:0] REG_le_75; 
-reg     [15:0] REG_le_76; 
-reg     [15:0] REG_le_77; 
-reg     [15:0] REG_le_78; 
-reg     [15:0] REG_le_79; 
-reg     [15:0] REG_le_80; 
-reg     [15:0] REG_le_81; 
-reg     [15:0] REG_le_82; 
-reg     [15:0] REG_le_83; 
-reg     [15:0] REG_le_84; 
-reg     [15:0] REG_le_85; 
-reg     [15:0] REG_le_86; 
-reg     [15:0] REG_le_87; 
-reg     [15:0] REG_le_88; 
-reg     [15:0] REG_le_89; 
-reg     [15:0] REG_le_90; 
-reg     [15:0] REG_le_91; 
-reg     [15:0] REG_le_92; 
-reg     [15:0] REG_le_93; 
-reg     [15:0] REG_le_94; 
-reg     [15:0] REG_le_95; 
-reg     [15:0] REG_le_96; 
-reg     [15:0] REG_le_97; 
-reg     [15:0] REG_le_98; 
-reg     [15:0] REG_le_99; 
-reg     [15:0] REG_le_100; 
-reg     [15:0] REG_le_101; 
-reg     [15:0] REG_le_102; 
-reg     [15:0] REG_le_103; 
-reg     [15:0] REG_le_104; 
-reg     [15:0] REG_le_105; 
-reg     [15:0] REG_le_106; 
-reg     [15:0] REG_le_107; 
-reg     [15:0] REG_le_108; 
-reg     [15:0] REG_le_109; 
-reg     [15:0] REG_le_110; 
-reg     [15:0] REG_le_111; 
-reg     [15:0] REG_le_112; 
-reg     [15:0] REG_le_113; 
-reg     [15:0] REG_le_114; 
-reg     [15:0] REG_le_115; 
-reg     [15:0] REG_le_116; 
-reg     [15:0] REG_le_117; 
-reg     [15:0] REG_le_118; 
-reg     [15:0] REG_le_119; 
-reg     [15:0] REG_le_120; 
-reg     [15:0] REG_le_121; 
-reg     [15:0] REG_le_122; 
-reg     [15:0] REG_le_123; 
-reg     [15:0] REG_le_124; 
-reg     [15:0] REG_le_125; 
-reg     [15:0] REG_le_126; 
-reg     [15:0] REG_le_127; 
-reg     [15:0] REG_le_128; 
-reg     [15:0] REG_le_129; 
-reg     [15:0] REG_le_130; 
-reg     [15:0] REG_le_131; 
-reg     [15:0] REG_le_132; 
-reg     [15:0] REG_le_133; 
-reg     [15:0] REG_le_134; 
-reg     [15:0] REG_le_135; 
-reg     [15:0] REG_le_136; 
-reg     [15:0] REG_le_137; 
-reg     [15:0] REG_le_138; 
-reg     [15:0] REG_le_139; 
-reg     [15:0] REG_le_140; 
-reg     [15:0] REG_le_141; 
-reg     [15:0] REG_le_142; 
-reg     [15:0] REG_le_143; 
-reg     [15:0] REG_le_144; 
-reg     [15:0] REG_le_145; 
-reg     [15:0] REG_le_146; 
-reg     [15:0] REG_le_147; 
-reg     [15:0] REG_le_148; 
-reg     [15:0] REG_le_149; 
-reg     [15:0] REG_le_150; 
-reg     [15:0] REG_le_151; 
-reg     [15:0] REG_le_152; 
-reg     [15:0] REG_le_153; 
-reg     [15:0] REG_le_154; 
-reg     [15:0] REG_le_155; 
-reg     [15:0] REG_le_156; 
-reg     [15:0] REG_le_157; 
-reg     [15:0] REG_le_158; 
-reg     [15:0] REG_le_159; 
-reg     [15:0] REG_le_160; 
-reg     [15:0] REG_le_161; 
-reg     [15:0] REG_le_162; 
-reg     [15:0] REG_le_163; 
-reg     [15:0] REG_le_164; 
-reg     [15:0] REG_le_165; 
-reg     [15:0] REG_le_166; 
-reg     [15:0] REG_le_167; 
-reg     [15:0] REG_le_168; 
-reg     [15:0] REG_le_169; 
-reg     [15:0] REG_le_170; 
-reg     [15:0] REG_le_171; 
-reg     [15:0] REG_le_172; 
-reg     [15:0] REG_le_173; 
-reg     [15:0] REG_le_174; 
-reg     [15:0] REG_le_175; 
-reg     [15:0] REG_le_176; 
-reg     [15:0] REG_le_177; 
-reg     [15:0] REG_le_178; 
-reg     [15:0] REG_le_179; 
-reg     [15:0] REG_le_180; 
-reg     [15:0] REG_le_181; 
-reg     [15:0] REG_le_182; 
-reg     [15:0] REG_le_183; 
-reg     [15:0] REG_le_184; 
-reg     [15:0] REG_le_185; 
-reg     [15:0] REG_le_186; 
-reg     [15:0] REG_le_187; 
-reg     [15:0] REG_le_188; 
-reg     [15:0] REG_le_189; 
-reg     [15:0] REG_le_190; 
-reg     [15:0] REG_le_191; 
-reg     [15:0] REG_le_192; 
-reg     [15:0] REG_le_193; 
-reg     [15:0] REG_le_194; 
-reg     [15:0] REG_le_195; 
-reg     [15:0] REG_le_196; 
-reg     [15:0] REG_le_197; 
-reg     [15:0] REG_le_198; 
-reg     [15:0] REG_le_199; 
-reg     [15:0] REG_le_200; 
-reg     [15:0] REG_le_201; 
-reg     [15:0] REG_le_202; 
-reg     [15:0] REG_le_203; 
-reg     [15:0] REG_le_204; 
-reg     [15:0] REG_le_205; 
-reg     [15:0] REG_le_206; 
-reg     [15:0] REG_le_207; 
-reg     [15:0] REG_le_208; 
-reg     [15:0] REG_le_209; 
-reg     [15:0] REG_le_210; 
-reg     [15:0] REG_le_211; 
-reg     [15:0] REG_le_212; 
-reg     [15:0] REG_le_213; 
-reg     [15:0] REG_le_214; 
-reg     [15:0] REG_le_215; 
-reg     [15:0] REG_le_216; 
-reg     [15:0] REG_le_217; 
-reg     [15:0] REG_le_218; 
-reg     [15:0] REG_le_219; 
-reg     [15:0] REG_le_220; 
-reg     [15:0] REG_le_221; 
-reg     [15:0] REG_le_222; 
-reg     [15:0] REG_le_223; 
-reg     [15:0] REG_le_224; 
-reg     [15:0] REG_le_225; 
-reg     [15:0] REG_le_226; 
-reg     [15:0] REG_le_227; 
-reg     [15:0] REG_le_228; 
-reg     [15:0] REG_le_229; 
-reg     [15:0] REG_le_230; 
-reg     [15:0] REG_le_231; 
-reg     [15:0] REG_le_232; 
-reg     [15:0] REG_le_233; 
-reg     [15:0] REG_le_234; 
-reg     [15:0] REG_le_235; 
-reg     [15:0] REG_le_236; 
-reg     [15:0] REG_le_237; 
-reg     [15:0] REG_le_238; 
-reg     [15:0] REG_le_239; 
-reg     [15:0] REG_le_240; 
-reg     [15:0] REG_le_241; 
-reg     [15:0] REG_le_242; 
-reg     [15:0] REG_le_243; 
-reg     [15:0] REG_le_244; 
-reg     [15:0] REG_le_245; 
-reg     [15:0] REG_le_246; 
-reg     [15:0] REG_le_247; 
-reg     [15:0] REG_le_248; 
-reg     [15:0] REG_le_249; 
-reg     [15:0] REG_le_250; 
-reg     [15:0] REG_le_251; 
-reg     [15:0] REG_le_252; 
-reg     [15:0] REG_le_253; 
-reg     [15:0] REG_le_254; 
-reg     [15:0] REG_le_255; 
-reg     [15:0] REG_le_256; 
+wire   [15:0] REG_le_65; 
+wire   [15:0] REG_le_66; 
+wire   [15:0] REG_le_67; 
+wire   [15:0] REG_le_68; 
+wire   [15:0] REG_le_69; 
+wire   [15:0] REG_le_70; 
+wire   [15:0] REG_le_71; 
+wire   [15:0] REG_le_72; 
+wire   [15:0] REG_le_73; 
+wire   [15:0] REG_le_74; 
+wire   [15:0] REG_le_75; 
+wire   [15:0] REG_le_76; 
+wire   [15:0] REG_le_77; 
+wire   [15:0] REG_le_78; 
+wire   [15:0] REG_le_79; 
+wire   [15:0] REG_le_80; 
+wire   [15:0] REG_le_81; 
+wire   [15:0] REG_le_82; 
+wire   [15:0] REG_le_83; 
+wire   [15:0] REG_le_84; 
+wire   [15:0] REG_le_85; 
+wire   [15:0] REG_le_86; 
+wire   [15:0] REG_le_87; 
+wire   [15:0] REG_le_88; 
+wire   [15:0] REG_le_89; 
+wire   [15:0] REG_le_90; 
+wire   [15:0] REG_le_91; 
+wire   [15:0] REG_le_92; 
+wire   [15:0] REG_le_93; 
+wire   [15:0] REG_le_94; 
+wire   [15:0] REG_le_95; 
+wire   [15:0] REG_le_96; 
+wire   [15:0] REG_le_97; 
+wire   [15:0] REG_le_98; 
+wire   [15:0] REG_le_99; 
+wire   [15:0] REG_le_100; 
+wire   [15:0] REG_le_101; 
+wire   [15:0] REG_le_102; 
+wire   [15:0] REG_le_103; 
+wire   [15:0] REG_le_104; 
+wire   [15:0] REG_le_105; 
+wire   [15:0] REG_le_106; 
+wire   [15:0] REG_le_107; 
+wire   [15:0] REG_le_108; 
+wire   [15:0] REG_le_109; 
+wire   [15:0] REG_le_110; 
+wire   [15:0] REG_le_111; 
+wire   [15:0] REG_le_112; 
+wire   [15:0] REG_le_113; 
+wire   [15:0] REG_le_114; 
+wire   [15:0] REG_le_115; 
+wire   [15:0] REG_le_116; 
+wire   [15:0] REG_le_117; 
+wire   [15:0] REG_le_118; 
+wire   [15:0] REG_le_119; 
+wire   [15:0] REG_le_120; 
+wire   [15:0] REG_le_121; 
+wire   [15:0] REG_le_122; 
+wire   [15:0] REG_le_123; 
+wire   [15:0] REG_le_124; 
+wire   [15:0] REG_le_125; 
+wire   [15:0] REG_le_126; 
+wire   [15:0] REG_le_127; 
+wire   [15:0] REG_le_128; 
+wire   [15:0] REG_le_129; 
+wire   [15:0] REG_le_130; 
+wire   [15:0] REG_le_131; 
+wire   [15:0] REG_le_132; 
+wire   [15:0] REG_le_133; 
+wire   [15:0] REG_le_134; 
+wire   [15:0] REG_le_135; 
+wire   [15:0] REG_le_136; 
+wire   [15:0] REG_le_137; 
+wire   [15:0] REG_le_138; 
+wire   [15:0] REG_le_139; 
+wire   [15:0] REG_le_140; 
+wire   [15:0] REG_le_141; 
+wire   [15:0] REG_le_142; 
+wire   [15:0] REG_le_143; 
+wire   [15:0] REG_le_144; 
+wire   [15:0] REG_le_145; 
+wire   [15:0] REG_le_146; 
+wire   [15:0] REG_le_147; 
+wire   [15:0] REG_le_148; 
+wire   [15:0] REG_le_149; 
+wire   [15:0] REG_le_150; 
+wire   [15:0] REG_le_151; 
+wire   [15:0] REG_le_152; 
+wire   [15:0] REG_le_153; 
+wire   [15:0] REG_le_154; 
+wire   [15:0] REG_le_155; 
+wire   [15:0] REG_le_156; 
+wire   [15:0] REG_le_157; 
+wire   [15:0] REG_le_158; 
+wire   [15:0] REG_le_159; 
+wire   [15:0] REG_le_160; 
+wire   [15:0] REG_le_161; 
+wire   [15:0] REG_le_162; 
+wire   [15:0] REG_le_163; 
+wire   [15:0] REG_le_164; 
+wire   [15:0] REG_le_165; 
+wire   [15:0] REG_le_166; 
+wire   [15:0] REG_le_167; 
+wire   [15:0] REG_le_168; 
+wire   [15:0] REG_le_169; 
+wire   [15:0] REG_le_170; 
+wire   [15:0] REG_le_171; 
+wire   [15:0] REG_le_172; 
+wire   [15:0] REG_le_173; 
+wire   [15:0] REG_le_174; 
+wire   [15:0] REG_le_175; 
+wire   [15:0] REG_le_176; 
+wire   [15:0] REG_le_177; 
+wire   [15:0] REG_le_178; 
+wire   [15:0] REG_le_179; 
+wire   [15:0] REG_le_180; 
+wire   [15:0] REG_le_181; 
+wire   [15:0] REG_le_182; 
+wire   [15:0] REG_le_183; 
+wire   [15:0] REG_le_184; 
+wire   [15:0] REG_le_185; 
+wire   [15:0] REG_le_186; 
+wire   [15:0] REG_le_187; 
+wire   [15:0] REG_le_188; 
+wire   [15:0] REG_le_189; 
+wire   [15:0] REG_le_190; 
+wire   [15:0] REG_le_191; 
+wire   [15:0] REG_le_192; 
+wire   [15:0] REG_le_193; 
+wire   [15:0] REG_le_194; 
+wire   [15:0] REG_le_195; 
+wire   [15:0] REG_le_196; 
+wire   [15:0] REG_le_197; 
+wire   [15:0] REG_le_198; 
+wire   [15:0] REG_le_199; 
+wire   [15:0] REG_le_200; 
+wire   [15:0] REG_le_201; 
+wire   [15:0] REG_le_202; 
+wire   [15:0] REG_le_203; 
+wire   [15:0] REG_le_204; 
+wire   [15:0] REG_le_205; 
+wire   [15:0] REG_le_206; 
+wire   [15:0] REG_le_207; 
+wire   [15:0] REG_le_208; 
+wire   [15:0] REG_le_209; 
+wire   [15:0] REG_le_210; 
+wire   [15:0] REG_le_211; 
+wire   [15:0] REG_le_212; 
+wire   [15:0] REG_le_213; 
+wire   [15:0] REG_le_214; 
+wire   [15:0] REG_le_215; 
+wire   [15:0] REG_le_216; 
+wire   [15:0] REG_le_217; 
+wire   [15:0] REG_le_218; 
+wire   [15:0] REG_le_219; 
+wire   [15:0] REG_le_220; 
+wire   [15:0] REG_le_221; 
+wire   [15:0] REG_le_222; 
+wire   [15:0] REG_le_223; 
+wire   [15:0] REG_le_224; 
+wire   [15:0] REG_le_225; 
+wire   [15:0] REG_le_226; 
+wire   [15:0] REG_le_227; 
+wire   [15:0] REG_le_228; 
+wire   [15:0] REG_le_229; 
+wire   [15:0] REG_le_230; 
+wire   [15:0] REG_le_231; 
+wire   [15:0] REG_le_232; 
+wire   [15:0] REG_le_233; 
+wire   [15:0] REG_le_234; 
+wire   [15:0] REG_le_235; 
+wire   [15:0] REG_le_236; 
+wire   [15:0] REG_le_237; 
+wire   [15:0] REG_le_238; 
+wire   [15:0] REG_le_239; 
+wire   [15:0] REG_le_240; 
+wire   [15:0] REG_le_241; 
+wire   [15:0] REG_le_242; 
+wire   [15:0] REG_le_243; 
+wire   [15:0] REG_le_244; 
+wire   [15:0] REG_le_245; 
+wire   [15:0] REG_le_246; 
+wire   [15:0] REG_le_247; 
+wire   [15:0] REG_le_248; 
+wire   [15:0] REG_le_249; 
+wire   [15:0] REG_le_250; 
+wire   [15:0] REG_le_251; 
+wire   [15:0] REG_le_252; 
+wire   [15:0] REG_le_253; 
+wire   [15:0] REG_le_254; 
+wire   [15:0] REG_le_255; 
+wire   [15:0] REG_le_256; 
 reg     [15:0] REG_lo_0; 
 reg     [15:0] REG_lo_1; 
 reg     [15:0] REG_lo_2; 
@@ -648,6 +653,11 @@ reg [15:0] lo_lut_data;
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+wire [0:0] lut_hybrid_sum_tmp;
+wire [0:0] lut_le_hit_sum_tmp;
+wire [0:0] lut_lo_hit_sum_tmp;
+wire [0:0] lut_oflow_sum_tmp;
+wire [0:0] lut_uflow_sum_tmp;
 wire [4:0] lut_hybrid_sum;
 wire [4:0] lut_le_hit_sum;
 wire [4:0] lut_lo_hit_sum;
@@ -21990,7 +22000,8 @@ NV_NVDLA_SDP_CORE_Y_lut_pipe_p1 pipe_p1 (
 // PERF STATISTIC
 // OFLOW
 //: my $k=0;
-//: print "assign lut_oflow_sum[4:0] = lut_in_oflow0";
+//: my $w=0;
+//: print "assign lut_oflow_sum_tmp[${w}:0] = lut_in_oflow0";
 //: if(${k} >1) {
 //: foreach my $i (1..${k}-1) {
 //: print "+ lut_in_oflow${i}";
@@ -21998,9 +22009,10 @@ NV_NVDLA_SDP_CORE_Y_lut_pipe_p1 pipe_p1 (
 //: }
 //: print ";\n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
-assign lut_oflow_sum[4:0] = lut_in_oflow0;
+assign lut_oflow_sum_tmp[0:0] = lut_in_oflow0;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+assign lut_oflow_sum[4:0] = {{(4-0){1'b0}},lut_oflow_sum_tmp[0:0]}; //spyglass disable W164b
 assign perf_lut_oflow_add = (&lut_oflow_cnt) ? 0 : lut_oflow_sum;
 assign perf_lut_oflow_sub = 1'b0;
 assign dp2reg_lut_oflow = lut_oflow_cnt;
@@ -22038,7 +22050,8 @@ always @(
 end
 // UFLOW
 //: my $k=0;
-//: print "assign lut_uflow_sum[4:0] = lut_in_uflow0";
+//: my $w=0;
+//: print "assign lut_uflow_sum_tmp[${w}:0] = lut_in_uflow0";
 //: if(${k} >1) {
 //: foreach my $i (1..${k}-1) {
 //: print "+ lut_in_uflow${i}";
@@ -22046,9 +22059,10 @@ end
 //: }
 //: print ";\n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
-assign lut_uflow_sum[4:0] = lut_in_uflow0;
+assign lut_uflow_sum_tmp[0:0] = lut_in_uflow0;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+assign lut_uflow_sum[4:0] = {{(4-0){1'b0}},lut_uflow_sum_tmp[0:0]}; //spyglass disable W164b
 assign perf_lut_uflow_add = (&lut_uflow_cnt) ? 0 : lut_uflow_sum;
 assign perf_lut_uflow_sub = 1'b0;
 assign dp2reg_lut_uflow = lut_uflow_cnt;
@@ -22086,11 +22100,12 @@ always @(
 end
 // HYBRID
 //: my $k=0;
-//: foreach my $i (1..${k}-1) {
+//: my $w=0;
+//: foreach my $i (0..${k}-1) {
 //: print "assign lut_in_hybrid${i} = !(lut_in_oflow${i} | lut_in_uflow${i}); \n";
 //: }
 //: print "\n";
-//: print "assign lut_hybrid_sum[4:0] = lut_in_hybrid0";
+//: print "assign lut_hybrid_sum_tmp[${w}:0] = lut_in_hybrid0";
 //: if(${k} >1) {
 //: foreach my $i (1..${k}-1) {
 //: print "+ lut_in_hybrid${i}";
@@ -22099,9 +22114,10 @@ end
 //: print ";\n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-assign lut_hybrid_sum[4:0] = lut_in_hybrid0;
+assign lut_hybrid_sum_tmp[0:0] = lut_in_hybrid0;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+assign lut_hybrid_sum[4:0] = {{(4-0){1'b0}},lut_hybrid_sum_tmp}; //spyglass disable W164b
 assign perf_lut_hybrid_add = (&lut_hybrid_cnt) ? 0 : lut_hybrid_sum;
 assign perf_lut_hybrid_sub = 1'b0;
 assign dp2reg_lut_hybrid = lut_hybrid_cnt;
@@ -22141,7 +22157,8 @@ always @(
 end
 // LE_HIT
 //: my $k=0;
-//: print "assign lut_le_hit_sum[4:0] = lut_in_le_hit0";
+//: my $w=0;
+//: print "assign lut_le_hit_sum_tmp[${w}:0] = lut_in_le_hit0";
 //: if(${k} >1) {
 //: foreach my $i (1..${k}-1) {
 //: print "+ lut_in_le_hit${i}";
@@ -22149,9 +22166,10 @@ end
 //: }
 //: print ";\n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
-assign lut_le_hit_sum[4:0] = lut_in_le_hit0;
+assign lut_le_hit_sum_tmp[0:0] = lut_in_le_hit0;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+assign lut_le_hit_sum[4:0] = {{(4-0){1'b0}},lut_le_hit_sum_tmp[0:0]}; //spyglass disable W164b 
 assign perf_lut_le_hit_add = (&lut_le_hit_cnt) ? 0 : lut_le_hit_sum;
 assign perf_lut_le_hit_sub = 1'b0;
 assign dp2reg_lut_le_hit = lut_le_hit_cnt;
@@ -22171,7 +22189,7 @@ always @(
   ) begin
 // VCS sop_coverage_off start
   perf_lut_le_hit_cnt_ext[33:0] = {1'b0, 1'b0, perf_lut_le_hit_cnt_cur};
-  perf_lut_le_hit_cnt_mod[33:0] = perf_lut_le_hit_cnt_cur + perf_lut_le_hit_add[4:0] - perf_lut_le_hit_sub[0:0];
+  perf_lut_le_hit_cnt_mod[33:0] = perf_lut_le_hit_cnt_cur + perf_lut_le_hit_add[4:0] - perf_lut_le_hit_sub[0:0]; // spyglass disable W164b
   perf_lut_le_hit_cnt_new[33:0] = (perf_lut_le_hit_adv)? perf_lut_le_hit_cnt_mod[33:0] : perf_lut_le_hit_cnt_ext[33:0];
   perf_lut_le_hit_cnt_nxt[33:0] = (op_en_load)? 34'd0 : perf_lut_le_hit_cnt_new[33:0];
 end
@@ -22191,7 +22209,8 @@ always @(
 end
 // LO_HIT
 //: my $k=0;
-//: print "assign lut_lo_hit_sum[4:0] = lut_in_lo_hit0";
+//: my $w=0;
+//: print "assign lut_lo_hit_sum_tmp[${w}:0] = lut_in_lo_hit0";
 //: if(${k} >1) {
 //: foreach my $i (1..${k}-1) {
 //: print "+ lut_in_lo_hit${i}";
@@ -22199,9 +22218,10 @@ end
 //: }
 //: print ";\n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
-assign lut_lo_hit_sum[4:0] = lut_in_lo_hit0;
+assign lut_lo_hit_sum_tmp[0:0] = lut_in_lo_hit0;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+assign lut_lo_hit_sum[4:0] = {{(4-0){1'b0}},lut_lo_hit_sum_tmp[0:0]}; //spyglass disable W164b
 assign perf_lut_lo_hit_add = (&lut_lo_hit_cnt) ? 0 : lut_lo_hit_sum;
 assign perf_lut_lo_hit_sub = 1'b0;
 assign dp2reg_lut_lo_hit = lut_lo_hit_cnt;
@@ -22385,7 +22405,6 @@ assign cmd_fifo_rd_prdy = lut_out_prdy & dat_fifo_rd_pvld;
 //: or reg2dp_lut_le_slope_uflow_shift
 //: or reg2dp_lut_le_start
 //: or reg2dp_lut_le_function
-//: or reg2dp_proc_precision
 //: or reg2dp_lut_le_index_offset
 //: or reg2dp_lut_lo_slope_uflow_scale
 //: or reg2dp_lut_lo_slope_uflow_shift
@@ -22825,3 +22844,890 @@ assign lut2inp_pd = pipe_skid_lut_out_pd;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 endmodule
+`define FORCE_CONTENTION_ASSERTION_RESET_ACTIVE 1'b1
+`include "simulate_x_tick.vh"
+module NV_NVDLA_SDP_CORE_Y_LUT_dat (
+      nvdla_core_clk
+    , nvdla_core_rstn
+    , dat_fifo_wr_pvld
+    , dat_fifo_wr_pd
+    , dat_fifo_rd_prdy
+    , dat_fifo_rd_pvld
+    , dat_fifo_rd_pd
+    , pwrbus_ram_pd
+    );
+// spyglass disable_block W401 -- clock is not input to module
+input nvdla_core_clk;
+input nvdla_core_rstn;
+input dat_fifo_wr_pvld;
+input [127:0] dat_fifo_wr_pd;
+input dat_fifo_rd_prdy;
+output dat_fifo_rd_pvld;
+output [127:0] dat_fifo_rd_pd;
+input [31:0] pwrbus_ram_pd;
+// Master Clock Gating (SLCG)
+//
+// We gate the clock(s) when idle or stalled.
+// This allows us to turn off numerous miscellaneous flops
+// that don't get gated during synthesis for one reason or another.
+//
+// We gate write side and read side separately.
+// If the fifo is synchronous, we also gate the ram separately, but if
+// -master_clk_gated_unified or -status_reg/-status_logic_reg is specified,
+// then we use one clk gate for write, ram, and read.
+//
+wire nvdla_core_clk_mgated_enable; // assigned by code at end of this module
+wire nvdla_core_clk_mgated; // used only in synchronous fifos
+NV_CLK_gate_power nvdla_core_clk_mgate( .clk(nvdla_core_clk), .reset_(nvdla_core_rstn), .clk_en(nvdla_core_clk_mgated_enable), .clk_gated(nvdla_core_clk_mgated) );
+//
+// WRITE SIDE
+//
+wire wr_reserving;
+assign wr_reserving = dat_fifo_wr_pvld;
+wire wr_popping; // fwd: write side sees pop?
+reg [1:0] dat_fifo_wr_count; // write-side count
+wire [1:0] wr_count_next_wr_popping = wr_reserving ? dat_fifo_wr_count : (dat_fifo_wr_count - 1'd1); // spyglass disable W164a W484
+wire [1:0] wr_count_next_no_wr_popping = wr_reserving ? (dat_fifo_wr_count + 1'd1) : dat_fifo_wr_count; // spyglass disable W164a W484
+wire [1:0] wr_count_next = wr_popping ? wr_count_next_wr_popping :
+                                               wr_count_next_no_wr_popping;
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        dat_fifo_wr_count <= 2'd0;
+    end else begin
+ if ( wr_reserving ^ wr_popping ) begin
+     dat_fifo_wr_count <= wr_count_next;
+        end
+//synopsys translate_off
+            else if ( !(wr_reserving ^ wr_popping) ) begin
+        end else begin
+            dat_fifo_wr_count <= {2{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+wire wr_pushing = wr_reserving; // data pushed same cycle as dat_fifo_wr_pvld
+//
+// RAM
+//
+reg dat_fifo_wr_adr; // current write address
+// spyglass disable_block W484
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        dat_fifo_wr_adr <= 1'd0;
+    end else begin
+        if ( wr_pushing ) begin
+     dat_fifo_wr_adr <= dat_fifo_wr_adr + 1'd1;
+        end
+    end
+end
+// spyglass enable_block W484
+wire rd_popping;
+reg dat_fifo_rd_adr; // read address this cycle
+wire ram_we = wr_pushing && (dat_fifo_wr_count > 2'd0 || !rd_popping); // note: write occurs next cycle
+wire [127:0] dat_fifo_rd_pd_p; // read data out of ram
+wire [31 : 0] pwrbus_ram_pd;
+// Adding parameter for fifogen to disable wr/rd contention assertion in ramgen.
+// Fifogen handles this by ignoring the data on the ram data out for that cycle.
+NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128 ram (
+      .clk( nvdla_core_clk_mgated )
+    , .pwrbus_ram_pd ( pwrbus_ram_pd )
+    , .di ( dat_fifo_wr_pd )
+    , .we ( ram_we )
+    , .wa ( dat_fifo_wr_adr )
+    , .ra ( (dat_fifo_wr_count == 0) ? 2'd2 : {1'b0,dat_fifo_rd_adr} )
+    , .dout ( dat_fifo_rd_pd_p )
+    );
+wire [0:0] rd_adr_next_popping = dat_fifo_rd_adr + 1'd1; // spyglass disable W484
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        dat_fifo_rd_adr <= 1'd0;
+    end else begin
+        if ( rd_popping ) begin
+     dat_fifo_rd_adr <= rd_adr_next_popping;
+        end
+//synopsys translate_off
+            else if ( !rd_popping ) begin
+        end else begin
+            dat_fifo_rd_adr <= {1{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+//
+// SYNCHRONOUS BOUNDARY
+//
+assign wr_popping = rd_popping; // let it be seen immediately
+wire rd_pushing = wr_pushing; // let it be seen immediately
+//
+// READ SIDE
+//
+wire dat_fifo_rd_pvld_p; // data out of fifo is valid
+reg dat_fifo_rd_pvld_int; // internal copy of dat_fifo_rd_pvld
+assign dat_fifo_rd_pvld = dat_fifo_rd_pvld_int;
+assign rd_popping = dat_fifo_rd_pvld_p && !(dat_fifo_rd_pvld_int && !dat_fifo_rd_prdy);
+reg [1:0] dat_fifo_rd_count_p; // read-side fifo count
+// spyglass disable_block W164a W484
+wire [1:0] rd_count_p_next_rd_popping = rd_pushing ? dat_fifo_rd_count_p :
+                                                                (dat_fifo_rd_count_p - 1'd1);
+wire [1:0] rd_count_p_next_no_rd_popping = rd_pushing ? (dat_fifo_rd_count_p + 1'd1) :
+                                                                    dat_fifo_rd_count_p;
+// spyglass enable_block W164a W484
+wire [1:0] rd_count_p_next = rd_popping ? rd_count_p_next_rd_popping :
+                                                     rd_count_p_next_no_rd_popping;
+assign dat_fifo_rd_pvld_p = dat_fifo_rd_count_p != 0 || rd_pushing;
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        dat_fifo_rd_count_p <= 2'd0;
+    end else begin
+        if ( rd_pushing || rd_popping ) begin
+     dat_fifo_rd_count_p <= rd_count_p_next;
+        end
+//synopsys translate_off
+            else if ( !(rd_pushing || rd_popping ) ) begin
+        end else begin
+            dat_fifo_rd_count_p <= {2{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+reg [127:0] dat_fifo_rd_pd; // output data register
+wire rd_req_next = (dat_fifo_rd_pvld_p || (dat_fifo_rd_pvld_int && !dat_fifo_rd_prdy)) ;
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        dat_fifo_rd_pvld_int <= 1'b0;
+    end else begin
+        dat_fifo_rd_pvld_int <= rd_req_next;
+    end
+end
+always @( posedge nvdla_core_clk_mgated ) begin
+    if ( (rd_popping) ) begin
+        dat_fifo_rd_pd <= dat_fifo_rd_pd_p;
+    end
+//synopsys translate_off
+        else if ( !((rd_popping)) ) begin
+    end else begin
+        dat_fifo_rd_pd <= {128{`x_or_0}};
+    end
+//synopsys translate_on
+end
+// Master Clock Gating (SLCG) Enables
+//
+// plusarg for disabling this stuff:
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+reg master_clk_gating_disabled; initial master_clk_gating_disabled = $test$plusargs( "fifogen_disable_master_clk_gating" ) != 0;
+`endif
+`endif
+// synopsys translate_on
+assign nvdla_core_clk_mgated_enable = ((wr_reserving || wr_pushing || wr_popping || dat_fifo_wr_pvld) || (rd_pushing || rd_popping || (dat_fifo_rd_pvld_int && dat_fifo_rd_prdy)) || (wr_pushing))
+                               `ifdef FIFOGEN_MASTER_CLK_GATING_DISABLED
+                               || 1'b1
+                               `endif
+// synopsys translate_off
+          `ifndef SYNTH_LEVEL1_COMPILE
+          `ifndef SYNTHESIS
+                               || master_clk_gating_disabled
+          `endif
+          `endif
+// synopsys translate_on
+                               ;
+//
+// Histogram of fifo depth (from write side's perspective)
+//
+// NOTE: it will reference `SIMTOP.perfmon_enabled, so that
+// has to at least be defined, though not initialized.
+// tbgen testbenches have it already and various
+// ways to turn it on and off.
+//
+`ifdef PERFMON_HISTOGRAM
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+perfmon_histogram perfmon (
+      .clk ( nvdla_core_clk )
+    , .max ( 32'd2 )
+    , .curr ( {30'd0, dat_fifo_wr_count} )
+    );
+`endif
+`endif
+// synopsys translate_on
+`endif
+// spyglass disable_block W164a W164b W116 W484 W504
+`ifdef SPYGLASS
+`else
+`ifdef FV_ASSERT_ON
+`else
+// synopsys translate_off
+`endif
+`ifdef ASSERT_ON
+`ifdef SPYGLASS
+wire disable_assert_plusarg = 1'b0;
+`else
+`ifdef FV_ASSERT_ON
+wire disable_assert_plusarg = 1'b0;
+`else
+wire disable_assert_plusarg = $test$plusargs("DISABLE_NESS_FLOW_ASSERTIONS");
+`endif
+`endif
+wire assert_enabled = 1'b1 && !disable_assert_plusarg;
+nv_assert_fifo #(0, 2, 0, 0, "FIFOGEN_ASSERTION Fifo overflow or underflow")
+    fifogen_rd_fifo_check ( .clk ( nvdla_core_clk ),
+                            .reset_ ( ( ( nvdla_core_rstn === 1'bx ? 1'b0 : nvdla_core_rstn ) & assert_enabled === 1'bx ? 1'b0 : ( nvdla_core_rstn === 1'bx ? 1'b0 : nvdla_core_rstn ) & assert_enabled ) ),
+                            .push ( rd_pushing ),
+                            .pop ( rd_popping )
+                          );
+`endif
+`ifdef FV_ASSERT_ON
+`else
+// synopsys translate_on
+`endif
+`ifdef ASSERT_ON
+//synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+always @(assert_enabled) begin
+    if ( assert_enabled === 1'b0 ) begin
+        $display("Asserts are disabled for %m");
+    end
+end
+`endif
+`endif
+//synopsys translate_on
+`endif
+`endif
+// spyglass enable_block W164a W164b W116 W484 W504
+//The NV_BLKBOX_SRC0 module is only present when the FIFOGEN_MODULE_SEARCH
+// define is set. This is to aid fifogen team search for fifogen fifo
+// instance and module names in a given design.
+`ifdef FIFOGEN_MODULE_SEARCH
+NV_BLKBOX_SRC0 dummy_breadcrumb_fifogen_blkbox (.Y());
+`endif
+// spyglass enable_block W401 -- clock is not input to module
+// synopsys dc_script_begin
+// set_boundary_optimization find(design, "NV_NVDLA_SDP_CORE_Y_LUT_dat") true
+// synopsys dc_script_end
+endmodule // NV_NVDLA_SDP_CORE_Y_LUT_dat
+//
+// Flop-Based RAM
+//
+module NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128 (
+      clk
+    , pwrbus_ram_pd
+    , di
+    , we
+    , wa
+    , ra
+    , dout
+    );
+input clk; // write clock
+input [31 : 0] pwrbus_ram_pd;
+input [127:0] di;
+input we;
+input [0:0] wa;
+input [1:0] ra;
+output [127:0] dout;
+`ifndef FPGA
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_0 (.A(pwrbus_ram_pd[0]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_1 (.A(pwrbus_ram_pd[1]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_2 (.A(pwrbus_ram_pd[2]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_3 (.A(pwrbus_ram_pd[3]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_4 (.A(pwrbus_ram_pd[4]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_5 (.A(pwrbus_ram_pd[5]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_6 (.A(pwrbus_ram_pd[6]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_7 (.A(pwrbus_ram_pd[7]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_8 (.A(pwrbus_ram_pd[8]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_9 (.A(pwrbus_ram_pd[9]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_10 (.A(pwrbus_ram_pd[10]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_11 (.A(pwrbus_ram_pd[11]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_12 (.A(pwrbus_ram_pd[12]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_13 (.A(pwrbus_ram_pd[13]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_14 (.A(pwrbus_ram_pd[14]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_15 (.A(pwrbus_ram_pd[15]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_16 (.A(pwrbus_ram_pd[16]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_17 (.A(pwrbus_ram_pd[17]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_18 (.A(pwrbus_ram_pd[18]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_19 (.A(pwrbus_ram_pd[19]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_20 (.A(pwrbus_ram_pd[20]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_21 (.A(pwrbus_ram_pd[21]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_22 (.A(pwrbus_ram_pd[22]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_23 (.A(pwrbus_ram_pd[23]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_24 (.A(pwrbus_ram_pd[24]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_25 (.A(pwrbus_ram_pd[25]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_26 (.A(pwrbus_ram_pd[26]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_27 (.A(pwrbus_ram_pd[27]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_28 (.A(pwrbus_ram_pd[28]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_29 (.A(pwrbus_ram_pd[29]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_30 (.A(pwrbus_ram_pd[30]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_31 (.A(pwrbus_ram_pd[31]));
+`endif
+`ifdef EMU
+wire [127:0] dout_p;
+// we use an emulation ram here to save flops on the emulation board
+// so that the monstrous chip can fit :-)
+//
+reg [0:0] Wa0_vmw;
+reg we0_vmw;
+reg [127:0] Di0_vmw;
+always @( posedge clk ) begin
+    Wa0_vmw <= wa;
+    we0_vmw <= we;
+    Di0_vmw <= di;
+end
+vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128 emu_ram (
+     .Wa0( Wa0_vmw )
+   , .we0( we0_vmw )
+   , .Di0( Di0_vmw )
+   , .Ra0( ra[0:0] )
+   , .Do0( dout_p )
+   );
+assign dout = (ra == 2) ? di : dout_p;
+`else
+reg [127:0] ram_ff0;
+reg [127:0] ram_ff1;
+always @( posedge clk ) begin
+    if ( we && wa == 1'd0 ) begin
+ ram_ff0 <= di;
+    end
+    if ( we && wa == 1'd1 ) begin
+ ram_ff1 <= di;
+    end
+end
+reg [127:0] dout;
+always @(*) begin
+    case( ra )
+    2'd0: dout = ram_ff0;
+    2'd1: dout = ram_ff1;
+    2'd2: dout = di;
+//VCS coverage off
+    default: dout = {128{`x_or_0}};
+//VCS coverage on
+    endcase
+end
+`endif // EMU
+endmodule // NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128
+// emulation model of flopram guts
+//
+`ifdef EMU
+module vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128 (
+   Wa0, we0, Di0,
+   Ra0, Do0
+   );
+input [0:0] Wa0;
+input we0;
+input [127:0] Di0;
+input [0:0] Ra0;
+output [127:0] Do0;
+// Only visible during Spyglass to avoid blackboxes.
+`ifdef SPYGLASS_FLOPRAM
+assign Do0 = 128'd0;
+wire dummy = 1'b0 | (|Wa0) | (|we0) | (|Di0) | (|Ra0);
+`endif
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+reg [127:0] mem[1:0];
+// expand mem for debug ease
+`ifdef EMU_EXPAND_FLOPRAM_MEM
+wire [127:0] Q0 = mem[0];
+wire [127:0] Q1 = mem[1];
+`endif
+// asynchronous ram writes
+always @(*) begin
+  if ( we0 == 1'b1 ) begin
+    #0.1;
+    mem[Wa0] = Di0;
+  end
+end
+assign Do0 = mem[Ra0];
+`endif
+`endif
+// synopsys translate_on
+// synopsys dc_script_begin
+// synopsys dc_script_end
+// g2c if { [find / -null_ok -subdesign vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128] != {} } { set_attr preserve 1 [find / -subdesign vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128] }
+endmodule // vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128
+//vmw: Memory vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128
+//vmw: Address-size 1
+//vmw: Data-size 128
+//vmw: Sensitivity level 1
+//vmw: Ports W R
+//vmw: terminal we0 WriteEnable0
+//vmw: terminal Wa0 address0
+//vmw: terminal Di0[127:0] data0[127:0]
+//vmw:
+//vmw: terminal Ra0 address1
+//vmw: terminal Do0[127:0] data1[127:0]
+//vmw:
+//qt: CELL vmw_NV_NVDLA_SDP_CORE_Y_LUT_dat_flopram_rwsa_2x128
+//qt: TERMINAL we0 TYPE=WE POLARITY=H PORT=1
+//qt: TERMINAL Wa0[%d] TYPE=ADDRESS DIR=W BIT=%1 PORT=1
+//qt: TERMINAL Di0[%d] TYPE=DATA DIR=I BIT=%1 PORT=1
+//qt:
+//qt: TERMINAL Ra0[%d] TYPE=ADDRESS DIR=R BIT=%1 PORT=1
+//qt: TERMINAL Do0[%d] TYPE=DATA DIR=O BIT=%1 PORT=1
+//qt:
+`endif // EMU
+module NV_NVDLA_SDP_CORE_Y_LUT_cmd (
+      nvdla_core_clk
+    , nvdla_core_rstn
+    , cmd_fifo_wr_prdy
+    , cmd_fifo_wr_pvld
+    , cmd_fifo_wr_pd
+    , cmd_fifo_rd_prdy
+    , cmd_fifo_rd_pvld
+    , cmd_fifo_rd_pd
+    , pwrbus_ram_pd
+    );
+// spyglass disable_block W401 -- clock is not input to module
+input nvdla_core_clk;
+input nvdla_core_rstn;
+output cmd_fifo_wr_prdy;
+input cmd_fifo_wr_pvld;
+input [279:0] cmd_fifo_wr_pd;
+input cmd_fifo_rd_prdy;
+output cmd_fifo_rd_pvld;
+output [279:0] cmd_fifo_rd_pd;
+input [31:0] pwrbus_ram_pd;
+// Master Clock Gating (SLCG)
+//
+// We gate the clock(s) when idle or stalled.
+// This allows us to turn off numerous miscellaneous flops
+// that don't get gated during synthesis for one reason or another.
+//
+// We gate write side and read side separately.
+// If the fifo is synchronous, we also gate the ram separately, but if
+// -master_clk_gated_unified or -status_reg/-status_logic_reg is specified,
+// then we use one clk gate for write, ram, and read.
+//
+wire nvdla_core_clk_mgated_enable; // assigned by code at end of this module
+wire nvdla_core_clk_mgated; // used only in synchronous fifos
+NV_CLK_gate_power nvdla_core_clk_mgate( .clk(nvdla_core_clk), .reset_(nvdla_core_rstn), .clk_en(nvdla_core_clk_mgated_enable), .clk_gated(nvdla_core_clk_mgated) );
+//
+// WRITE SIDE
+//
+wire wr_reserving;
+reg cmd_fifo_wr_busy_int; // copy for internal use
+assign cmd_fifo_wr_prdy = !cmd_fifo_wr_busy_int;
+assign wr_reserving = cmd_fifo_wr_pvld && !cmd_fifo_wr_busy_int; // reserving write space?
+wire wr_popping; // fwd: write side sees pop?
+reg [1:0] cmd_fifo_wr_count; // write-side count
+wire [1:0] wr_count_next_wr_popping = wr_reserving ? cmd_fifo_wr_count : (cmd_fifo_wr_count - 1'd1); // spyglass disable W164a W484
+wire [1:0] wr_count_next_no_wr_popping = wr_reserving ? (cmd_fifo_wr_count + 1'd1) : cmd_fifo_wr_count; // spyglass disable W164a W484
+wire [1:0] wr_count_next = wr_popping ? wr_count_next_wr_popping :
+                                               wr_count_next_no_wr_popping;
+wire wr_count_next_no_wr_popping_is_2 = ( wr_count_next_no_wr_popping == 2'd2 );
+wire wr_count_next_is_2 = wr_popping ? 1'b0 :
+                                          wr_count_next_no_wr_popping_is_2;
+wire [1:0] wr_limit_muxed; // muxed with simulation/emulation overrides
+wire [1:0] wr_limit_reg = wr_limit_muxed;
+// VCS coverage off
+wire cmd_fifo_wr_busy_next = wr_count_next_is_2 || // busy next cycle?
+                          (wr_limit_reg != 2'd0 && // check cmd_fifo_wr_limit if != 0
+                           wr_count_next >= wr_limit_reg) ;
+// VCS coverage on
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        cmd_fifo_wr_busy_int <= 1'b0;
+        cmd_fifo_wr_count <= 2'd0;
+    end else begin
+ cmd_fifo_wr_busy_int <= cmd_fifo_wr_busy_next;
+ if ( wr_reserving ^ wr_popping ) begin
+     cmd_fifo_wr_count <= wr_count_next;
+        end
+//synopsys translate_off
+            else if ( !(wr_reserving ^ wr_popping) ) begin
+        end else begin
+            cmd_fifo_wr_count <= {2{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+wire wr_pushing = wr_reserving; // data pushed same cycle as cmd_fifo_wr_pvld
+//
+// RAM
+//
+reg cmd_fifo_wr_adr; // current write address
+// spyglass disable_block W484
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        cmd_fifo_wr_adr <= 1'd0;
+    end else begin
+        if ( wr_pushing ) begin
+     cmd_fifo_wr_adr <= cmd_fifo_wr_adr + 1'd1;
+        end
+    end
+end
+// spyglass enable_block W484
+wire rd_popping;
+reg cmd_fifo_rd_adr; // read address this cycle
+wire ram_we = wr_pushing && (cmd_fifo_wr_count > 2'd0 || !rd_popping); // note: write occurs next cycle
+wire [279:0] cmd_fifo_rd_pd_p; // read data out of ram
+wire [31 : 0] pwrbus_ram_pd;
+// Adding parameter for fifogen to disable wr/rd contention assertion in ramgen.
+// Fifogen handles this by ignoring the data on the ram data out for that cycle.
+NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280 ram (
+      .clk( nvdla_core_clk_mgated )
+    , .pwrbus_ram_pd ( pwrbus_ram_pd )
+    , .di ( cmd_fifo_wr_pd )
+    , .we ( ram_we )
+    , .wa ( cmd_fifo_wr_adr )
+    , .ra ( (cmd_fifo_wr_count == 0) ? 2'd2 : {1'b0,cmd_fifo_rd_adr} )
+    , .dout ( cmd_fifo_rd_pd_p )
+    );
+wire [0:0] rd_adr_next_popping = cmd_fifo_rd_adr + 1'd1; // spyglass disable W484
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        cmd_fifo_rd_adr <= 1'd0;
+    end else begin
+        if ( rd_popping ) begin
+     cmd_fifo_rd_adr <= rd_adr_next_popping;
+        end
+//synopsys translate_off
+            else if ( !rd_popping ) begin
+        end else begin
+            cmd_fifo_rd_adr <= {1{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+//
+// SYNCHRONOUS BOUNDARY
+//
+assign wr_popping = rd_popping; // let it be seen immediately
+wire rd_pushing = wr_pushing; // let it be seen immediately
+//
+// READ SIDE
+//
+wire cmd_fifo_rd_pvld_p; // data out of fifo is valid
+reg cmd_fifo_rd_pvld_int; // internal copy of cmd_fifo_rd_pvld
+assign cmd_fifo_rd_pvld = cmd_fifo_rd_pvld_int;
+assign rd_popping = cmd_fifo_rd_pvld_p && !(cmd_fifo_rd_pvld_int && !cmd_fifo_rd_prdy);
+reg [1:0] cmd_fifo_rd_count_p; // read-side fifo count
+// spyglass disable_block W164a W484
+wire [1:0] rd_count_p_next_rd_popping = rd_pushing ? cmd_fifo_rd_count_p :
+                                                                (cmd_fifo_rd_count_p - 1'd1);
+wire [1:0] rd_count_p_next_no_rd_popping = rd_pushing ? (cmd_fifo_rd_count_p + 1'd1) :
+                                                                    cmd_fifo_rd_count_p;
+// spyglass enable_block W164a W484
+wire [1:0] rd_count_p_next = rd_popping ? rd_count_p_next_rd_popping :
+                                                     rd_count_p_next_no_rd_popping;
+assign cmd_fifo_rd_pvld_p = cmd_fifo_rd_count_p != 0 || rd_pushing;
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        cmd_fifo_rd_count_p <= 2'd0;
+    end else begin
+        if ( rd_pushing || rd_popping ) begin
+     cmd_fifo_rd_count_p <= rd_count_p_next;
+        end
+//synopsys translate_off
+            else if ( !(rd_pushing || rd_popping ) ) begin
+        end else begin
+            cmd_fifo_rd_count_p <= {2{`x_or_0}};
+        end
+//synopsys translate_on
+    end
+end
+reg [279:0] cmd_fifo_rd_pd; // output data register
+wire rd_req_next = (cmd_fifo_rd_pvld_p || (cmd_fifo_rd_pvld_int && !cmd_fifo_rd_prdy)) ;
+always @( posedge nvdla_core_clk_mgated or negedge nvdla_core_rstn ) begin
+    if ( !nvdla_core_rstn ) begin
+        cmd_fifo_rd_pvld_int <= 1'b0;
+    end else begin
+        cmd_fifo_rd_pvld_int <= rd_req_next;
+    end
+end
+always @( posedge nvdla_core_clk_mgated ) begin
+    if ( (rd_popping) ) begin
+        cmd_fifo_rd_pd <= cmd_fifo_rd_pd_p;
+    end
+//synopsys translate_off
+        else if ( !((rd_popping)) ) begin
+    end else begin
+        cmd_fifo_rd_pd <= {280{`x_or_0}};
+    end
+//synopsys translate_on
+end
+// Master Clock Gating (SLCG) Enables
+//
+// plusarg for disabling this stuff:
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+reg master_clk_gating_disabled; initial master_clk_gating_disabled = $test$plusargs( "fifogen_disable_master_clk_gating" ) != 0;
+`endif
+`endif
+// synopsys translate_on
+assign nvdla_core_clk_mgated_enable = ((wr_reserving || wr_pushing || wr_popping || (cmd_fifo_wr_pvld && !cmd_fifo_wr_busy_int) || (cmd_fifo_wr_busy_int != cmd_fifo_wr_busy_next)) || (rd_pushing || rd_popping || (cmd_fifo_rd_pvld_int && cmd_fifo_rd_prdy)) || (wr_pushing))
+                               `ifdef FIFOGEN_MASTER_CLK_GATING_DISABLED
+                               || 1'b1
+                               `endif
+// synopsys translate_off
+          `ifndef SYNTH_LEVEL1_COMPILE
+          `ifndef SYNTHESIS
+                               || master_clk_gating_disabled
+          `endif
+          `endif
+// synopsys translate_on
+                               ;
+// Simulation and Emulation Overrides of wr_limit(s)
+//
+`ifdef EMU
+`ifdef EMU_FIFO_CFG
+// Emulation Global Config Override
+//
+assign wr_limit_muxed = `EMU_FIFO_CFG.NV_NVDLA_SDP_CORE_Y_LUT_cmd_wr_limit_override ? `EMU_FIFO_CFG.NV_NVDLA_SDP_CORE_Y_LUT_cmd_wr_limit : 2'd0;
+`else
+// No Global Override for Emulation
+//
+assign wr_limit_muxed = 2'd0;
+`endif // EMU_FIFO_CFG
+`else // !EMU
+`ifdef SYNTH_LEVEL1_COMPILE
+// No Override for GCS Compiles
+//
+assign wr_limit_muxed = 2'd0;
+`else
+`ifdef SYNTHESIS
+// No Override for RTL Synthesis
+//
+assign wr_limit_muxed = 2'd0;
+`else
+// RTL Simulation Plusarg Override
+// VCS coverage off
+reg wr_limit_override;
+reg [1:0] wr_limit_override_value;
+assign wr_limit_muxed = wr_limit_override ? wr_limit_override_value : 2'd0;
+`ifdef NV_ARCHPRO
+event reinit;
+initial begin
+    $display("fifogen reinit initial block %m");
+    -> reinit;
+end
+`endif
+`ifdef NV_ARCHPRO
+always @( reinit ) begin
+`else
+initial begin
+`endif
+    wr_limit_override = 0;
+    wr_limit_override_value = 0; // to keep viva happy with dangles
+    if ( $test$plusargs( "NV_NVDLA_SDP_CORE_Y_LUT_cmd_wr_limit" ) ) begin
+        wr_limit_override = 1;
+        $value$plusargs( "NV_NVDLA_SDP_CORE_Y_LUT_cmd_wr_limit=%d", wr_limit_override_value);
+    end
+end
+// VCS coverage on
+`endif
+`endif
+`endif
+//
+// Histogram of fifo depth (from write side's perspective)
+//
+// NOTE: it will reference `SIMTOP.perfmon_enabled, so that
+// has to at least be defined, though not initialized.
+// tbgen testbenches have it already and various
+// ways to turn it on and off.
+//
+`ifdef PERFMON_HISTOGRAM
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+perfmon_histogram perfmon (
+      .clk ( nvdla_core_clk )
+    , .max ( {30'd0, (wr_limit_reg == 2'd0) ? 2'd2 : wr_limit_reg} )
+    , .curr ( {30'd0, cmd_fifo_wr_count} )
+    );
+`endif
+`endif
+// synopsys translate_on
+`endif
+// spyglass disable_block W164a W164b W116 W484 W504
+`ifdef SPYGLASS
+`else
+`ifdef FV_ASSERT_ON
+`else
+// synopsys translate_off
+`endif
+`ifdef ASSERT_ON
+`ifdef SPYGLASS
+wire disable_assert_plusarg = 1'b0;
+`else
+`ifdef FV_ASSERT_ON
+wire disable_assert_plusarg = 1'b0;
+`else
+wire disable_assert_plusarg = $test$plusargs("DISABLE_NESS_FLOW_ASSERTIONS");
+`endif
+`endif
+wire assert_enabled = 1'b1 && !disable_assert_plusarg;
+`endif
+`ifdef FV_ASSERT_ON
+`else
+// synopsys translate_on
+`endif
+`ifdef ASSERT_ON
+//synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+always @(assert_enabled) begin
+    if ( assert_enabled === 1'b0 ) begin
+        $display("Asserts are disabled for %m");
+    end
+end
+`endif
+`endif
+//synopsys translate_on
+`endif
+`endif
+// spyglass enable_block W164a W164b W116 W484 W504
+//The NV_BLKBOX_SRC0 module is only present when the FIFOGEN_MODULE_SEARCH
+// define is set. This is to aid fifogen team search for fifogen fifo
+// instance and module names in a given design.
+`ifdef FIFOGEN_MODULE_SEARCH
+NV_BLKBOX_SRC0 dummy_breadcrumb_fifogen_blkbox (.Y());
+`endif
+// spyglass enable_block W401 -- clock is not input to module
+// synopsys dc_script_begin
+// set_boundary_optimization find(design, "NV_NVDLA_SDP_CORE_Y_LUT_cmd") true
+// synopsys dc_script_end
+endmodule // NV_NVDLA_SDP_CORE_Y_LUT_cmd
+//
+// Flop-Based RAM
+//
+module NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280 (
+      clk
+    , pwrbus_ram_pd
+    , di
+    , we
+    , wa
+    , ra
+    , dout
+    );
+input clk; // write clock
+input [31 : 0] pwrbus_ram_pd;
+input [279:0] di;
+input we;
+input [0:0] wa;
+input [1:0] ra;
+output [279:0] dout;
+`ifndef FPGA
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_0 (.A(pwrbus_ram_pd[0]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_1 (.A(pwrbus_ram_pd[1]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_2 (.A(pwrbus_ram_pd[2]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_3 (.A(pwrbus_ram_pd[3]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_4 (.A(pwrbus_ram_pd[4]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_5 (.A(pwrbus_ram_pd[5]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_6 (.A(pwrbus_ram_pd[6]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_7 (.A(pwrbus_ram_pd[7]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_8 (.A(pwrbus_ram_pd[8]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_9 (.A(pwrbus_ram_pd[9]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_10 (.A(pwrbus_ram_pd[10]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_11 (.A(pwrbus_ram_pd[11]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_12 (.A(pwrbus_ram_pd[12]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_13 (.A(pwrbus_ram_pd[13]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_14 (.A(pwrbus_ram_pd[14]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_15 (.A(pwrbus_ram_pd[15]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_16 (.A(pwrbus_ram_pd[16]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_17 (.A(pwrbus_ram_pd[17]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_18 (.A(pwrbus_ram_pd[18]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_19 (.A(pwrbus_ram_pd[19]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_20 (.A(pwrbus_ram_pd[20]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_21 (.A(pwrbus_ram_pd[21]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_22 (.A(pwrbus_ram_pd[22]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_23 (.A(pwrbus_ram_pd[23]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_24 (.A(pwrbus_ram_pd[24]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_25 (.A(pwrbus_ram_pd[25]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_26 (.A(pwrbus_ram_pd[26]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_27 (.A(pwrbus_ram_pd[27]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_28 (.A(pwrbus_ram_pd[28]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_29 (.A(pwrbus_ram_pd[29]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_30 (.A(pwrbus_ram_pd[30]));
+NV_BLKBOX_SINK UJ_BBOX2UNIT_UNUSED_pwrbus_31 (.A(pwrbus_ram_pd[31]));
+`endif
+`ifdef EMU
+wire [279:0] dout_p;
+// we use an emulation ram here to save flops on the emulation board
+// so that the monstrous chip can fit :-)
+//
+reg [0:0] Wa0_vmw;
+reg we0_vmw;
+reg [279:0] Di0_vmw;
+always @( posedge clk ) begin
+    Wa0_vmw <= wa;
+    we0_vmw <= we;
+    Di0_vmw <= di;
+end
+vmw_NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280 emu_ram (
+     .Wa0( Wa0_vmw )
+   , .we0( we0_vmw )
+   , .Di0( Di0_vmw )
+   , .Ra0( ra[0:0] )
+   , .Do0( dout_p )
+   );
+assign dout = (ra == 2) ? di : dout_p;
+`else
+reg [279:0] ram_ff0;
+reg [279:0] ram_ff1;
+always @( posedge clk ) begin
+    if ( we && wa == 1'd0 ) begin
+ ram_ff0 <= di;
+    end
+    if ( we && wa == 1'd1 ) begin
+ ram_ff1 <= di;
+    end
+end
+reg [279:0] dout;
+always @(*) begin
+    case( ra )
+    2'd0: dout = ram_ff0;
+    2'd1: dout = ram_ff1;
+    2'd2: dout = di;
+//VCS coverage off
+    default: dout = {280{`x_or_0}};
+//VCS coverage on
+    endcase
+end
+`endif // EMU
+endmodule // NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280
+// emulation model of flopram guts
+//
+`ifdef EMU
+module vmw_NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280 (
+   Wa0, we0, Di0,
+   Ra0, Do0
+   );
+input [0:0] Wa0;
+input we0;
+input [279:0] Di0;
+input [0:0] Ra0;
+output [279:0] Do0;
+// Only visible during Spyglass to avoid blackboxes.
+`ifdef SPYGLASS_FLOPRAM
+assign Do0 = 280'd0;
+wire dummy = 1'b0 | (|Wa0) | (|we0) | (|Di0) | (|Ra0);
+`endif
+// synopsys translate_off
+`ifndef SYNTH_LEVEL1_COMPILE
+`ifndef SYNTHESIS
+reg [279:0] mem[1:0];
+// expand mem for debug ease
+`ifdef EMU_EXPAND_FLOPRAM_MEM
+wire [279:0] Q0 = mem[0];
+wire [279:0] Q1 = mem[1];
+`endif
+// asynchronous ram writes
+always @(*) begin
+  if ( we0 == 1'b1 ) begin
+    #0.1;
+    mem[Wa0] = Di0;
+  end
+end
+assign Do0 = mem[Ra0];
+`endif
+`endif
+// synopsys translate_on
+// synopsys dc_script_begin
+// synopsys dc_script_end
+// g2c if { [find / -null_ok -subdesign vmw_NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280] != {} } { set_attr preserve 1 [find / -subdesign vmw_NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280] }
+endmodule // vmw_NV_NVDLA_SDP_CORE_Y_LUT_cmd_flopram_rwsa_2x280
+`endif // EMU

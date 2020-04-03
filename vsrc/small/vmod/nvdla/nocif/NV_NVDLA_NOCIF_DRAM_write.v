@@ -16,6 +16,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define SMALL_MEMBUS
+//#endif
 module NV_NVDLA_NOCIF_DRAM_write (
     nvdla_core_clk
    ,nvdla_core_rstn
@@ -73,7 +79,7 @@ module NV_NVDLA_NOCIF_DRAM_write (
 //:my $i;
 //:for($i=0;$i<3;$i++) {
 //:print qq(
-//:input [64 +1:0] client${i}2mcif_wr_req_pd;
+//:input [64 +(( 64 )/8/8):0] client${i}2mcif_wr_req_pd;
 //:input client${i}2mcif_wr_req_valid;
 //:output client${i}2mcif_wr_req_ready;
 //:input [7:0] client${i}2mcif_wr_wt;
@@ -83,21 +89,21 @@ module NV_NVDLA_NOCIF_DRAM_write (
 //:}
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-input [64 +1:0] client02mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client02mcif_wr_req_pd;
 input client02mcif_wr_req_valid;
 output client02mcif_wr_req_ready;
 input [7:0] client02mcif_wr_wt;
 input [3:0] client02mcif_wr_axid;
 output mcif2client0_wr_rsp_complete;
 
-input [64 +1:0] client12mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client12mcif_wr_req_pd;
 input client12mcif_wr_req_valid;
 output client12mcif_wr_req_ready;
 input [7:0] client12mcif_wr_wt;
 input [3:0] client12mcif_wr_axid;
 output mcif2client1_wr_rsp_complete;
 
-input [64 +1:0] client22mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client22mcif_wr_req_pd;
 input client22mcif_wr_req_valid;
 output client22mcif_wr_req_ready;
 input [7:0] client22mcif_wr_wt;
@@ -122,7 +128,6 @@ output noc2mcif_axi_b_bready; /* data return handshake */
 input [7:0] noc2mcif_axi_b_bid;
 input [7:0] reg2dp_wr_os_cnt;
 input [31:0] pwrbus_ram_pd;
-wire eg2ig_axi_vld;
 wire [1:0] eg2ig_axi_len;
 wire [3:0] cq_wr_thread_id;
 wire [2:0] cq_wr_pd;
@@ -253,7 +258,7 @@ NV_NVDLA_NOCIF_DRAM_WRITE_cq u_cq (
   ,.pwrbus_ram_pd (pwrbus_ram_pd[31:0])
   ,.cq_wr_prdy (cq_wr_prdy) //|> w
   ,.cq_wr_pvld (cq_wr_pvld) //|< w
-  ,.cq_wr_thread_id (cq_wr_thread_id[2:0]) //|< w
+  ,.cq_wr_thread_id (cq_wr_thread_id[3:0]) //|< w
   ,.cq_wr_pd (cq_wr_pd[2:0]) //|< w
 //:my $i;
 //:for($i=0;$i<3;$i++) {
@@ -264,7 +269,7 @@ NV_NVDLA_NOCIF_DRAM_WRITE_cq u_cq (
 //:);
 //:}
 //:my $i;
-//:for($i=3;$i<5;$i++) {
+//:for($i=3;$i<16;$i++) {
 //:print qq(
 //:,.cq_rd${i}_prdy (1'b1) //|< w
 //:);
@@ -286,6 +291,28 @@ NV_NVDLA_NOCIF_DRAM_WRITE_cq u_cq (
 ,.cq_rd3_prdy (1'b1) //|< w
 
 ,.cq_rd4_prdy (1'b1) //|< w
+
+,.cq_rd5_prdy (1'b1) //|< w
+
+,.cq_rd6_prdy (1'b1) //|< w
+
+,.cq_rd7_prdy (1'b1) //|< w
+
+,.cq_rd8_prdy (1'b1) //|< w
+
+,.cq_rd9_prdy (1'b1) //|< w
+
+,.cq_rd10_prdy (1'b1) //|< w
+
+,.cq_rd11_prdy (1'b1) //|< w
+
+,.cq_rd12_prdy (1'b1) //|< w
+
+,.cq_rd13_prdy (1'b1) //|< w
+
+,.cq_rd14_prdy (1'b1) //|< w
+
+,.cq_rd15_prdy (1'b1) //|< w
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 );

@@ -17,6 +17,12 @@
 //#define CDMA_SBUF_SDATA_BITS            256
 //DorisL-S----------------
 //
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE  ==  32 )
+//     #define IMG_LARGE
+// #endif
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE == 8 )
+//     #define IMG_SMALL
+// #endif
 //DorisL-E----------------
 //--------------------------------------------------
 module NV_NVDLA_CDMA_wt (
@@ -1144,20 +1150,26 @@ NV_NVDLA_DMAIF_rdrsp NV_NVDLA_PDP_RDMA_rdrsp(
 //: my $dmaif = 64;
 //: my $atmm8 = 8 * (8 * 8);
 //: my $fifo_depth = int( $atmm8/$dmaif );
-//: my $fifo_width = $dmaif;
+//: my $fifo_width = ( 64 + (64/8/8) );
+//: print " NV_NVDLA_CDMA_WT_8ATMM_fifo_${fifo_width}x${fifo_depth} u_8atmm_fifo(   \n";
 //| eperl: generated_beg (DO NOT EDIT BELOW)
+ NV_NVDLA_CDMA_WT_8ATMM_fifo_65x8 u_8atmm_fifo(   
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
-//
-NV_NVDLA_CDMA_WT_8ATMM_fifo u_8atmm_fifo(
      .nvdla_core_clk (nvdla_core_clk )
     ,.nvdla_core_rstn (nvdla_core_rstn )
-    ,.atmm8_wr_prdy (dmaif_rd_rsp_prdy)
-    ,.atmm8_wr_pvld (dmaif_rd_rsp_pvld)
-    ,.atmm8_wr_pd (dmaif_rd_rsp_pd)
-    ,.atmm8_rd_prdy (dma_rd_rsp_rdy )
-    ,.atmm8_rd_pvld (dma_rd_rsp_vld )
-    ,.atmm8_rd_pd (dma_rd_rsp_pd )
+    ,.lat_wr_prdy (dmaif_rd_rsp_prdy)
+    ,.lat_wr_pvld (dmaif_rd_rsp_pvld)
+    ,.lat_wr_pd (dmaif_rd_rsp_pd)
+    ,.lat_rd_prdy (dma_rd_rsp_rdy )
+    ,.lat_rd_pvld (dma_rd_rsp_vld )
+    ,.lat_rd_pd (dma_rd_rsp_pd )
+//,.atmm8_wr_prdy (dmaif_rd_rsp_prdy)
+//,.atmm8_wr_pvld (dmaif_rd_rsp_pvld)
+//,.atmm8_wr_pd (dmaif_rd_rsp_pd)
+//,.atmm8_rd_prdy (dma_rd_rsp_rdy )
+//,.atmm8_rd_pvld (dma_rd_rsp_vld )
+//,.atmm8_rd_pd (dma_rd_rsp_pd )
     ,.pwrbus_ram_pd (32'd0)
     );
 ///////////////////////////////////////////
@@ -1208,7 +1220,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     end else if(wt_cbuf_wr_vld_w & (!sc_wt_updt)) begin
 //: my $atmc=8;
 //: my $dmaif=64 / 8;
-//: if($dmaif = $atmc) {
+//: if($dmaif == $atmc) {
 //: print qq(
 //: wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1;
 //: );
@@ -1230,10 +1242,37 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
+    end else if(wt_cbuf_wr_vld_w & sc_wt_updt) begin
+//: my $atmc=8;
+//: my $dmaif=64 / 8;
+//: if($dmaif == $atmc) {
+//: print qq(
+//: wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1 - sc_wt_entries;
+//: );
+//: } elsif($dmaif < $atmc) {
+//: my $k = $atmc/$dmaif - 1;
+//: print qq(
+//: if(dmaif_within_atmc_cnt == ${k}) begin
+//: wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1 - sc_wt_entries;
+//: end else begin
+//: wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt - sc_wt_entries;
+//: end
+//: );
+//: } elsif($dmaif > $atmc) {
+//: my $m = $dmaif/$atmc;
+//: print qq(
+//: wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + ${m} - sc_wt_entries;
+//: );
+//: }
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
+wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1 - sc_wt_entries;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
     end else if(!wt_cbuf_wr_vld_w & sc_wt_updt) begin
         wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt - sc_wt_entries;
-    end else if(wt_cbuf_wr_vld_w & sc_wt_updt) begin
-        wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1 - sc_wt_entries;
+//end else if(wt_cbuf_wr_vld_w & sc_wt_updt) begin
+// wt_wr_dmatx_cnt <= wt_wr_dmatx_cnt + 1'b1 - sc_wt_entries;
     end
 end
 //: my $bank_depth = int( log(512)/log(2) );
@@ -1547,7 +1586,7 @@ assign cdma2buf_wt_wr_en_w = wt_cbuf_wr_vld_w | wt_cbuf_flush_vld_w;
 //:
 //: my $dmanum = int($atmc/$dmaif);
 //: foreach my $s (0..${dmanum}-1) {
-//: &eperl::flop("-nodeclare -clk nvdla_core_ng_clk -rval \"1'b0\"  -en \"cdma2buf_wt_wr_en_w\" -d \"cdma2buf_wt_wr_sel_w===${k}'d${s}\" -q cdma2buf_wt_wr_sel[${s}]");
+//: &eperl::flop("-nodeclare -clk nvdla_core_ng_clk -rval \"1'b0\"  -en \"cdma2buf_wt_wr_en_w\" -d \"cdma2buf_wt_wr_sel_w==${k}'d${s}\" -q cdma2buf_wt_wr_sel[${s}]");
 //: }
 //: ## &eperl::flop("-nodeclare -clk nvdla_core_ng_clk -rval \"1'b0\"  -en \"cdma2buf_wt_wr_en_w\" -d \"cdma2buf_wt_wr_sel_w\" -q cdma2buf_wt_wr_sel");
 //: } elsif($dmaif > $atmc) {
@@ -1889,12 +1928,12 @@ assign {mon_incr_wt_cnt, incr_wt_cnt} = wt_fetched_cnt - pre_wt_fetched_cnt;
 //: } elsif($dmaif > $atmc) {
 //: my $k = int(log($dmaif/$atmc)/log(2));
 //: print qq(
-//: assign incr_wt_entries_w = {incr_wt_cnt[12:0],{${k}{1'b0}}};
+//: assign incr_wt_entries_w = {incr_wt_cnt[15-${k}-1:0],{${k}{1'b0}}};
 //: );
 //: } elsif($dmaif < $atmc) {
 //: my $k = int(log($atmc/$dmaif)/log(2));
 //: print qq(
-//: assign incr_wt_entries_w = {{(2+${k}){1'b0}},incr_wt_cnt[12:${k}]};
+//: assign incr_wt_entries_w = {incr_wt_cnt[15+${k}-1:${k}]};
 //: );
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)

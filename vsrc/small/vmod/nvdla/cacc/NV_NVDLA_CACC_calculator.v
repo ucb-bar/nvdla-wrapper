@@ -207,10 +207,18 @@ wire calc_wr_en = calc_valid & (~calc_channel_end);
 //: my $pp= 34;
 //: my $bb= 19;
 //: for(my $i = 0; $i <8; $i ++) {
+//: if($hh == 0) {
+//: print qq(
+//: wire [21:0]calc_op0_${i} = {calc_elem_${i}};
+//: wire [${pp}-1:0] calc_op1_${i} = abuf_in_data_${i};
+//: );
+//: }
+//: elsif($hh > 0) {
 //: print qq(
 //: wire [21:0]calc_op0_${i} = {{${hh}{calc_elem_${i}[${bb}-1]}},calc_elem_${i}};
 //: wire [${pp}-1:0] calc_op1_${i} = abuf_in_data_${i};
 //: );
+//: }
 //: }
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 

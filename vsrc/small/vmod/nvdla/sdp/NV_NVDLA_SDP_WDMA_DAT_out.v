@@ -539,9 +539,13 @@ always @(
     if (cmd_en) begin
         dma_wr_req_pd[66 -2:0] = {{(66 -46 -1){1'b0}},dma_wr_cmd_pd};
     end else begin
+//#if (NVDLA_DMA_WR_DAT < 66 -1)
+// dma_wr_req_pd[66 -2:0] = {{(66 -NVDLA_DMA_WR_DAT-1){1'b0}},dma_wr_dat_pd};
+//#else
         dma_wr_req_pd[66 -2:0] = dma_wr_dat_pd;
+//#endif
     end
-    dma_wr_req_pd[66 -1] = cmd_en ? 1'd0 : 1'd1 ;
+        dma_wr_req_pd[66 -1] = cmd_en ? 1'd0 : 1'd1 ;
 end
 //=================================================
 // Count the Equal Bit in EQ Mode

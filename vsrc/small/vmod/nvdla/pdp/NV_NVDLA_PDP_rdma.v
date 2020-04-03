@@ -16,6 +16,14 @@
 // File Name: NV_NVDLA_PDP_define.h
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+//#ifdef NVDLA_FEATURE_DATA_TYPE_INT8
+//#if ( NVDLA_PDP_THROUGHPUT  ==  8 )
+//    #define LARGE_FIFO_RAM
+//#endif
+//#if ( NVDLA_PDP_THROUGHPUT == 1 )
+//    #define SMALL_FIFO_RAM
+//#endif
+//#endif
 module NV_NVDLA_PDP_rdma (
    csb2pdp_rdma_req_pd //|< i
   ,csb2pdp_rdma_req_pvld //|< i
@@ -59,7 +67,7 @@ module NV_NVDLA_PDP_rdma (
  output [33:0] pdp_rdma2csb_resp_pd; /* pkt_id_width=1 pkt_widths=33,33  */
  output pdp_rdma2dp_valid; /* data valid */
  input pdp_rdma2dp_ready; /* data return handshake */
- output [8*1 +11:0] pdp_rdma2dp_pd;
+ output [8*1 +13:0] pdp_rdma2dp_pd;
  input [31:0] pwrbus_ram_pd;
  input dla_clk_ovr_on_sync;
  input global_clk_ovr_on_sync;

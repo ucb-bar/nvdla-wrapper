@@ -203,8 +203,8 @@ assign stt_offset[2:0] = in_addr[5+2:5];assign size_offset[2:0] = in_size[2:0];
 //assign stt_offset[2:0] = in_addr[7:5];
 //assign size_offset[2:0] = in_size[2:0];
 assign {mon_end_offset_c, end_offset[2:0]} = stt_offset + size_offset;
-assign is_single_tran = (stt_offset + in_size) < (1*4);
-assign ftran_size[2:0] = is_single_tran ? size_offset : (1*4 -1) -stt_offset;
+assign is_single_tran = (stt_offset + in_size) < ((( 256 )/8/32)*4);
+assign ftran_size[2:0] = is_single_tran ? size_offset : ((( 256 )/8/32)*4 -1) -stt_offset;
 //assign ftran_size[2:0] = is_single_tran ? size_offset : (7 -stt_offset);
 assign ftran_num[3:0] = ftran_size + 1;
 assign ltran_size[2:0] = is_single_tran ? `tick_x_or_0 : end_offset; // when single tran, size of ltran is meanningless

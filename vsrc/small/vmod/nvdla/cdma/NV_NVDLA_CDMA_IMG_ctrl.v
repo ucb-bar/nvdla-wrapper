@@ -17,6 +17,12 @@
 //#define CDMA_SBUF_SDATA_BITS            256
 //DorisL-S----------------
 //
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE  ==  32 )
+//     #define IMG_LARGE
+// #endif
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE == 8 )
+//     #define IMG_SMALL
+// #endif
 //DorisL-E----------------
 //--------------------------------------------------
 module NV_NVDLA_CDMA_IMG_ctrl (
@@ -509,22 +515,48 @@ always @(*) begin
     pixel_precision_nxt = 2'h0;
     pixel_order_nxt = 11'h1;
     pixel_packed_10b_nxt = 1'b0;
-//pixel_planar0_sft_nxt = 3'h3;//log2(atmm/BytePerPixel(4 in a8r8g8b8))
-//pixel_planar1_sft_nxt = 3'h5;//log2(?)
-//pixel_planar0_mask_nxt = 5'h7;//atomm/(BytePerPixel) -1
-//pixel_planar1_mask_nxt = 5'h1f;//?
-    pixel_planar0_sft_nxt = 3'h1;
-    pixel_planar1_sft_nxt = 3'h3;
-    pixel_planar0_mask_nxt = 5'h1;
-    pixel_planar1_mask_nxt = 5'h7;
+//pixel_planar0_sft_nxt // log2(atmm/BytePerPixel(4 in RGB, 1 in YUV))
+//pixel_planar1_sft_nxt // log2(atmm/BytePerPixel(useless in RGB, 2 in YUV))
+//pixel_planar0_mask_nxt // atmm/BytePerPixel -1
+//pixel_planar1_mask_nxt // atmm/BytePerPixel -1
+//: my $atmm = 8;
+//: my $Byte_Per_Pixle = 4;
+//: my $p0_sft = int( log($atmm/$Byte_Per_Pixle)/log(2) );
+//: my $p0_mask = int( ($atmm/$Byte_Per_Pixle)-1 );
+//: print qq(
+//: pixel_planar0_sft_nxt = 3'd${p0_sft};
+//: pixel_planar1_sft_nxt = 3'd3;
+//: pixel_planar0_mask_nxt = 5'd${p0_mask};
+//: pixel_planar1_mask_nxt = 5'd7;
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
+pixel_planar0_sft_nxt = 3'd1;
+pixel_planar1_sft_nxt = 3'd3;
+pixel_planar0_mask_nxt = 5'd1;
+pixel_planar1_mask_nxt = 5'd7;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
     case(reg2dp_pixel_format)
     6'h0 :
 // 0 T_R8,
     begin
-//pixel_planar0_sft_nxt = 3'h5;
-//pixel_planar0_mask_nxt = 5'h1f;
-        pixel_planar0_sft_nxt = 3'h3;
-        pixel_planar0_mask_nxt = 5'h7;
+//: my $atmm = 8;
+//: my $Byte_Per_Pixle = 1;
+//: my $p0_sft = int( log($atmm/$Byte_Per_Pixle)/log(2) );
+//: my $p0_mask = int( ($atmm/$Byte_Per_Pixle)-1 );
+//: print qq(
+//: pixel_planar0_sft_nxt = 3'd${p0_sft};
+//: pixel_planar0_mask_nxt = 5'd${p0_mask};
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
+pixel_planar0_sft_nxt = 3'd3;
+pixel_planar0_mask_nxt = 5'd7;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+//pixel_planar0_sft_nxt = 3'h3;
+//pixel_planar0_mask_nxt = 5'h7;
     end
     6'hc, 6'h10 :
 // c T_A8B8G8R8,
@@ -557,27 +589,61 @@ always @(*) begin
     begin
         pixel_planar_nxt = 1'h1;
         pixel_order_nxt = 11'h200;
-//pixel_planar0_sft_nxt = 3'h5;
-//pixel_planar1_sft_nxt = 3'h4;
-//pixel_planar0_mask_nxt = 5'h1f;
-//pixel_planar1_mask_nxt = 5'hf;
-        pixel_planar0_sft_nxt = 3'h3;
-        pixel_planar1_sft_nxt = 3'h2;
-        pixel_planar0_mask_nxt = 5'h7;
-        pixel_planar1_mask_nxt = 5'h3;
+//: my $atmm = 8;
+//: my $Byte_Per_Pixle_p0 = 1;
+//: my $Byte_Per_Pixle_p1 = 2;
+//: my $p0_sft = int( log($atmm/$Byte_Per_Pixle_p0)/log(2) );
+//: my $p0_mask = int( ($atmm/$Byte_Per_Pixle_p0)-1 );
+//: my $p1_sft = int( log($atmm/$Byte_Per_Pixle_p1)/log(2) );
+//: my $p1_mask = int( ($atmm/$Byte_Per_Pixle_p1)-1 );
+//: print qq(
+//: pixel_planar0_sft_nxt = 3'd${p0_sft};
+//: pixel_planar1_sft_nxt = 3'd${p1_sft};
+//: pixel_planar0_mask_nxt = 5'd${p0_mask};
+//: pixel_planar1_mask_nxt = 5'd${p1_mask};
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
+pixel_planar0_sft_nxt = 3'd3;
+pixel_planar1_sft_nxt = 3'd2;
+pixel_planar0_mask_nxt = 5'd7;
+pixel_planar1_mask_nxt = 5'd3;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+//pixel_planar0_sft_nxt = 3'h3;
+//pixel_planar1_sft_nxt = 3'h2;
+//pixel_planar0_mask_nxt = 5'h7;
+//pixel_planar1_mask_nxt = 5'h3;
     end
     6'h1d :
 // 1d T_Y8___V8U8_N444,
     begin
         pixel_planar_nxt = 1'h1;
-//pixel_planar0_sft_nxt = 3'h5;
-//pixel_planar1_sft_nxt = 3'h4;
-//pixel_planar0_mask_nxt = 5'h1f;
-//pixel_planar1_mask_nxt = 5'hf;
-        pixel_planar0_sft_nxt = 3'h3;
-        pixel_planar1_sft_nxt = 3'h2;
-        pixel_planar0_mask_nxt = 5'h7;
-        pixel_planar1_mask_nxt = 5'h3;
+//: my $atmm = 8;
+//: my $Byte_Per_Pixle_p0 = 1;
+//: my $Byte_Per_Pixle_p1 = 2;
+//: my $p0_sft = int( log($atmm/$Byte_Per_Pixle_p0)/log(2) );
+//: my $p0_mask = int( ($atmm/$Byte_Per_Pixle_p0)-1 );
+//: my $p1_sft = int( log($atmm/$Byte_Per_Pixle_p1)/log(2) );
+//: my $p1_mask = int( ($atmm/$Byte_Per_Pixle_p1)-1 );
+//: print qq(
+//: pixel_planar0_sft_nxt = 3'd${p0_sft};
+//: pixel_planar1_sft_nxt = 3'd${p1_sft};
+//: pixel_planar0_mask_nxt = 5'd${p0_mask};
+//: pixel_planar1_mask_nxt = 5'd${p1_mask};
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
+pixel_planar0_sft_nxt = 3'd3;
+pixel_planar1_sft_nxt = 3'd2;
+pixel_planar0_mask_nxt = 5'd7;
+pixel_planar1_mask_nxt = 5'd3;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+//pixel_planar0_sft_nxt = 3'h3;
+//pixel_planar1_sft_nxt = 3'h2;
+//pixel_planar0_mask_nxt = 5'h7;
+//pixel_planar1_mask_nxt = 5'h3;
     end
     endcase
 end

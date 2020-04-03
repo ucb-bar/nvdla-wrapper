@@ -17,6 +17,12 @@
 //#define CDMA_SBUF_SDATA_BITS            256
 //DorisL-S----------------
 //
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE  ==  32 )
+//     #define IMG_LARGE
+// #endif
+// #if ( NVDLA_MEMORY_ATOMIC_SIZE == 8 )
+//     #define IMG_SMALL
+// #endif
 //DorisL-E----------------
 //--------------------------------------------------
 module NV_NVDLA_CDMA_dc (
@@ -251,7 +257,7 @@ reg [3:0] dma_rsp_size_cnt;
 //reg [31:0] dp2reg_dc_rd_latency;
 //reg [31:0] dp2reg_dc_rd_stall;
 reg [17:0] entry_per_batch_d2;
-reg [11:0] fetch_grain;
+reg [12:0] fetch_grain;
 reg [14:0] idx_base;
 reg [17:0] idx_batch_offset;
 reg [17:0] idx_ch_offset;
@@ -287,14 +293,22 @@ reg pending_req_d1;
 //bw of below two signals
 reg [0:0] pre_gen_sel;
 reg [0:0] req_csm_sel;
+//: my $req_cur_atomic_size=13;
 //: foreach my $i (0..1){
 //: print qq(
 //: wire pre_reg_en_d2_g${i};
-//: reg [13:0] req_atomic_${i}_d3;
+//: reg [${req_cur_atomic_size}:0] req_atomic_${i}_d3;
 //: reg [17:0] req_entry_${i}_d3;
 //: reg req_pre_valid_${i}_d3;
 //: );
 //: }
+//: print qq(
+//: reg [${req_cur_atomic_size}:0] req_atomic_d2;
+//: reg [${req_cur_atomic_size}:0] req_atm_cnt_0;
+//: reg [${req_cur_atomic_size}:0] req_atm_cnt_1;
+//: reg [${req_cur_atomic_size}:0] req_atm_cnt_2;
+//: reg [${req_cur_atomic_size}:0] req_atm_cnt_3;
+//: );
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
 wire pre_reg_en_d2_g0;
@@ -307,15 +321,16 @@ reg [13:0] req_atomic_1_d3;
 reg [17:0] req_entry_1_d3;
 reg req_pre_valid_1_d3;
 
-//| eperl: generated_end (DO NOT EDIT ABOVE)
-reg pre_valid_d1;
-reg pre_valid_d2;
+reg [13:0] req_atomic_d2;
 reg [13:0] req_atm_cnt_0;
 reg [13:0] req_atm_cnt_1;
 reg [13:0] req_atm_cnt_2;
 reg [13:0] req_atm_cnt_3;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+reg pre_valid_d1;
+reg pre_valid_d2;
 reg [1:0] req_atm_sel;
-reg [13:0] req_atomic_d2;
 reg [4:0] req_batch_cnt;
 reg [10:0] req_ch_cnt;
 reg mon_req_ch_cnt;
@@ -334,7 +349,7 @@ reg [17:0] rsp_batch_entry_last;
 reg [10:0] rsp_ch_cnt;
 reg mon_rsp_ch_cnt;
 reg [2:0] rsp_cur_ch;
-reg [11:0] rsp_cur_grain;
+reg [12:0] rsp_cur_grain;
 //reg [17:0] req_entry_0_d3;
 //reg [17:0] req_entry_1_d3;
 reg [17:0] rsp_entry_init;
@@ -473,7 +488,7 @@ wire dp2reg_dc_rd_stall_dec;
 wire [17:0] entry_per_batch;
 wire [17:0] entry_required;
 wire fetch_done;
-wire [11:0] fetch_grain_w;
+wire [12:0] fetch_grain_w;
 wire [17:0] idx_batch_offset_w;
 wire [17:0] idx_ch_offset_w;
 wire [17:0] idx_h_offset_w;
@@ -598,6 +613,17 @@ wire rd_req_rdyi;
 //: reg [12+31-${atmbw}:0] grain_addr;
 //: wire [2+31-${atmbw}:0] req_addr_ch_base_add;
 //: );
+//: my $req_cur_atomic_size=13;
+//: print qq(
+//: wire [${req_cur_atomic_size}:0] req_atm;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt_0_w;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt_1_w;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt_2_w;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt_3_w;
+//: wire [${req_cur_atomic_size}:0] req_atm_cnt_inc;
+//: wire [${req_cur_atomic_size}:0] req_atm_left;
+//: );
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
 wire [63-3:0] req_addr;
@@ -619,7 +645,6 @@ wire [12+31-3:0] grain_addr_w;
 reg [12+31-3:0] grain_addr;
 wire [2+31-3:0] req_addr_ch_base_add;
 
-//| eperl: generated_end (DO NOT EDIT ABOVE)
 wire [13:0] req_atm;
 wire [13:0] req_atm_cnt;
 wire [13:0] req_atm_cnt_0_w;
@@ -628,6 +653,8 @@ wire [13:0] req_atm_cnt_2_w;
 wire [13:0] req_atm_cnt_3_w;
 wire [13:0] req_atm_cnt_inc;
 wire [13:0] req_atm_left;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
 wire req_atm_reg_en;
 wire req_atm_reg_en_0;
 wire req_atm_reg_en_1;
@@ -640,7 +667,15 @@ wire req_batch_reg_en;
 wire [10:0] req_ch_left_w;
 wire [2:0] req_ch_mode;
 wire req_ch_reg_en;
+//: my $req_cur_atomic_size=13;
+//: print qq(
+//: wire [${req_cur_atomic_size}:0] req_cur_atomic;
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
 wire [13:0] req_cur_atomic;
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
 wire [13:0] req_cur_grain_w;
 wire [14:0] req_entry;
 wire req_grain_reg_en;
@@ -664,7 +699,7 @@ wire [10:0] rsp_ch_left_w;
 wire [2:0] rsp_ch_mode;
 wire rsp_ch_reg_en;
 wire [2:0] rsp_cur_ch_w;
-wire [11:0] rsp_cur_grain_w;
+wire [12:0] rsp_cur_grain_w;
 wire [17:0] rsp_entry;
 wire rsp_h_reg_en;
 reg rsp_rd_en;
@@ -940,7 +975,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        fetch_grain <= {12{1'b0}};
+        fetch_grain <= {13{1'b0}};
     end else begin
         if ((layer_st) == 1'b1) begin
             fetch_grain <= fetch_grain_w;
@@ -981,8 +1016,8 @@ end
 assign pre_ready = ~pre_valid_d1 | pre_ready_d1;
 assign pre_reg_en = is_running & (req_height_cnt_d1 != data_height) & pre_ready;
 assign {mon_req_slice_left, req_slice_left} = data_height - req_height_cnt_d1;
-assign is_req_grain_last = (req_slice_left <= {2'd0,fetch_grain});
-assign req_cur_grain_w = is_req_grain_last ? req_slice_left : {2'd0,fetch_grain};
+assign is_req_grain_last = (req_slice_left <= {1'd0,fetch_grain});
+assign req_cur_grain_w = is_req_grain_last ? req_slice_left : {1'd0,fetch_grain};
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
         {mon_req_height_cnt_d1,req_height_cnt_d1} <= {15{1'b0}};
@@ -1029,7 +1064,7 @@ assign pre_ready_d1 = ~pre_valid_d2 | pre_ready_d2;
 assign pre_reg_en_d1 = pre_valid_d1 & pre_ready_d1;
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atomic_d2 <= {14{1'b0}};
+        req_atomic_d2 <= 0;
     end else begin
         if ((pre_reg_en_d1) == 1'b1) begin
             req_atomic_d2 <= req_cur_atomic;
@@ -1085,7 +1120,7 @@ assign pre_reg_en_d2_init = pre_valid_d2 & pre_ready_d2 & ~is_req_grain_last_d2;
 assign pre_reg_en_d2_last = pre_valid_d2 & pre_ready_d2 & is_req_grain_last_d2;
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atomic_0_d3 <= {14{1'b0}};
+        req_atomic_0_d3 <= 0;
     end else begin
         if ((pre_reg_en_d2_g0) == 1'b1) begin
             req_atomic_0_d3 <= req_atomic_d2;
@@ -1094,7 +1129,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atomic_1_d3 <= {14{1'b0}};
+        req_atomic_1_d3 <= 0;
     end else begin
         if ((pre_reg_en_d2_g1) == 1'b1) begin
             req_atomic_1_d3 <= req_atomic_d2;
@@ -1312,20 +1347,20 @@ assign is_atm_done[3] = (req_atm_cnt_3 == req_atm);
 assign req_atm_cnt = (req_atm_sel == 2'h0) ? req_atm_cnt_0 :
                      (req_atm_sel == 2'h1) ? req_atm_cnt_1 :
                      (req_atm_sel == 2'h2) ? req_atm_cnt_2 :
-                     (req_atm_sel == 2'h3) ? req_atm_cnt_3 : 14'd0;
+                     (req_atm_sel == 2'h3) ? req_atm_cnt_3 : 0;
 assign {mon_req_atm_cnt_inc, req_atm_cnt_inc} = req_atm_cnt + req_atm_size;
 assign cur_atm_done = (req_atm_sel == 2'h0) ? is_atm_done[0] :
                       (req_atm_sel == 2'h1) ? is_atm_done[1] :
                       (req_atm_sel == 2'h2) ? is_atm_done[2] :
                       (req_atm_sel == 2'h3) ? is_atm_done[3] : 1'b0;
 assign {mon_req_atm_left, req_atm_left} = req_atm - req_atm_cnt;
-assign {mon_req_atm_size_addr_limit, req_atm_size_addr_limit} = (req_atm_cnt == 14'b0) ? (4'h8 - req_addr[2:0]) : 4'h8;
+assign {mon_req_atm_size_addr_limit, req_atm_size_addr_limit} = (req_atm_cnt == 0) ? (4'h8 - req_addr[2:0]) : 4'h8;
 assign req_atm_size = (req_atm_left < {{10{1'b0}}, req_atm_size_addr_limit}) ? req_atm_left[3:0] : req_atm_size_addr_limit;
 assign {mon_req_atm_size_out, req_atm_size_out} = req_atm_size - 1'b1;
-assign req_atm_cnt_0_w = (~is_running | is_req_atm_end) ? 14'b0 : req_atm_cnt_inc;
-assign req_atm_cnt_1_w = (~is_running | is_req_atm_end) ? 14'b0 : req_atm_cnt_inc;
-assign req_atm_cnt_2_w = (~is_running | is_req_atm_end) ? 14'b0 : req_atm_cnt_inc;
-assign req_atm_cnt_3_w = (~is_running | is_req_atm_end) ? 14'b0 : req_atm_cnt_inc;
+assign req_atm_cnt_0_w = (~is_running | is_req_atm_end) ? 0 : req_atm_cnt_inc;
+assign req_atm_cnt_1_w = (~is_running | is_req_atm_end) ? 0 : req_atm_cnt_inc;
+assign req_atm_cnt_2_w = (~is_running | is_req_atm_end) ? 0 : req_atm_cnt_inc;
+assign req_atm_cnt_3_w = (~is_running | is_req_atm_end) ? 0 : req_atm_cnt_inc;
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
         req_atm_sel <= {2{1'b0}};
@@ -1343,7 +1378,7 @@ end
 assign is_req_atm_sel_end = ({2'd0,req_atm_sel} == (req_cur_ch-1));
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atm_cnt_0 <= {14{1'b0}};
+        req_atm_cnt_0 <= 0;
     end else begin
         if ((layer_st | req_atm_reg_en_0) == 1'b1) begin
             req_atm_cnt_0 <= req_atm_cnt_0_w;
@@ -1352,7 +1387,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atm_cnt_1 <= {14{1'b0}};
+        req_atm_cnt_1 <= 0;
     end else begin
         if ((layer_st | req_atm_reg_en_1) == 1'b1) begin
             req_atm_cnt_1 <= req_atm_cnt_1_w;
@@ -1361,7 +1396,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atm_cnt_2 <= {14{1'b0}};
+        req_atm_cnt_2 <= 0;
     end else begin
         if ((layer_st | req_atm_reg_en_2) == 1'b1) begin
             req_atm_cnt_2 <= req_atm_cnt_2_w;
@@ -1370,7 +1405,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        req_atm_cnt_3 <= {14{1'b0}};
+        req_atm_cnt_3 <= 0;
     end else begin
         if ((layer_st | req_atm_reg_en_3) == 1'b1) begin
             req_atm_cnt_3 <= req_atm_cnt_3_w;
@@ -1798,7 +1833,7 @@ assign {mon_rsp_all_h_cnt_inc,
         rsp_all_h_cnt_inc} = rsp_all_h_cnt + rsp_cur_grain;
 assign {mon_rsp_all_h_left_w,
         rsp_all_h_left_w} = layer_st ? {1'b0, data_height_w} : data_height - rsp_all_h_cnt_inc;
-assign rsp_cur_grain_w = (rsp_all_h_left_w > {{2{1'b0}}, fetch_grain_w}) ? fetch_grain_w : rsp_all_h_left_w[11:0];
+assign rsp_cur_grain_w = (rsp_all_h_left_w > {{1{1'b0}}, fetch_grain_w}) ? fetch_grain_w : rsp_all_h_left_w[12:0];
 assign is_rsp_all_h_end = (rsp_all_h_cnt_inc == data_height);
 assign is_rsp_done = ~reg2dp_op_en | (rsp_all_h_cnt == data_height);
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
@@ -1814,7 +1849,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
-        rsp_cur_grain <= {12{1'b0}};
+        rsp_cur_grain <= {13{1'b0}};
     end else begin
         if ((layer_st | rsp_all_h_reg_en) == 1'b1) begin
             rsp_cur_grain <= rsp_cur_grain_w;
@@ -2480,7 +2515,7 @@ end
 //: (is_rsp_ch_end) ? {1'b0, idx_batch_offset_w} :
 //: (rsp_ch_cnt[0]) ? idx_ch_offset + data_width : idx_ch_offset;
 //: assign is_w_cnt_div4 = 1'b0;
-//: assign is_w_cnt_div2 = (is_data_normal & is_rsp_ch_end & ~rsp_ch_cnt[0] & (rsp_cur_ch == 3'h2));
+//: assign is_w_cnt_div2 = (is_data_normal & is_rsp_ch_end & ~rsp_ch_cnt[0]);
 //: assign cbuf_wr_hsel_w = (is_w_cnt_div2 & rsp_w_cnt[0]) | (is_data_normal & rsp_ch_cnt[0]) ;
 //: );
 //: } elsif(($dmaif==1) && ($atmc==4)) {
@@ -2561,8 +2596,19 @@ assign {mon_idx_h_offset_w,
 //assign idx_w_offset_add = is_w_cnt_div4 ? {rsp_w_cnt[12 +2:2]} : ( is_w_cnt_div2 ? rsp_w_cnt[12+1 :1] : rsp_w_cnt[12:0] );
 assign idx_w_offset_add = is_w_cnt_div4 ? {1'b0,rsp_w_cnt[15:2]} : ( is_w_cnt_div2 ? rsp_w_cnt[14+1 :1] : rsp_w_cnt[14:0] );
 assign {mon_cbuf_idx_inc[2:0], cbuf_idx_inc} = idx_base + (idx_grain_offset + idx_h_offset) + idx_w_offset_add;
+//: my $bank_depth_bits = int( log(512)/log(2) );
+//: print qq(
+//: assign is_cbuf_idx_wrap = cbuf_idx_inc >= {1'b0, data_bank, ${bank_depth_bits}'b0};
+//: assign cbuf_idx_w = ~is_cbuf_idx_wrap ? {2'b0, cbuf_idx_inc[14:0]} : {2'd0,cbuf_idx_inc[14 :0]} - {2'b0, data_bank, ${bank_depth_bits}'b0};
+//: );
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+
 assign is_cbuf_idx_wrap = cbuf_idx_inc >= {1'b0, data_bank, 9'b0};
 assign cbuf_idx_w = ~is_cbuf_idx_wrap ? {2'b0, cbuf_idx_inc[14:0]} : {2'd0,cbuf_idx_inc[14 :0]} - {2'b0, data_bank, 9'b0};
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+//assign is_cbuf_idx_wrap = cbuf_idx_inc >= {1'b0, data_bank, 9'b0};
+//assign cbuf_idx_w = ~is_cbuf_idx_wrap ? {2'b0, cbuf_idx_inc[14:0]} : {2'd0,cbuf_idx_inc[14 :0]} - {2'b0, data_bank, 9'b0};
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     if (!nvdla_core_rstn) begin
         idx_base <= 0;

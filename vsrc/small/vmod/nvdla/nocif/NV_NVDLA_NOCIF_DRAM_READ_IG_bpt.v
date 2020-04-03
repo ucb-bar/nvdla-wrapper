@@ -17,6 +17,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define SMALL_MEMBUS
+//#endif
 module NV_NVDLA_NOCIF_DRAM_READ_IG_bpt (
    nvdla_core_clk //|< i
   ,nvdla_core_rstn //|< i
@@ -54,9 +60,9 @@ reg [9:0] lat_cnt_nxt;
 reg [7:0] lat_count_cnt;
 reg [0:0] lat_count_dec;
 reg [32 -1:0] out_addr;
-wire [2:0] out_size;
+reg [2:0] out_size;
 reg [15:0] req_num;
-wire [2:0] slot_needed;
+reg [2:0] slot_needed;
 wire [1:0] beat_size_NC;
 wire bpt2arb_accept;
 wire [32 -1:0] bpt2arb_addr;
@@ -112,23 +118,23 @@ NV_NVDLA_NOCIF_DRAM_READ_IG_BPT_pipe_p1 pipe_p1 (
   ,.nvdla_core_rstn (nvdla_core_rstn) //|< i
   ,.dma2bpt_req_pd (dma2bpt_req_pd[32 +14:0]) //|< i
   ,.dma2bpt_req_valid (dma2bpt_req_valid) //|< i
+  ,.in_rdy_p (in_rdy_p) //|< w
   ,.dma2bpt_req_ready (dma2bpt_req_ready) //|> o
   ,.in_pd_p (in_pd_p[32 +14:0]) //|> w
   ,.in_vld_p (in_vld_p) //|> w
-  ,.in_rdy_p (in_rdy_p) //|< w
   );
 NV_NVDLA_NOCIF_DRAM_READ_IG_BPT_pipe_p2 pipe_p2 (
    .nvdla_core_clk (nvdla_core_clk) //|< i
   ,.nvdla_core_rstn (nvdla_core_rstn) //|< i
   ,.in_pd_p (in_pd_p[32 +14:0]) //|< w
-  ,.in_vld_p (in_vld_p) //|< w
-  ,.in_rdy_p (in_rdy_p) //|> w
-  ,.in_pd (in_pd[32 +14:0]) //|> w
-  ,.in_vld (in_vld) //|> w
   ,.in_rdy (in_rdy) //|< w
+  ,.in_vld_p (in_vld_p) //|< w
+  ,.in_pd (in_pd[32 +14:0]) //|> w
+  ,.in_rdy_p (in_rdy_p) //|> w
+  ,.in_vld (in_vld) //|> w
   );
 assign in_rdy = req_rdy & is_ltran;
-assign in_vld_pd = {(32 +15){in_vld}} & in_pd;
+assign in_vld_pd = {79{in_vld}} & in_pd;
 // PKT_UNPACK_WIRE( dma_read_cmd , in_ , in_vld_pd )
 assign in_addr[32 -1:0] = in_vld_pd[32 -1:0];
 assign in_size[14:0] = in_vld_pd[32 +14:32];
@@ -178,19 +184,44 @@ assign in_size[14:0] = in_vld_pd[32 +14:32];
 // spyglass enable_block WRN_58
 // spyglass enable_block WRN_61
 `endif // SPYGLASS_ASSERT_ON
+//assign stt_addr = in_addr;
+//assign {mon_end_addr_c,end_addr} = stt_addr + in_size<<5;
+//:my $k=8;
+//:my $j=log(${k})/log(2);
+//:my $l = 64;
+//:my $m = log(${l})/log(2);
+//: if (8 == $m) {
+//: print qq(assign stt_offset[2:0] = in_addr[$j+1:$j];);
+//: print qq(assign size_offset[2:0] = in_size[1:0];);
+//: } else {
+//: print qq(assign stt_offset[2:0] = in_addr[$j+2:$j];);
+//: print qq(assign size_offset[2:0] = in_size[2:0];);
+//:}
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+assign stt_offset[2:0] = in_addr[3+2:3];assign size_offset[2:0] = in_size[2:0];
+//| eperl: generated_end (DO NOT EDIT ABOVE)
+//assign stt_offset[2:0] = in_addr[7:5];
+//assign size_offset[2:0] = in_size[2:0];
+assign {mon_end_offset_c, end_offset[2:0]} = stt_offset + size_offset;
+assign is_single_tran = (stt_offset + in_size) < ((( 64 )/8/8)*4);
+assign ftran_size[2:0] = is_single_tran ? size_offset : ((( 64 )/8/8)*4 -1) -stt_offset;
+//assign ftran_size[2:0] = is_single_tran ? size_offset : (7 -stt_offset);
+assign ftran_num[3:0] = ftran_size + 1;
+assign ltran_size[2:0] = is_single_tran ? `tick_x_or_0 : end_offset; // when single tran, size of ltran is meanningless
+assign ltran_num[3:0] = is_single_tran ? 0 : end_offset+1;
+assign mtran_num = in_size + 1 - ftran_num - ltran_num;
 //================
 // check the empty entry of lat.fifo
 //================
 //dma2bpt_cdt_lat_fifo_pop
-assign slot_needed = 1;
-/*always @(
+always @(
   is_single_tran
   or out_size
   or is_ltran
   or out_swizzle
   or is_ftran
   ) begin
-    if (NVDLA_MEMORY_ATOMIC_LOG2 == NVDLA_PRIMARY_MEMIF_WIDTH_LOG2) begin
+    if (3 == 3) begin
        slot_needed = 1;
     end
     else if (is_single_tran) begin
@@ -202,7 +233,7 @@ assign slot_needed = 1;
     end else begin
         slot_needed = 3'd4;
     end
-end*/
+end
 assign lat_fifo_stall_enable = (tieoff_lat_fifo_depth!=0);
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
   if (!nvdla_core_rstn) begin
@@ -349,10 +380,8 @@ assign req_enable = (!lat_fifo_stall_enable) || ({{5{1'b0}}, slot_needed} <= lat
 //================
 // bsp out: swizzle
 //================
-assign out_swizzle = 1'b0; //(NVDLA_MEMORY_ATOMIC_LOG2 == NVDLA_PRIMARY_MEMIF_WIDTH_LOG2) ? 1'b0 : (stt_offset[0]==1'b1);
-assign out_odd = 1'b0; //(NVDLA_MEMORY_ATOMIC_LOG2 == NVDLA_PRIMARY_MEMIF_WIDTH_LOG2) ? 0 : (in_size[0]==1'b0);
-assign out_size = 3'b0;
-/*
+assign out_swizzle = (3 == 3) ? 1'b0 : (stt_offset[0]==1'b1);
+assign out_odd = (3 == 3) ? 0 : (in_size[0]==1'b0);
 //================
 // bsp out: size
 //================
@@ -364,7 +393,7 @@ always @(
   or ltran_size
   ) begin
     out_size = {3{`tick_x_or_0}};
-    if (NVDLA_MEMORY_ATOMIC_LOG2 == NVDLA_PRIMARY_MEMIF_WIDTH_LOG2) begin
+    if (3 == 3) begin
        out_size = 0;
     end
     else if (is_ftran) begin
@@ -375,29 +404,74 @@ always @(
         out_size = ltran_size;
     end
 end
-*/
+//================
+// bsp out: USER: SIZE
+//================
+assign out_inc = is_ftran & is_ltran & out_swizzle && !out_odd;
+assign {mon_out_beats_c,beat_size_NC[1:0]} = out_size[2:1] + out_inc; //stepheng.
+`ifdef SPYGLASS_ASSERT_ON
+`else
+// spyglass disable_block NoWidthInBasedNum-ML
+// spyglass disable_block STARC-2.10.3.2a
+// spyglass disable_block STARC05-2.1.3.1
+// spyglass disable_block STARC-2.1.4.6
+// spyglass disable_block W116
+// spyglass disable_block W154
+// spyglass disable_block W239
+// spyglass disable_block W362
+// spyglass disable_block WRN_58
+// spyglass disable_block WRN_61
+`endif // SPYGLASS_ASSERT_ON
+`ifdef ASSERT_ON
+`ifdef FV_ASSERT_ON
+`define ASSERT_RESET nvdla_core_rstn
+`else
+`ifdef SYNTHESIS
+`define ASSERT_RESET nvdla_core_rstn
+`else
+`ifdef ASSERT_OFF_RESET_IS_X
+`define ASSERT_RESET ((1'bx === nvdla_core_rstn) ? 1'b0 : nvdla_core_rstn)
+`else
+`define ASSERT_RESET ((1'bx === nvdla_core_rstn) ? 1'b1 : nvdla_core_rstn)
+`endif // ASSERT_OFF_RESET_IS_X
+`endif // SYNTHESIS
+`endif // FV_ASSERT_ON
+// VCS coverage off
+  nv_assert_never #(0,0,"should never overflow") zzz_assert_never_4x (nvdla_core_clk, `ASSERT_RESET, mon_out_beats_c); // spyglass disable W504 SelfDeterminedExpr-ML 
+// VCS coverage on
+`undef ASSERT_RESET
+`endif // ASSERT_ON
+`ifdef SPYGLASS_ASSERT_ON
+`else
+// spyglass enable_block NoWidthInBasedNum-ML
+// spyglass enable_block STARC-2.10.3.2a
+// spyglass enable_block STARC05-2.1.3.1
+// spyglass enable_block STARC-2.1.4.6
+// spyglass enable_block W116
+// spyglass enable_block W154
+// spyglass enable_block W239
+// spyglass enable_block W362
+// spyglass enable_block WRN_58
+// spyglass enable_block WRN_61
+`endif // SPYGLASS_ASSERT_ON
+//assign out_user_size = {1'b0,beat_size_NC};//stepheng.
 //================
 // bpt2arb: addr
 //================
 always @(posedge nvdla_core_clk) begin
     if (bpt2arb_accept) begin
-//if (is_ftran) begin
-// //out_addr <= in_addr + ((ftran_size+1)<<(NVDLA_MEMORY_ATOMIC_LOG2));
-//if (3 == 3)
-// out_addr <= in_addr + ((1)<<(3));
-// else
-// out_addr <= in_addr + ((ftran_size+1)<<(3));
-//end else begin
-// //out_addr <= out_addr + (8<<(NVDLA_MEMORY_ATOMIC_LOG2-1));
-//if (3 == 3)
-// out_addr <= out_addr + (1<<(3));
-// else
-// out_addr <= out_addr + (8<<(3 -1));
-//end
         if (is_ftran) begin
-            out_addr <= in_addr + 8;
+//out_addr <= in_addr + ((ftran_size+1)<<(3));
+     if (3 == 3)
+               out_addr <= in_addr + ((1)<<(3));
+            else
+               out_addr <= in_addr + ((ftran_size+1)<<(3));
         end else begin
-            out_addr <= out_addr + 8;
+//out_addr <= out_addr + (8<<(3 -1));
+     if (3 == 3)
+               out_addr <= out_addr + (1<<(3));
+            else
+               out_addr <= out_addr + (8<<(3 -1));
         end
     end
 end
@@ -409,19 +483,19 @@ always @(
 //or mtran_num
   *
   ) begin
-//if (3 == 3)
+    if (3 == 3)
        req_num = in_size + 1;
-//else if (is_single_tran) begin
-// req_num = 1;
-//end else if (mtran_num==0) begin
-// req_num = 2;
-//end else begin
-// req_num = 2 + mtran_num[14:3];
-//end
+    else if (is_single_tran) begin
+        req_num = 1;
+    end else if (mtran_num==0) begin
+        req_num = 2;
+    end else begin
+        req_num = 2 + mtran_num[14:3];
+    end
 end
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
   if (!nvdla_core_rstn) begin
-    count_req <= {15{1'b0}};
+    count_req <= {14{1'b0}};
   end else begin
     if (bpt2arb_accept) begin
         if (is_ltran) begin
@@ -441,11 +515,15 @@ assign bpt2arb_swizzle = out_swizzle;
 assign bpt2arb_odd = out_odd;
 assign bpt2arb_ltran = is_ltran;
 assign bpt2arb_ftran = is_ftran;
+//assign bpt2arb_user_size = out_user_size; //stepheng.
 assign bpt2arb_axid = tieoff_axid[3:0];
+//
 assign req_rdy = req_enable & bpt2arb_req_ready;
 assign req_vld = req_enable & in_vld;
 assign bpt2arb_req_valid = req_vld;
 assign bpt2arb_accept = bpt2arb_req_valid & req_rdy;
+//
+// PKT_PACK_WIRE( cvt_read_cmd , bpt2arb_ , bpt2arb_req_pd )
 assign bpt2arb_req_pd[3:0] = bpt2arb_axid[3:0];
 assign bpt2arb_req_pd[32 +3:4] = bpt2arb_addr[32 -1:0];
 assign bpt2arb_req_pd[32 +6:32 +4] = bpt2arb_size[2:0];
@@ -453,6 +531,92 @@ assign bpt2arb_req_pd[32 +7] = bpt2arb_swizzle ;
 assign bpt2arb_req_pd[32 +8] = bpt2arb_odd ;
 assign bpt2arb_req_pd[32 +9] = bpt2arb_ltran ;
 assign bpt2arb_req_pd[32 +10] = bpt2arb_ftran ;
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    reg funcpoint_cover_off;
+    initial begin
+        if ( $test$plusargs( "cover_off" ) ) begin
+            funcpoint_cover_off = 1'b1;
+        end else begin
+            funcpoint_cover_off = 1'b0;
+        end
+    end
+    property mcif_bpt__is_first_trans__0_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        ((req_vld) && nvdla_core_rstn) |-> (is_ftran);
+    endproperty
+// Cover 0 : "is_ftran"
+    FUNCPOINT_mcif_bpt__is_first_trans__0_COV : cover property (mcif_bpt__is_first_trans__0_cov);
+  `endif
+`endif
+//VCS coverage on
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    property mcif_bpt__is_middle_trans__1_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        ((req_vld) && nvdla_core_rstn) |-> (is_mtran);
+    endproperty
+// Cover 1 : "is_mtran"
+    FUNCPOINT_mcif_bpt__is_middle_trans__1_COV : cover property (mcif_bpt__is_middle_trans__1_cov);
+  `endif
+`endif
+//VCS coverage on
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    property mcif_bpt__is_last_trans__2_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        ((req_vld) && nvdla_core_rstn) |-> (is_ltran);
+    endproperty
+// Cover 2 : "is_ltran"
+    FUNCPOINT_mcif_bpt__is_last_trans__2_COV : cover property (mcif_bpt__is_last_trans__2_cov);
+  `endif
+`endif
+//VCS coverage on
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    property mcif_bpt__is_swizzle_and_odd__3_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        ((req_vld) && nvdla_core_rstn) |-> (out_swizzle & out_odd);
+    endproperty
+// Cover 3 : "out_swizzle & out_odd"
+    FUNCPOINT_mcif_bpt__is_swizzle_and_odd__3_COV : cover property (mcif_bpt__is_swizzle_and_odd__3_cov);
+  `endif
+`endif
+//VCS coverage on
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    property mcif_bpt__is_odd_not_swizzle__4_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        ((req_vld) && nvdla_core_rstn) |-> (out_odd & !out_swizzle);
+    endproperty
+// Cover 4 : "out_odd & !out_swizzle"
+    FUNCPOINT_mcif_bpt__is_odd_not_swizzle__4_COV : cover property (mcif_bpt__is_odd_not_swizzle__4_cov);
+  `endif
+`endif
+//VCS coverage on
+//VCS coverage off
+`ifndef DISABLE_FUNCPOINT
+  `ifdef ENABLE_FUNCPOINT
+    property mcif_bpt__count_inc_and_dec__5_cov;
+        disable iff((nvdla_core_rstn !== 1) || funcpoint_cover_off)
+        @(posedge nvdla_core_clk)
+        lat_count_inc & lat_count_dec;
+    endproperty
+// Cover 5 : "lat_count_inc & lat_count_dec"
+    FUNCPOINT_mcif_bpt__count_inc_and_dec__5_COV : cover property (mcif_bpt__count_inc_and_dec__5_cov);
+  `endif
+`endif
+//VCS coverage on
 endmodule // NV_NVDLA_NOCIF_READ_IG_bpt
 // **************************************************************************************************************
 // Generated by ::pipe -m -bc -os in_pd_p (in_vld_p,in_rdy_p) <= dma2bpt_req_pd[32 +14:0] (dma2bpt_req_valid,dma2bpt_req_ready)

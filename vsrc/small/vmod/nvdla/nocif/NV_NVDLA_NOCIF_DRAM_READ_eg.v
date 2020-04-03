@@ -17,6 +17,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define SMALL_MEMBUS
+//#endif
 module NV_NVDLA_NOCIF_DRAM_READ_eg (
    nvdla_core_clk //|< i
   ,nvdla_core_rstn //|< i
@@ -89,7 +95,7 @@ module NV_NVDLA_NOCIF_DRAM_READ_eg (
 //:print("output mcif2client${i}_rd_rsp_valid;\n");
 //:print("input mcif2client${i}_rd_rsp_ready;\n");
 //:print qq(
-//:output [64 +1 -1:0] mcif2client${i}_rd_rsp_pd;
+//:output [64 +(( 64 )/8/8)-1:0] mcif2client${i}_rd_rsp_pd;
 //:);
 //:print("input  cq_rd${i}_pvld;\n");
 //:print("output  cq_rd${i}_prdy;\n");
@@ -99,49 +105,49 @@ module NV_NVDLA_NOCIF_DRAM_READ_eg (
 output mcif2client0_rd_rsp_valid;
 input mcif2client0_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client0_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client0_rd_rsp_pd;
 input  cq_rd0_pvld;
 output  cq_rd0_prdy;
 input [6:0] cq_rd0_pd;
 output mcif2client1_rd_rsp_valid;
 input mcif2client1_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client1_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client1_rd_rsp_pd;
 input  cq_rd1_pvld;
 output  cq_rd1_prdy;
 input [6:0] cq_rd1_pd;
 output mcif2client2_rd_rsp_valid;
 input mcif2client2_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client2_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client2_rd_rsp_pd;
 input  cq_rd2_pvld;
 output  cq_rd2_prdy;
 input [6:0] cq_rd2_pd;
 output mcif2client3_rd_rsp_valid;
 input mcif2client3_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client3_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client3_rd_rsp_pd;
 input  cq_rd3_pvld;
 output  cq_rd3_prdy;
 input [6:0] cq_rd3_pd;
 output mcif2client4_rd_rsp_valid;
 input mcif2client4_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client4_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client4_rd_rsp_pd;
 input  cq_rd4_pvld;
 output  cq_rd4_prdy;
 input [6:0] cq_rd4_pd;
 output mcif2client5_rd_rsp_valid;
 input mcif2client5_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client5_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client5_rd_rsp_pd;
 input  cq_rd5_pvld;
 output  cq_rd5_prdy;
 input [6:0] cq_rd5_pd;
 output mcif2client6_rd_rsp_valid;
 input mcif2client6_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client6_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client6_rd_rsp_pd;
 input  cq_rd6_pvld;
 output  cq_rd6_prdy;
 input [6:0] cq_rd6_pd;
@@ -188,7 +194,7 @@ reg [1:0] arb_wen;
 //:wire [64/2-1:0] dma${i}_mdata1;
 //:);
 //:print qq(
-//:wire [64 +1 -1:0] dma${i}_pd;
+//:wire [64 +(( 64 )/8/8)-1:0] dma${i}_pd;
 //:);
 //:print("wire dma${i}_rdy;\n");
 //:print("wire dma${i}_vld;\n");
@@ -197,8 +203,6 @@ reg [1:0] arb_wen;
 //:print qq(wire [64/2:0] ro${i}_rd1_pd;\n);
 //:print("wire ro${i}_rd0_prdy;\n");
 //:print("wire ro${i}_rd0_pvld;\n");
-//:print("wire ro${i}_rd1_prdy;\n");
-//:print("wire ro${i}_rd1_pvld;\n");
 //:print("wire ro${i}_wr_rdy;\n");
 //:print("wire ro${i}_wr0_prdy;\n");
 //:print("wire ro${i}_wr1_prdy;\n");
@@ -228,7 +232,7 @@ wire [64/2-1:0] dma0_mdata0;
 
 wire [64/2-1:0] dma0_mdata1;
 
-wire [64 +1 -1:0] dma0_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma0_pd;
 wire dma0_rdy;
 wire dma0_vld;
 wire mon_dma0_lodd;
@@ -236,8 +240,6 @@ wire [64/2:0] ro0_rd0_pd;
 wire [64/2:0] ro0_rd1_pd;
 wire ro0_rd0_prdy;
 wire ro0_rd0_pvld;
-wire ro0_rd1_prdy;
-wire ro0_rd1_pvld;
 wire ro0_wr_rdy;
 wire ro0_wr0_prdy;
 wire ro0_wr1_prdy;
@@ -265,7 +267,7 @@ wire [64/2-1:0] dma1_mdata0;
 
 wire [64/2-1:0] dma1_mdata1;
 
-wire [64 +1 -1:0] dma1_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma1_pd;
 wire dma1_rdy;
 wire dma1_vld;
 wire mon_dma1_lodd;
@@ -273,8 +275,6 @@ wire [64/2:0] ro1_rd0_pd;
 wire [64/2:0] ro1_rd1_pd;
 wire ro1_rd0_prdy;
 wire ro1_rd0_pvld;
-wire ro1_rd1_prdy;
-wire ro1_rd1_pvld;
 wire ro1_wr_rdy;
 wire ro1_wr0_prdy;
 wire ro1_wr1_prdy;
@@ -302,7 +302,7 @@ wire [64/2-1:0] dma2_mdata0;
 
 wire [64/2-1:0] dma2_mdata1;
 
-wire [64 +1 -1:0] dma2_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma2_pd;
 wire dma2_rdy;
 wire dma2_vld;
 wire mon_dma2_lodd;
@@ -310,8 +310,6 @@ wire [64/2:0] ro2_rd0_pd;
 wire [64/2:0] ro2_rd1_pd;
 wire ro2_rd0_prdy;
 wire ro2_rd0_pvld;
-wire ro2_rd1_prdy;
-wire ro2_rd1_pvld;
 wire ro2_wr_rdy;
 wire ro2_wr0_prdy;
 wire ro2_wr1_prdy;
@@ -339,7 +337,7 @@ wire [64/2-1:0] dma3_mdata0;
 
 wire [64/2-1:0] dma3_mdata1;
 
-wire [64 +1 -1:0] dma3_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma3_pd;
 wire dma3_rdy;
 wire dma3_vld;
 wire mon_dma3_lodd;
@@ -347,8 +345,6 @@ wire [64/2:0] ro3_rd0_pd;
 wire [64/2:0] ro3_rd1_pd;
 wire ro3_rd0_prdy;
 wire ro3_rd0_pvld;
-wire ro3_rd1_prdy;
-wire ro3_rd1_pvld;
 wire ro3_wr_rdy;
 wire ro3_wr0_prdy;
 wire ro3_wr1_prdy;
@@ -376,7 +372,7 @@ wire [64/2-1:0] dma4_mdata0;
 
 wire [64/2-1:0] dma4_mdata1;
 
-wire [64 +1 -1:0] dma4_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma4_pd;
 wire dma4_rdy;
 wire dma4_vld;
 wire mon_dma4_lodd;
@@ -384,8 +380,6 @@ wire [64/2:0] ro4_rd0_pd;
 wire [64/2:0] ro4_rd1_pd;
 wire ro4_rd0_prdy;
 wire ro4_rd0_pvld;
-wire ro4_rd1_prdy;
-wire ro4_rd1_pvld;
 wire ro4_wr_rdy;
 wire ro4_wr0_prdy;
 wire ro4_wr1_prdy;
@@ -413,7 +407,7 @@ wire [64/2-1:0] dma5_mdata0;
 
 wire [64/2-1:0] dma5_mdata1;
 
-wire [64 +1 -1:0] dma5_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma5_pd;
 wire dma5_rdy;
 wire dma5_vld;
 wire mon_dma5_lodd;
@@ -421,8 +415,6 @@ wire [64/2:0] ro5_rd0_pd;
 wire [64/2:0] ro5_rd1_pd;
 wire ro5_rd0_prdy;
 wire ro5_rd0_pvld;
-wire ro5_rd1_prdy;
-wire ro5_rd1_pvld;
 wire ro5_wr_rdy;
 wire ro5_wr0_prdy;
 wire ro5_wr1_prdy;
@@ -450,7 +442,7 @@ wire [64/2-1:0] dma6_mdata0;
 
 wire [64/2-1:0] dma6_mdata1;
 
-wire [64 +1 -1:0] dma6_pd;
+wire [64 +(( 64 )/8/8)-1:0] dma6_pd;
 wire dma6_rdy;
 wire dma6_vld;
 wire mon_dma6_lodd;
@@ -458,8 +450,6 @@ wire [64/2:0] ro6_rd0_pd;
 wire [64/2:0] ro6_rd1_pd;
 wire ro6_rd0_prdy;
 wire ro6_rd0_pvld;
-wire ro6_rd1_prdy;
-wire ro6_rd1_pvld;
 wire ro6_wr_rdy;
 wire ro6_wr0_prdy;
 wire ro6_wr1_prdy;
@@ -512,7 +502,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p1 pipe_p1 (
   ,.noc2mcif_axi_r_rready (noc2mcif_axi_r_rready) //|> o
   );
 //my $dw = eval(64 +4);
-//&eperl::pipe(" -is -wid $dw -do ipipe_axi_pd -vo ipipe_axi_vld -ri noc2mcif_axi_r_rready -vi noc2mcif_axi_r_rvalid -di noc2mcif_axi_r_pd -ro ipipe_axi_rdy");
+//&eperl::pipe(" -os -wid $dw -do ipipe_axi_pd -vo ipipe_axi_vld -ri noc2mcif_axi_r_rready -vi noc2mcif_axi_r_rvalid -di noc2mcif_axi_r_pd -ro ipipe_axi_rdy");
 wire [64 -1:0] rq_wr_pd;
 assign eg2ig_axi_vld = ipipe_axi_vld & ipipe_axi_rdy;
 assign {ipipe_axi_axid,ipipe_axi_data} = ipipe_axi_pd;
@@ -585,9 +575,10 @@ assign ipipe_axi_rdy = 0
 //:}
 //:my $k = 7;
 //:my $i;
-//:for ($i=$k; $i<10;$i++) {
+//:for ($i=$k; $i<16;$i++) {
 //:print qq(
-//: wire src${i}_req = 1'b0;
+//: assign src${i}_req = 1'b0;
+//: wire src${i}_gnt;
 //:);
 //:}
 //| eperl: generated_beg (DO NOT EDIT BELOW)
@@ -704,11 +695,32 @@ wire src6_req = rq6_rd_pvld && ctt6_vld && ro6_wr_rdy;
 assign ctt6_rdy = src6_gnt;
 assign rq6_rd_prdy = src6_gnt;
 
-wire src7_req = 1'b0;
+assign src7_req = 1'b0;
+wire src7_gnt;
 
-wire src8_req = 1'b0;
+assign src8_req = 1'b0;
+wire src8_gnt;
 
-wire src9_req = 1'b0;
+assign src9_req = 1'b0;
+wire src9_gnt;
+
+assign src10_req = 1'b0;
+wire src10_gnt;
+
+assign src11_req = 1'b0;
+wire src11_gnt;
+
+assign src12_req = 1'b0;
+wire src12_gnt;
+
+assign src13_req = 1'b0;
+wire src13_gnt;
+
+assign src14_req = 1'b0;
+wire src14_gnt;
+
+assign src15_req = 1'b0;
+wire src15_gnt;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 read_eg_arb u_read_eg_arb (
@@ -722,6 +734,12 @@ read_eg_arb u_read_eg_arb (
   ,.req7 (src7_req) //|< w
   ,.req8 (src8_req) //|< w
   ,.req9 (src9_req) //|< w
+  ,.req10 (src10_req) //|< w
+  ,.req11 (src11_req) //|< w
+  ,.req12 (src12_req) //|< w
+  ,.req13 (src13_req) //|< w
+  ,.req14 (src14_req) //|< w
+  ,.req15 (src15_req) //|< w
   ,.wt0 ({8{1'b1}}) //|< ?
   ,.wt1 ({8{1'b1}}) //|< ?
   ,.wt2 ({8{1'b1}}) //|< ?
@@ -732,6 +750,12 @@ read_eg_arb u_read_eg_arb (
   ,.wt7 ({8{1'b1}}) //|< ?
   ,.wt8 ({8{1'b1}}) //|< ?
   ,.wt9 ({8{1'b1}}) //|< ?
+  ,.wt10 ({8{1'b1}}) //|< ?
+  ,.wt11 ({8{1'b1}}) //|< ?
+  ,.wt12 ({8{1'b1}}) //|< ?
+  ,.wt13 ({8{1'b1}}) //|< ?
+  ,.wt14 ({8{1'b1}}) //|< ?
+  ,.wt15 ({8{1'b1}}) //|< ?
   ,.clk (nvdla_core_clk) //|< i
   ,.reset_ (nvdla_core_rstn) //|< i
   ,.gnt0 (src0_gnt) //|> w
@@ -741,6 +765,15 @@ read_eg_arb u_read_eg_arb (
   ,.gnt4 (src4_gnt) //|> w
   ,.gnt5 (src5_gnt) //|> w
   ,.gnt6 (src6_gnt) //|> w
+  ,.gnt7 (src7_gnt) //|> w
+  ,.gnt8 (src8_gnt) //|> w
+  ,.gnt9 (src9_gnt) //|> w
+  ,.gnt10 (src10_gnt) //|> w
+  ,.gnt11 (src11_gnt) //|> w
+  ,.gnt12 (src12_gnt) //|> w
+  ,.gnt13 (src13_gnt) //|> w
+  ,.gnt14 (src14_gnt) //|> w
+  ,.gnt15 (src15_gnt) //|> w
   );
 always @(src0_gnt or rq0_rd_pd
 //:my $k = 7;
@@ -758,7 +791,6 @@ or src6_gnt or rq6_rd_pd
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 ) begin
-//spyglass disable_block W171 W226
  case (1'b1)
 //:my $k = 7;
 //:my $i;
@@ -798,7 +830,6 @@ or src6_gnt or ctt6_cq_pd
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 ) begin
-//spyglass disable_block W171 W226
  case (1'b1)
 //:my $k = 7;
 //:my $i;
@@ -816,7 +847,7 @@ src6_gnt: arb_cq_pd = ctt6_cq_pd;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   default : begin
-                arb_cq_pd = {7{`x_or_0}};
+                arb_cq_pd = {64{`x_or_0}};
               end
 //VCS coverage on
     endcase
@@ -838,7 +869,6 @@ or src6_gnt or ctt6_cnt
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
 ) begin
-//spyglass disable_block W171 W226
  case (1'b1)
 //:my $k = 7;
 //:my $i;
@@ -856,7 +886,7 @@ src6_gnt: arb_cnt = ctt6_cnt;
 
 //| eperl: generated_end (DO NOT EDIT ABOVE)
   default : begin
-                arb_cnt = {2{`x_or_0}};
+                arb_cnt = {64{`x_or_0}};
               end
 //VCS coverage on
     endcase
@@ -896,11 +926,12 @@ assign arb_last_beat = (arb_cnt==arb_cq_lens);
 assign arb_first_beat = (arb_cnt==0);
 //:my $k = 7;
 //:my $i;
-//:my $j=1;
+//:my $j=(( 64 )/8/8);
 //:for($i=0;$i<$k;$i++) {
 //:print qq(
 //:assign ro${i}_wr_rdy = ro${i}_wr0_prdy & ro${i}_wr1_prdy;
 //:wire ro${i}_wr0_pvld = src${i}_gnt & arb_wen0_swizzled & ro${i}_wr1_prdy;
+//:wire ro${i}_rd1_prdy;
 //:wire [64/2:0] ro${i}_wr0_pd = arb_pd0;
 //:NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro${i}_fifo0 (
 //:.nvdla_core_clk(nvdla_core_clk)
@@ -961,6 +992,7 @@ assign arb_first_beat = (arb_cnt==0);
 
 assign ro0_wr_rdy = ro0_wr0_prdy & ro0_wr1_prdy;
 wire ro0_wr0_pvld = src0_gnt & arb_wen0_swizzled & ro0_wr1_prdy;
+wire ro0_rd1_prdy;
 wire [64/2:0] ro0_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro0_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1012,6 +1044,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp0 (
 
 assign ro1_wr_rdy = ro1_wr0_prdy & ro1_wr1_prdy;
 wire ro1_wr0_pvld = src1_gnt & arb_wen0_swizzled & ro1_wr1_prdy;
+wire ro1_rd1_prdy;
 wire [64/2:0] ro1_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro1_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1063,6 +1096,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp1 (
 
 assign ro2_wr_rdy = ro2_wr0_prdy & ro2_wr1_prdy;
 wire ro2_wr0_pvld = src2_gnt & arb_wen0_swizzled & ro2_wr1_prdy;
+wire ro2_rd1_prdy;
 wire [64/2:0] ro2_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro2_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1114,6 +1148,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp2 (
 
 assign ro3_wr_rdy = ro3_wr0_prdy & ro3_wr1_prdy;
 wire ro3_wr0_pvld = src3_gnt & arb_wen0_swizzled & ro3_wr1_prdy;
+wire ro3_rd1_prdy;
 wire [64/2:0] ro3_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro3_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1165,6 +1200,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp3 (
 
 assign ro4_wr_rdy = ro4_wr0_prdy & ro4_wr1_prdy;
 wire ro4_wr0_pvld = src4_gnt & arb_wen0_swizzled & ro4_wr1_prdy;
+wire ro4_rd1_prdy;
 wire [64/2:0] ro4_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro4_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1216,6 +1252,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp4 (
 
 assign ro5_wr_rdy = ro5_wr0_prdy & ro5_wr1_prdy;
 wire ro5_wr0_pvld = src5_gnt & arb_wen0_swizzled & ro5_wr1_prdy;
+wire ro5_rd1_prdy;
 wire [64/2:0] ro5_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro5_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1267,6 +1304,7 @@ NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 pipe_pp5 (
 
 assign ro6_wr_rdy = ro6_wr0_prdy & ro6_wr1_prdy;
 wire ro6_wr0_pvld = src6_gnt & arb_wen0_swizzled & ro6_wr1_prdy;
+wire ro6_rd1_prdy;
 wire [64/2:0] ro6_wr0_pd = arb_pd0;
 NV_NVDLA_NOCIF_DRAM_READ_EG_ro_fifo ro6_fifo0 (
 .nvdla_core_clk(nvdla_core_clk)
@@ -1766,21 +1804,21 @@ module NV_NVDLA_NOCIF_DRAM_READ_EG_pipe_p2 (
 input nvdla_core_clk;
 input nvdla_core_rstn;
 input rd_rsp_rdy;
-input [64 +1 -1:0] dma_pd;
+input [64 +(( 64 )/8/8)-1:0] dma_pd;
 input dma_vld;
-output [64 +1 -1:0] rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] rd_rsp_pd;
 output rd_rsp_valid;
 output dma_rdy;
-reg [64 +1 -1:0] rd_rsp_pd;
+reg [64 +(( 64 )/8/8)-1:0] rd_rsp_pd;
 reg rd_rsp_valid;
 reg dma_rdy;
-reg [64 +1 -1:0] p2_pipe_data;
+reg [64 +(( 64 )/8/8)-1:0] p2_pipe_data;
 reg p2_pipe_ready;
 reg p2_pipe_ready_bc;
 reg p2_pipe_valid;
 reg p2_skid_catch;
-reg [64 +1 -1:0] p2_skid_data;
-reg [64 +1 -1:0] p2_skid_pipe_data;
+reg [64 +(( 64 )/8/8)-1:0] p2_skid_data;
+reg [64 +(( 64 )/8/8)-1:0] p2_skid_pipe_data;
 reg p2_skid_pipe_ready;
 reg p2_skid_pipe_valid;
 reg p2_skid_ready;
@@ -1809,7 +1847,7 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 end
 always @(posedge nvdla_core_clk) begin
 // VCS sop_coverage_off start
-  p2_skid_data <= (p2_skid_catch)? dma_pd[64 +1 -1:0] : p2_skid_data;
+  p2_skid_data <= (p2_skid_catch)? dma_pd[64 +(( 64 )/8/8)-1:0] : p2_skid_data;
 // VCS sop_coverage_off end
 end
 always @(
@@ -1821,7 +1859,7 @@ always @(
   ) begin
   p2_skid_pipe_valid = (p2_skid_ready_flop)? dma_vld : p2_skid_valid;
 // VCS sop_coverage_off start
-  p2_skid_pipe_data = (p2_skid_ready_flop)? dma_pd[64 +1 -1:0] : p2_skid_data;
+  p2_skid_pipe_data = (p2_skid_ready_flop)? dma_pd[64 +(( 64 )/8/8)-1:0] : p2_skid_data;
 // VCS sop_coverage_off end
 end
 //## pipe (2) valid-ready-bubble-collapse
