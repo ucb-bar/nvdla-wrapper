@@ -11,6 +11,7 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SRC0.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/nv_assert_no_x.vlib.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_CLK_gate_power.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/assertion_header.vh \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cacc/NV_NVDLA_CACC_CALC_int8.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cacc/NV_NVDLA_CACC_assembly_buffer.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cacc/NV_NVDLA_CACC_assembly_ctrl.v \
@@ -308,6 +309,7 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SINK.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/p_SSYNC3DO_C_PPP.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/nv_assert_no_x.vlib.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/assertion_header.vh \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/small_rams/nv_ram_rwsp_80x14.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/small_rams/nv_ram_rwsp_160x65.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/small_rams/nv_ram_rwsp_160x16.v \

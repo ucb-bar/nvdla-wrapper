@@ -23,26 +23,18 @@ default: $(PREPROC_VERILOG)
 #########################################################################################
 
 ALL_VSRCS = $(filter-out %.vh,$($(NVDLA_NAME)_vsrcs))
-INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
+INC_DIRS = $(dir $(filter %.vh,$($(NVDLA_NAME)_vsrcs)))
 
 #########################################################################################
-# pre-process using verilator
+# pre-process using custom py script
 #########################################################################################
 
-# default nvdla top module
-TOP = $(NVDLA_NAME)
-
-PREPROC_VERILATOR_OPTS = \
-	-E \
-	+incdir+$(INC_DIR)
-
-# preprocess with Verilator
+# preprocess to remove includes
 $(PREPROC_VERILOG): $(ALL_VSRCS)
 	mkdir -p $(dir $(PREPROC_VERILOG))
-	cat $(ALL_VSRCS) > combined.sv
-	verilator --cc --exe $(PREPROC_VERILATOR_OPTS) combined.sv -Mdir $(nvdla_dir)/NVDLA.preprocess --top-module $(TOP) > $@
-	sed -i '/^`line/d' $@
-	rm -rf combined.sv $(nvdla_dir)/NVDLA.preprocess
+	cat $(ALL_VSRCS) > combined.v
+	./insert-includes.py combined.v $@ $(INC_DIRS)
+	rm -rf combined.v
 
 clean:
 	rm -rf $(PREPROC_VERILOG)
