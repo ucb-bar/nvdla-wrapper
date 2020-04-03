@@ -17,11 +17,11 @@ inVlog = sys.argv[1]
 outVlog = sys.argv[2]
 
 if inVlog == outVlog:
-    sys.exit("The input and output file cannot be the same.")
+    sys.exit("[ERROR] The input and output file cannot be the same.")
 
 # add directories to search list
 incDirs = sys.argv[3:]
-print("Using include dirs: " + str(incDirs))
+print("[INFO] Using include dirs: " + str(incDirs))
 
 # open file
 with open(inVlog, 'r') as inFile:
@@ -43,7 +43,7 @@ with open(inVlog, 'r') as inFile:
 
                 # must find something to include with
                 if not found:
-                    sys.exit("Couldn't find include to replace for " + str(potentialIncFileName))
+                    sys.exit("[ERROR] Couldn't find include to replace for " + str(potentialIncFileName))
             else:
                 outFile.write(line)
 
