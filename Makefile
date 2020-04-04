@@ -20,12 +20,18 @@ default: $(PREPROC_VERILOG)
 #########################################################################################
 
 lookup_srcs = $(shell find -L $(1)/ -name target -prune -o -iname "*.$(2)" -print 2> /dev/null)
+
+VLOG_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)
+
+include $(nvdla_blocks_dir)/vsrc.mk
+
 ALL_VSRCS = \
 	$(nvdla_blocks_dir)/vsrc/defines/defs.v \
-	$(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/$(NVDLA_NAME).v \
-	$(call lookup_srcs,$(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/nvdla,v) \
+	$(nvdla_$(NVDLA_TYPE)_vsrcs) \
+	$(VLOG_DIR)/$(NVDLA_NAME).v \
 	$(nvdla_blocks_dir)/vsrc/defines/undefs.v
-INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
+
+INC_DIRS = $(sort $(dir $(call lookup_srcs,$(VLOG_DIR)/vmod,vh)))
 
 #########################################################################################
 # pre-process using custom script to replace the includes (but leave rest unaffected)
@@ -34,7 +40,7 @@ INC_DIR = $(nvdla_blocks_dir)/vsrc/$(NVDLA_TYPE)/vmod/include
 $(PREPROC_VERILOG): $(ALL_VSRCS)
 	mkdir -p $(dir $(PREPROC_VERILOG))
 	cat $(ALL_VSRCS) > combined.v
-	./insert-includes.py combined.v $@ $(INC_DIR)
+	./insert-includes.py combined.v $@ $(INC_DIRS)
 	rm -rf combined.v
 
 clean:
