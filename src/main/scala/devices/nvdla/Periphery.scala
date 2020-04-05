@@ -10,7 +10,7 @@ import freechips.rocketchip.tilelink.{TLBuffer, TLIdentityNode}
 case object NVDLAKey extends Field[Option[NVDLAParams]](None)
 case object NVDLAFrontBusExtraBuffers extends Field[Int](0)
 
-trait HasPeripheryNVDLA { this: BaseSubsystem =>
+trait CanHavePeripheryNVDLA { this: BaseSubsystem =>
   p(NVDLAKey).map { params =>
     val nvdla = LazyModule(new NVDLA(params))
 
