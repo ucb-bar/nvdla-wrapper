@@ -180,7 +180,7 @@ module NV_NVDLA_NOCIF_dram (
 //: print("output mcif2client${i}_rd_rsp_valid;\n");
 //: print("input mcif2client${i}_rd_rsp_ready;\n");
 //: print qq(
-//: output [256 +1 -1:0] mcif2client${i}_rd_rsp_pd;
+//: output [256 +(( 256 )/8/32)-1:0] mcif2client${i}_rd_rsp_pd;
 //: );
 //: print("input [7:0] client${i}2mcif_lat_fifo_depth;\n");
 //: }
@@ -188,7 +188,7 @@ module NV_NVDLA_NOCIF_dram (
 //:my $i = 0;
 //:for ($i=0;$i<$k;$i++) {
 //: print qq(
-//: input [256 +1:0] client${i}2mcif_wr_req_pd;
+//: input [256 +(( 256 )/8/32):0] client${i}2mcif_wr_req_pd;
 //: );
 //: print ("input [3:0] client${i}2mcif_wr_axid;\n");
 //: print("input client${i}2mcif_wr_req_valid;\n");
@@ -205,7 +205,7 @@ output client02mcif_rd_req_ready;
 output mcif2client0_rd_rsp_valid;
 input mcif2client0_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client0_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client0_rd_rsp_pd;
 input [7:0] client02mcif_lat_fifo_depth;
 input client12mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client12mcif_rd_axid;
@@ -216,7 +216,7 @@ output client12mcif_rd_req_ready;
 output mcif2client1_rd_rsp_valid;
 input mcif2client1_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client1_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client1_rd_rsp_pd;
 input [7:0] client12mcif_lat_fifo_depth;
 input client22mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client22mcif_rd_axid;
@@ -227,7 +227,7 @@ output client22mcif_rd_req_ready;
 output mcif2client2_rd_rsp_valid;
 input mcif2client2_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client2_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client2_rd_rsp_pd;
 input [7:0] client22mcif_lat_fifo_depth;
 input client32mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client32mcif_rd_axid;
@@ -238,7 +238,7 @@ output client32mcif_rd_req_ready;
 output mcif2client3_rd_rsp_valid;
 input mcif2client3_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client3_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client3_rd_rsp_pd;
 input [7:0] client32mcif_lat_fifo_depth;
 input client42mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client42mcif_rd_axid;
@@ -249,7 +249,7 @@ output client42mcif_rd_req_ready;
 output mcif2client4_rd_rsp_valid;
 input mcif2client4_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client4_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client4_rd_rsp_pd;
 input [7:0] client42mcif_lat_fifo_depth;
 input client52mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client52mcif_rd_axid;
@@ -260,7 +260,7 @@ output client52mcif_rd_req_ready;
 output mcif2client5_rd_rsp_valid;
 input mcif2client5_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client5_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client5_rd_rsp_pd;
 input [7:0] client52mcif_lat_fifo_depth;
 input client62mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client62mcif_rd_axid;
@@ -271,7 +271,7 @@ output client62mcif_rd_req_ready;
 output mcif2client6_rd_rsp_valid;
 input mcif2client6_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client6_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client6_rd_rsp_pd;
 input [7:0] client62mcif_lat_fifo_depth;
 input client72mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client72mcif_rd_axid;
@@ -282,22 +282,22 @@ output client72mcif_rd_req_ready;
 output mcif2client7_rd_rsp_valid;
 input mcif2client7_rd_rsp_ready;
 
-output [256 +1 -1:0] mcif2client7_rd_rsp_pd;
+output [256 +(( 256 )/8/32)-1:0] mcif2client7_rd_rsp_pd;
 input [7:0] client72mcif_lat_fifo_depth;
 
-input [256 +1:0] client02mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client02mcif_wr_req_pd;
 input [3:0] client02mcif_wr_axid;
 input client02mcif_wr_req_valid;
 output client02mcif_wr_req_ready;
 output mcif2client0_wr_rsp_complete;
 
-input [256 +1:0] client12mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client12mcif_wr_req_pd;
 input [3:0] client12mcif_wr_axid;
 input client12mcif_wr_req_valid;
 output client12mcif_wr_req_ready;
 output mcif2client1_wr_rsp_complete;
 
-input [256 +1:0] client22mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client22mcif_wr_req_pd;
 input [3:0] client22mcif_wr_axid;
 input client22mcif_wr_req_valid;
 output client22mcif_wr_req_ready;

@@ -80,6 +80,8 @@ reg [33:0] glb2csb_resp_pd;
 reg glb2csb_resp_valid;
 reg [62:0] req_pd;
 reg req_vld;
+wire bdma_done_set0;
+wire bdma_done_set1;
 wire cacc_done_set0;
 wire cacc_done_set1;
 wire cdma_dat_done_set0;
@@ -110,18 +112,24 @@ wire rsp_wr_error;
 wire [32:0] rsp_wr_pd;
 wire [31:0] rsp_wr_rdat;
 wire rsp_wr_vld;
+wire rubik_done_set0;
+wire rubik_done_set1;
 wire sdp_done_set0;
 wire sdp_done_set1;
 //////////////////////////////////////////////////////////
 ////  register
 //////////////////////////////////////////////////////////
 //tie 0 for wo type register read
+assign bdma_done_set0 = 1'b0;
+assign bdma_done_set1 = 1'b0;
 assign cdp_done_set0 = 1'b0;
 assign cdp_done_set1 = 1'b0;
 assign pdp_done_set0 = 1'b0;
 assign pdp_done_set1 = 1'b0;
 assign sdp_done_set0 = 1'b0;
 assign sdp_done_set1 = 1'b0;
+assign rubik_done_set0 = 1'b0;
+assign rubik_done_set1 = 1'b0;
 assign cdma_dat_done_set0 = 1'b0;
 assign cdma_dat_done_set1 = 1'b0;
 assign cdma_wt_done_set0 = 1'b0;
@@ -210,6 +218,8 @@ NV_NVDLA_GLB_CSB_reg u_reg (
     ,.sdp_done_mask1 (sdp_done_mask1) //|> o
     ,.sdp_done_set0_trigger (sdp_done_set0_trigger) //|> o
     ,.sdp_done_status0_trigger (sdp_done_status0_trigger) //|> o
+    ,.bdma_done_set0 (bdma_done_set0) //|< w
+    ,.bdma_done_set1 (bdma_done_set1) //|< w
     ,.cacc_done_set0 (cacc_done_set0) //|< w
     ,.cacc_done_set1 (cacc_done_set1) //|< w
     ,.cdma_dat_done_set0 (cdma_dat_done_set0) //|< w
@@ -220,8 +230,12 @@ NV_NVDLA_GLB_CSB_reg u_reg (
     ,.cdp_done_set1 (cdp_done_set1) //|< w
     ,.pdp_done_set0 (pdp_done_set0) //|< w
     ,.pdp_done_set1 (pdp_done_set1) //|< w
+    ,.rubik_done_set0 (rubik_done_set0) //|< w
+    ,.rubik_done_set1 (rubik_done_set1) //|< w
     ,.sdp_done_set0 (sdp_done_set0) //|< w
     ,.sdp_done_set1 (sdp_done_set1) //|< w
+    ,.bdma_done_status0 (1'b0) //|< i
+    ,.bdma_done_status1 (1'b0) //|< i
     ,.cacc_done_status0 (cacc_done_status0) //|< i
     ,.cacc_done_status1 (cacc_done_status1) //|< i
     ,.cdma_dat_done_status0 (cdma_dat_done_status0) //|< i
@@ -232,6 +246,8 @@ NV_NVDLA_GLB_CSB_reg u_reg (
     ,.cdp_done_status1 (cdp_done_status1) //|< i
     ,.pdp_done_status0 (pdp_done_status0) //|< i
     ,.pdp_done_status1 (pdp_done_status1) //|< i
+    ,.rubik_done_status0 (1'b0) //|< i
+    ,.rubik_done_status1 (1'b0) //|< i
     ,.sdp_done_status0 (sdp_done_status0) //|< i
     ,.sdp_done_status1 (sdp_done_status1) //|< i
 );

@@ -15,6 +15,14 @@
 // ================================================================
 // File Name: NV_NVDLA_CDP_define.h
 ///////////////////////////////////////////////////
+//#ifdef NVDLA_FEATURE_DATA_TYPE_INT8
+//#if ( NVDLA_CDP_THROUGHPUT  ==  8 )
+//    #define LARGE_FIFO_RAM
+//#endif
+//#if ( NVDLA_CDP_THROUGHPUT == 1 )
+//    #define SMALL_FIFO_RAM
+//#endif
+//#endif
 `include "simulate_x_tick.vh"
 module NV_NVDLA_CDP_RDMA_ig (
    nvdla_core_clk //|< i
@@ -109,15 +117,6 @@ wire cmd_accept;
 wire cnt_cen;
 wire cnt_clr;
 wire cnt_inc;
-wire cv_dma_rd_req_rdy;
-wire cv_dma_rd_req_vld;
-wire [78:0] cv_int_rd_req_pd;
-wire [78:0] cv_int_rd_req_pd_d0;
-wire cv_int_rd_req_ready;
-wire cv_int_rd_req_ready_d0;
-wire cv_int_rd_req_valid;
-wire cv_int_rd_req_valid_d0;
-wire cv_rd_req_rdyi;
 wire [32 +14:0] dma_rd_req_pd;
 wire dma_rd_req_ram_type;
 wire dma_rd_req_rdy;
@@ -135,15 +134,6 @@ wire is_last_c;
 wire is_last_h;
 wire is_last_w;
 wire is_slice_end;
-wire mc_dma_rd_req_rdy;
-wire mc_dma_rd_req_vld;
-wire [78:0] mc_int_rd_req_pd;
-wire [78:0] mc_int_rd_req_pd_d0;
-wire mc_int_rd_req_ready;
-wire mc_int_rd_req_ready_d0;
-wire mc_int_rd_req_valid;
-wire mc_int_rd_req_valid_d0;
-wire mc_rd_req_rdyi;
 wire mon_number_of_32x1_block_in_channel_c;
 wire mon_op_en_neg;
 wire mon_op_en_pos;
@@ -914,7 +904,7 @@ end
 //==============
 // DMA Interface
 //==============
-NV_NVDLA_DMAIF_rdreq NV_NVDLA_PDP_RDMA_rdreq(
+NV_NVDLA_DMAIF_rdreq NV_NVDLA_CDP_RDMA_rdreq(
   .nvdla_core_clk (nvdla_core_clk )
  ,.nvdla_core_rstn (nvdla_core_rstn )
  ,.reg2dp_src_ram_type (reg2dp_src_ram_type)

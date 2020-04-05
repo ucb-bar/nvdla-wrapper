@@ -170,7 +170,13 @@ NV_NVDLA_SDP_RDMA_ig u_ig (
   ,.reg2dp_surface_stride (reg2dp_bs_surface_stride[31-3:0]) //|< i
   ,.dp2reg_rdma_stall (dp2reg_brdma_stall[31:0]) //|> o
   );
-NV_NVDLA_SDP_BRDMA_cq u_cq (
+//: my $depth = 16;
+//: my $width = 16;
+//: print "NV_NVDLA_SDP_BRDMA_cq_${depth}x${width}  u_cq ( \n";
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+NV_NVDLA_SDP_BRDMA_cq_16x16  u_cq ( 
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
    .nvdla_core_clk (nvdla_gated_clk) //|< w
   ,.nvdla_core_rstn (nvdla_core_rstn) //|< i
   ,.pwrbus_ram_pd (pwrbus_ram_pd[31:0]) //|< i
@@ -210,7 +216,13 @@ NV_NVDLA_SDP_RDMA_eg u_eg (
   ,.reg2dp_rdma_data_size (reg2dp_brdma_data_size) //|< i
   ,.reg2dp_rdma_data_use (reg2dp_brdma_data_use[1:0]) //|< i
   );
-NV_NVDLA_SDP_BRDMA_lat_fifo u_lat_fifo (
+//: my $depth = 16;
+//: my $width = 65;
+//: print "NV_NVDLA_SDP_BRDMA_lat_fifo_${depth}x${width}  u_lat_fifo (\n";
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+NV_NVDLA_SDP_BRDMA_lat_fifo_16x65  u_lat_fifo (
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
    .nvdla_core_clk (nvdla_gated_clk)
   ,.nvdla_core_rstn (nvdla_core_rstn)
   ,.pwrbus_ram_pd (pwrbus_ram_pd[31:0])

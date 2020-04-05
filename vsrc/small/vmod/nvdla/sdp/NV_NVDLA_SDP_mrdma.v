@@ -168,7 +168,13 @@ assign dp2reg_done = eg_done;
 //=======================================
 // Context Queue: trace outstanding req, and pass info from Ig to Eg
 //---------------------------------------
- NV_NVDLA_SDP_MRDMA_cq u_cq (
+//: my $depth = (8 < 16) ? 16 : 8;
+//: my $width = 14;
+//: print "NV_NVDLA_SDP_MRDMA_cq_${depth}x${width}  u_cq ( \n";
+//| eperl: generated_beg (DO NOT EDIT BELOW)
+NV_NVDLA_SDP_MRDMA_cq_16x14  u_cq ( 
+
+//| eperl: generated_end (DO NOT EDIT ABOVE)
     .nvdla_core_clk (nvdla_gated_clk) //|< w
    ,.nvdla_core_rstn (nvdla_core_rstn) //|< i
    ,.pwrbus_ram_pd (pwrbus_ram_pd[31:0]) //|< i

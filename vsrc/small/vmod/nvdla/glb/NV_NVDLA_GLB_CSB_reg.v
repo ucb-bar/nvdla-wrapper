@@ -17,6 +17,8 @@ module NV_NVDLA_GLB_CSB_reg (
   ,reg_wr_en
   ,nvdla_core_clk
   ,nvdla_core_rstn
+  ,bdma_done_mask0
+  ,bdma_done_mask1
   ,cacc_done_mask0
   ,cacc_done_mask1
   ,cdma_dat_done_mask0
@@ -27,10 +29,14 @@ module NV_NVDLA_GLB_CSB_reg (
   ,cdp_done_mask1
   ,pdp_done_mask0
   ,pdp_done_mask1
+  ,rubik_done_mask0
+  ,rubik_done_mask1
   ,sdp_done_mask0
   ,sdp_done_mask1
   ,sdp_done_set0_trigger
   ,sdp_done_status0_trigger
+  ,bdma_done_set0
+  ,bdma_done_set1
   ,cacc_done_set0
   ,cacc_done_set1
   ,cdma_dat_done_set0
@@ -41,8 +47,12 @@ module NV_NVDLA_GLB_CSB_reg (
   ,cdp_done_set1
   ,pdp_done_set0
   ,pdp_done_set1
+  ,rubik_done_set0
+  ,rubik_done_set1
   ,sdp_done_set0
   ,sdp_done_set1
+  ,bdma_done_status0
+  ,bdma_done_status1
   ,cacc_done_status0
   ,cacc_done_status1
   ,cdma_dat_done_status0
@@ -53,6 +63,8 @@ module NV_NVDLA_GLB_CSB_reg (
   ,cdp_done_status1
   ,pdp_done_status0
   ,pdp_done_status1
+  ,rubik_done_status0
+  ,rubik_done_status1
   ,sdp_done_status0
   ,sdp_done_status1
   );
@@ -72,6 +84,8 @@ input reg_wr_en;
 input nvdla_core_clk;
 input nvdla_core_rstn;
 // Writable register flop/trigger outputs
+output bdma_done_mask0;
+output bdma_done_mask1;
 output cacc_done_mask0;
 output cacc_done_mask1;
 output cdma_dat_done_mask0;
@@ -82,11 +96,15 @@ output cdp_done_mask0;
 output cdp_done_mask1;
 output pdp_done_mask0;
 output pdp_done_mask1;
+output rubik_done_mask0;
+output rubik_done_mask1;
 output sdp_done_mask0;
 output sdp_done_mask1;
 output sdp_done_set0_trigger;
 output sdp_done_status0_trigger;
 // Read-only register inputs
+input bdma_done_set0;
+input bdma_done_set1;
 input cacc_done_set0;
 input cacc_done_set1;
 input cdma_dat_done_set0;
@@ -97,8 +115,12 @@ input cdp_done_set0;
 input cdp_done_set1;
 input pdp_done_set0;
 input pdp_done_set1;
+input rubik_done_set0;
+input rubik_done_set1;
 input sdp_done_set0;
 input sdp_done_set1;
+input bdma_done_status0;
+input bdma_done_status1;
 input cacc_done_status0;
 input cacc_done_status1;
 input cdma_dat_done_status0;
@@ -109,6 +131,8 @@ input cdp_done_status0;
 input cdp_done_status1;
 input pdp_done_status0;
 input pdp_done_status1;
+input rubik_done_status0;
+input rubik_done_status1;
 input sdp_done_status0;
 input sdp_done_status1;
 // wr_mask register inputs
@@ -118,8 +142,8 @@ reg arreggen_abort_on_invalid_wr;
 reg arreggen_abort_on_rowr;
 reg arreggen_dump;
 // leda FM_2_23 on
-wire bdma_done_mask0 = 1'b0 ;
-wire bdma_done_mask1 = 1'b0 ;
+reg bdma_done_mask0;
+reg bdma_done_mask1;
 reg cacc_done_mask0;
 reg cacc_done_mask1;
 reg cdma_dat_done_mask0;
@@ -131,18 +155,10 @@ reg cdp_done_mask1;
 reg pdp_done_mask0;
 reg pdp_done_mask1;
 reg [31:0] reg_rd_data;
-wire rubik_done_mask0 = 1'b0 ;
-wire rubik_done_mask1 = 1'b0;
+reg rubik_done_mask0;
+reg rubik_done_mask1;
 reg sdp_done_mask0;
 reg sdp_done_mask1;
-wire rubik_done_set1 = 1'b0;
-wire rubik_done_set0 = 1'b0;
-wire rubik_done_status1 = 1'b0;
-wire rubik_done_status0 = 1'b0;
-wire bdma_done_set1 = 1'b0;
-wire bdma_done_set0 = 1'b0;
-wire bdma_done_status1 = 1'b0;
-wire bdma_done_status0 = 1'b0;
 assign reg_offset_wr = {20'b0 , reg_offset};
 // SCR signals
 // Address decode
@@ -189,6 +205,8 @@ end
 // Register flop declarations
 always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
   if (!nvdla_core_rstn) begin
+    bdma_done_mask0 <= 1'b0;
+    bdma_done_mask1 <= 1'b0;
     cacc_done_mask0 <= 1'b0;
     cacc_done_mask1 <= 1'b0;
     cdma_dat_done_mask0 <= 1'b0;
@@ -199,10 +217,19 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
     cdp_done_mask1 <= 1'b0;
     pdp_done_mask0 <= 1'b0;
     pdp_done_mask1 <= 1'b0;
+    rubik_done_mask0 <= 1'b0;
+    rubik_done_mask1 <= 1'b0;
     sdp_done_mask0 <= 1'b0;
     sdp_done_mask1 <= 1'b0;
   end else begin
+// Register: NVDLA_GLB_S_INTR_MASK_0 Field: bdma_done_mask0
+  if (nvdla_glb_s_intr_mask_0_wren) begin
+    bdma_done_mask0 <= reg_wr_data[6];
+  end
 // Register: NVDLA_GLB_S_INTR_MASK_0 Field: bdma_done_mask1
+  if (nvdla_glb_s_intr_mask_0_wren) begin
+    bdma_done_mask1 <= reg_wr_data[7];
+  end
 // Register: NVDLA_GLB_S_INTR_MASK_0 Field: cacc_done_mask0
   if (nvdla_glb_s_intr_mask_0_wren) begin
     cacc_done_mask0 <= reg_wr_data[20];
@@ -242,6 +269,14 @@ always @(posedge nvdla_core_clk or negedge nvdla_core_rstn) begin
 // Register: NVDLA_GLB_S_INTR_MASK_0 Field: pdp_done_mask1
   if (nvdla_glb_s_intr_mask_0_wren) begin
     pdp_done_mask1 <= reg_wr_data[5];
+  end
+// Register: NVDLA_GLB_S_INTR_MASK_0 Field: rubik_done_mask0
+  if (nvdla_glb_s_intr_mask_0_wren) begin
+    rubik_done_mask0 <= reg_wr_data[8];
+  end
+// Register: NVDLA_GLB_S_INTR_MASK_0 Field: rubik_done_mask1
+  if (nvdla_glb_s_intr_mask_0_wren) begin
+    rubik_done_mask1 <= reg_wr_data[9];
   end
 // Register: NVDLA_GLB_S_INTR_MASK_0 Field: sdp_done_mask0
   if (nvdla_glb_s_intr_mask_0_wren) begin

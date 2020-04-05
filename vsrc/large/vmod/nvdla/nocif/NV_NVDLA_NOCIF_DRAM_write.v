@@ -79,7 +79,7 @@ module NV_NVDLA_NOCIF_DRAM_write (
 //:my $i;
 //:for($i=0;$i<3;$i++) {
 //:print qq(
-//:input [256 +1:0] client${i}2mcif_wr_req_pd;
+//:input [256 +(( 256 )/8/32):0] client${i}2mcif_wr_req_pd;
 //:input client${i}2mcif_wr_req_valid;
 //:output client${i}2mcif_wr_req_ready;
 //:input [7:0] client${i}2mcif_wr_wt;
@@ -89,21 +89,21 @@ module NV_NVDLA_NOCIF_DRAM_write (
 //:}
 //| eperl: generated_beg (DO NOT EDIT BELOW)
 
-input [256 +1:0] client02mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client02mcif_wr_req_pd;
 input client02mcif_wr_req_valid;
 output client02mcif_wr_req_ready;
 input [7:0] client02mcif_wr_wt;
 input [3:0] client02mcif_wr_axid;
 output mcif2client0_wr_rsp_complete;
 
-input [256 +1:0] client12mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client12mcif_wr_req_pd;
 input client12mcif_wr_req_valid;
 output client12mcif_wr_req_ready;
 input [7:0] client12mcif_wr_wt;
 input [3:0] client12mcif_wr_axid;
 output mcif2client1_wr_rsp_complete;
 
-input [256 +1:0] client22mcif_wr_req_pd;
+input [256 +(( 256 )/8/32):0] client22mcif_wr_req_pd;
 input client22mcif_wr_req_valid;
 output client22mcif_wr_req_ready;
 input [7:0] client22mcif_wr_wt;

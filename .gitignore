@@ -1,5 +1,4 @@
 target
 *.vcp
-*.vlib
 *.swp
 src/main/resources

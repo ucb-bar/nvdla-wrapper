@@ -139,7 +139,7 @@ module NV_NVDLA_NOCIF_DRAM_read (
 input nvdla_core_clk;
 input nvdla_core_rstn;
 //:my $k=8;
-//:my $w = 256 +1 -1;
+//:my $w = 256 +(( 256 )/8/32)-1;
 //:my $i;
 //:for ($i=0;$i<$k;$i++) {
 //: print("input client${i}2mcif_rd_cdt_lat_fifo_pop;\n");

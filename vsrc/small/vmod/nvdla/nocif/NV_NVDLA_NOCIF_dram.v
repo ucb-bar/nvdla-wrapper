@@ -16,6 +16,12 @@
 // File Name: NV_NVDLA_define.h
 ///////////////////////////////////////////////////
 //
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  512 )
+//    #define LARGE_MEMBUS
+//#endif
+//#if ( NVDLA_PRIMARY_MEMIF_WIDTH  ==  64 )
+//    #define SMALL_MEMBUS
+//#endif
 module NV_NVDLA_NOCIF_dram (
    nvdla_core_clk
   ,nvdla_core_rstn
@@ -165,7 +171,7 @@ module NV_NVDLA_NOCIF_dram (
 //: print("output mcif2client${i}_rd_rsp_valid;\n");
 //: print("input mcif2client${i}_rd_rsp_ready;\n");
 //: print qq(
-//: output [64 +1 -1:0] mcif2client${i}_rd_rsp_pd;
+//: output [64 +(( 64 )/8/8)-1:0] mcif2client${i}_rd_rsp_pd;
 //: );
 //: print("input [7:0] client${i}2mcif_lat_fifo_depth;\n");
 //: }
@@ -173,7 +179,7 @@ module NV_NVDLA_NOCIF_dram (
 //:my $i = 0;
 //:for ($i=0;$i<$k;$i++) {
 //: print qq(
-//: input [64 +1:0] client${i}2mcif_wr_req_pd;
+//: input [64 +(( 64 )/8/8):0] client${i}2mcif_wr_req_pd;
 //: );
 //: print ("input [3:0] client${i}2mcif_wr_axid;\n");
 //: print("input client${i}2mcif_wr_req_valid;\n");
@@ -190,7 +196,7 @@ output client02mcif_rd_req_ready;
 output mcif2client0_rd_rsp_valid;
 input mcif2client0_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client0_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client0_rd_rsp_pd;
 input [7:0] client02mcif_lat_fifo_depth;
 input client12mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client12mcif_rd_axid;
@@ -201,7 +207,7 @@ output client12mcif_rd_req_ready;
 output mcif2client1_rd_rsp_valid;
 input mcif2client1_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client1_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client1_rd_rsp_pd;
 input [7:0] client12mcif_lat_fifo_depth;
 input client22mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client22mcif_rd_axid;
@@ -212,7 +218,7 @@ output client22mcif_rd_req_ready;
 output mcif2client2_rd_rsp_valid;
 input mcif2client2_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client2_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client2_rd_rsp_pd;
 input [7:0] client22mcif_lat_fifo_depth;
 input client32mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client32mcif_rd_axid;
@@ -223,7 +229,7 @@ output client32mcif_rd_req_ready;
 output mcif2client3_rd_rsp_valid;
 input mcif2client3_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client3_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client3_rd_rsp_pd;
 input [7:0] client32mcif_lat_fifo_depth;
 input client42mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client42mcif_rd_axid;
@@ -234,7 +240,7 @@ output client42mcif_rd_req_ready;
 output mcif2client4_rd_rsp_valid;
 input mcif2client4_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client4_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client4_rd_rsp_pd;
 input [7:0] client42mcif_lat_fifo_depth;
 input client52mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client52mcif_rd_axid;
@@ -245,7 +251,7 @@ output client52mcif_rd_req_ready;
 output mcif2client5_rd_rsp_valid;
 input mcif2client5_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client5_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client5_rd_rsp_pd;
 input [7:0] client52mcif_lat_fifo_depth;
 input client62mcif_rd_cdt_lat_fifo_pop;
 input [3:0] client62mcif_rd_axid;
@@ -256,22 +262,22 @@ output client62mcif_rd_req_ready;
 output mcif2client6_rd_rsp_valid;
 input mcif2client6_rd_rsp_ready;
 
-output [64 +1 -1:0] mcif2client6_rd_rsp_pd;
+output [64 +(( 64 )/8/8)-1:0] mcif2client6_rd_rsp_pd;
 input [7:0] client62mcif_lat_fifo_depth;
 
-input [64 +1:0] client02mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client02mcif_wr_req_pd;
 input [3:0] client02mcif_wr_axid;
 input client02mcif_wr_req_valid;
 output client02mcif_wr_req_ready;
 output mcif2client0_wr_rsp_complete;
 
-input [64 +1:0] client12mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client12mcif_wr_req_pd;
 input [3:0] client12mcif_wr_axid;
 input client12mcif_wr_req_valid;
 output client12mcif_wr_req_ready;
 output mcif2client1_wr_rsp_complete;
 
-input [64 +1:0] client22mcif_wr_req_pd;
+input [64 +(( 64 )/8/8):0] client22mcif_wr_req_pd;
 input [3:0] client22mcif_wr_axid;
 input client22mcif_wr_req_valid;
 output client22mcif_wr_req_ready;

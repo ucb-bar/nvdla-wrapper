@@ -23,8 +23,10 @@
     //atomK
     //atomK
     //atomK*2
+    //atomK*4
+//notice, for image case, first atom OP within one strip OP must fetch from entry align place, in the middle of an entry is not supported.
+//thus, when atomC/atomK=4, stripe=4*atomK, feature data still keeps atomK*2
     `define CC_ATOMC_DIV_ATOMK_EQUAL_1
-//image stripe keep 2*atomK
 //batch keep 1
 module NV_NVDLA_CSC_sg (
    nvdla_core_clk //|< i
@@ -226,7 +228,7 @@ wire dat_push_ready;
 wire dat_push_req;
 wire dat_release;
 wire dat_reuse_release;
-wire [5:0] dat_stripe_batch_size_w;
+wire [6:0] dat_stripe_batch_size_w;
 wire [6:0] dat_stripe_img_length_w;
 wire [6:0] dat_stripe_img_size_w;
 wire [6:0] dat_stripe_length_w;
@@ -352,7 +354,7 @@ wire [4:0] weight_s_up_cnt_w;
 wire [4:0] weight_width_cmp_w;
 wire wt_bank_change;
 wire wt_cbuf_ready;
-wire [4:0] wt_cycles;
+wire [5:0] wt_cycles;
 wire [5:0] wt_max_cycles;
 wire wt_pending_clr_w;
 wire wt_pending_req_w;
@@ -1409,23 +1411,23 @@ assign sg2wt_channel_end = wt_pop_pd[15];
 assign sg2wt_group_end = wt_pop_pd[16];
 assign sg2wt_wt_release = wt_pop_pd[17];
 assign {mon_sg2wt_kernel_size_inc, sg2wt_kernel_size_inc} = sg2wt_kernel_size + 1'b1;
-assign {mon_dat_stripe_batch_size_w[0], dat_stripe_batch_size_w} = sg2dat_stripe_length;
+assign dat_stripe_batch_size_w = sg2dat_stripe_length;
 assign dat_stripe_img_size_w = sg2dat_stripe_length;
-assign dat_stripe_size_w = is_img_d1 ? dat_stripe_img_size_w : {1'b0, dat_stripe_batch_size_w};
+assign dat_stripe_size_w = is_img_d1 ? dat_stripe_img_size_w : dat_stripe_batch_size_w;
 assign {mon_dat_stripe_img_length_w,
         dat_stripe_img_length_w} = ~is_img_d1 ? 8'b0 :
                                   (reg2dp_y_extension == 2'h2) ? ((sg2dat_stripe_length + 2'h3) & 8'hfc) :
                                   (reg2dp_y_extension == 2'h1) ? ((sg2dat_stripe_length + 2'h1) & 8'hfe) :
                                   {1'b0, sg2dat_stripe_length};
-assign dat_stripe_length_w = is_img_d1 ? dat_stripe_img_length_w : {1'b0, dat_stripe_batch_size_w};
+assign dat_stripe_length_w = is_img_d1 ? dat_stripe_img_length_w : dat_stripe_batch_size_w;
 //delay for one cycle
 assign dat_max_cycles = ~dat_pop_ready ? 7'b0 :
                         (dat_stripe_length < 7'd8 ) ? 7'd8 :
                         dat_stripe_length;
-assign wt_cycles = sg2wt_kernel_size[4:0];
+assign wt_cycles = sg2wt_kernel_size[5:0];
 assign wt_max_cycles = ~wt_pop_ready ? 6'b0 :
-                       ((wt_cycles <= 5'b1) & (pop_cnt <= 6'b1)) ? 6'h2 :
-                       ({1'b0, wt_cycles} > pop_cnt) ? {1'b0, wt_cycles} :
+                       ((wt_cycles <= 6'b1) & (pop_cnt <= 6'b1)) ? 6'h2 :
+                       (wt_cycles > pop_cnt) ? wt_cycles :
                        pop_cnt;
 assign {mon_max_cycles, max_cycles} = (dat_max_cycles >= {1'b0, wt_max_cycles}) ? (dat_max_cycles - 1'b1) : ({1'b0, wt_max_cycles} - 1'b1);
 assign {mon_pop_cnt_dec, pop_cnt_dec} = pop_cnt - 1'b1;
