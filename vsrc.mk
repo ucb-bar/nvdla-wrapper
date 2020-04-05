@@ -1,3 +1,6 @@
+# list of srcs for large and small configurations of NVDLA
+# note: bulk includes all files in vsrc/*/ doesn't work since some of the files have syntax errors
+
 nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/top/NV_NVDLA_partition_o.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/top/NV_NVDLA_partition_c.v \
