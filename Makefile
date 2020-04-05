@@ -42,7 +42,7 @@ PREPROC_SCRIPT = $(nvdla_blocks_dir)/../../scripts/insert-includes.py
 $(PREPROC_VERILOG): $(ALL_VSRCS)
 	mkdir -p $(dir $(PREPROC_VERILOG))
 	cat $(ALL_VSRCS) > combined.v
-	./$(PREPROC_SCRIPT) combined.v $@ $(INC_DIRS)
+	$(PREPROC_SCRIPT) combined.v $@ $(INC_DIRS)
 	rm -rf combined.v
 
 clean:
