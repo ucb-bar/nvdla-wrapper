@@ -59,13 +59,8 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_slcg.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_status.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_cdma.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_WG_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_wg.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_sp_arb.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_wt.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_wgs_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_wrr_arb.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdp/int_sum_block_tp1.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_bufferin.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_cvtin.v \
@@ -112,7 +107,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csb_master/NV_NVDLA_csb_master.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_dl.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_dual_reg.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_pra_cell.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_regfile.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_SG_dat_fifo.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_sg.v \
@@ -124,7 +118,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/csc/NV_NVDLA_CSC_wl.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/glb/NV_NVDLA_GLB_CSB_reg.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/glb/NV_NVDLA_GLB_csb.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/glb/NV_NVDLA_GLB_fc.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/glb/NV_NVDLA_GLB_ic.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/glb/NV_NVDLA_glb.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/nocif/NV_NVDLA_MCIF_CSB_reg.v \
@@ -223,7 +216,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_dat.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_gate.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_intr.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_unpack.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_wdma.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_CORE_Y_lut.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_CORE_y.v \
@@ -232,7 +224,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_core.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_idx_top.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_inp_top.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_128x18.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_256x3.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x11.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x6.v \
@@ -246,18 +237,13 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x17.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x9.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_16x256.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_16x272.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_16x64.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_256x64.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x1024.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x1088.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x10.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x257.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x14.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x16.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x257.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_32x129.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_32x32.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x129.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x14.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x16.v \
@@ -279,7 +265,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/MUX2HDD2.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/nv_assert_no_x.vlib \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SRC0.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SRC0_X.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_HLS_shiftleftsu.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_HLS_shiftrightsatsu.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/sync3d_c_ppp.v \
@@ -295,8 +280,6 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/p_SSYNC2DO_C_PP.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/p_SSYNC3DO_S_PPP.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/p_SSYNC3DO.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_CDP_HLS_icvt.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_CDP_HLS_ocvt.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_CLK_gate_power.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SINK.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_HLS_saturate.v \
@@ -367,15 +350,9 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_slcg.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_status.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_cdma.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_WG_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_wg.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_sp_arb.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_wt.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_wgs_fifo.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdma/NV_NVDLA_CDMA_WT_wrr_arb.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_bufferin_tp1.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_bufferin.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_cvtin.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_cvtout.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/NV_NVDLA_CDP_DP_INTP_unit.v \
@@ -420,7 +397,6 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csb_master/NV_NVDLA_csb_master.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_dl.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_dual_reg.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_pra_cell.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_regfile.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_SG_dat_fifo.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_sg.v \
@@ -432,7 +408,6 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/csc/NV_NVDLA_CSC_wl.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/glb/NV_NVDLA_GLB_CSB_reg.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/glb/NV_NVDLA_GLB_csb.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/glb/NV_NVDLA_GLB_fc.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/glb/NV_NVDLA_GLB_ic.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/glb/NV_NVDLA_glb.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/nocif/NV_NVDLA_MCIF_CSB_reg.v \
@@ -483,11 +458,8 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_CORE_pack.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_CORE_unpack.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_core.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_ERDMA_gate.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_C_int.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_c.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_lut_expn.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_lut_line.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_prelu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_relu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_sync2data.v \
@@ -497,11 +469,6 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_X_int_mul.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_X_int_relu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_X_int_trt.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_alu.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_cvt.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_idx.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_inp.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_mul.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_MRDMA_EG_cmd.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_MRDMA_EG_din.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_MRDMA_EG_dout.v \
@@ -531,7 +498,6 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_dat.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_gate.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_intr.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_unpack.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_wdma.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/int_sum_block_tp1.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_128x18.v \
@@ -551,15 +517,11 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_16x272.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_16x64.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_256x64.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_64x1024.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_64x1088.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_64x10.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_128x257.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x14.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x16.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x257.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_32x129.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_32x32.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x129.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x14.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x16.v \
@@ -579,7 +541,6 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/MUX2HDD2.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/nv_assert_no_x.vlib \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SRC0.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SRC0_X.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftleftsu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftrightsatsu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/sync3d_c_ppp.v \
@@ -595,13 +556,8 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/p_SSYNC2DO_C_PP.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/p_SSYNC3DO_S_PPP.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/p_SSYNC3DO.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_CDP_HLS_icvt.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_CDP_HLS_ocvt.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_CLK_gate_power.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SINK.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_saturate.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftrightsu.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_DW_lsd.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftrightss.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftrightusz.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/top/NV_nvdla.v
