@@ -13,7 +13,7 @@ NVDLA_NAME = nvdla_$(NVDLA_TYPE)
 NVDLA_RAMS ?= fpga/model
 
 # name of output pre-processed verilog file
-PREPROC_VERILOG_DIR = $(nvdla_blocks_dir)/src/main/resources
+PREPROC_VERILOG_DIR = $(nvdla_blocks_dir)
 PREPROC_VERILOG = $(PREPROC_VERILOG_DIR)/$(NVDLA_NAME).preprocessed.v
 
 .PHONY: default $(PREPROC_VERILOG)
