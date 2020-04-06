@@ -8,8 +8,9 @@ import chisel3.util._
 
 //scalastyle:off
 //turn off linter: blackbox name must match verilog module
-class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dataWidthAXI: Int) extends BlackBox with HasBlackBoxResource {
-
+class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dataWidthAXI: Int, synthRAMs: Boolean)
+  extends BlackBox with HasBlackBoxResource
+{
   override def desiredName = blackboxName
 
   val io = IO(new Bundle {
@@ -92,8 +93,9 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
     val pready = Output(Bool())
   })
 
-  val make = s"make -C generators/nvdla NVDLA_TYPE=${configName} default"
-  require (make.! == 0, "Failed to run pre-processing step")
+  val makeStr = s"make -C generators/nvdla/src/main/resources default NVDLA_TYPE=${configName}"
+  val preproc = if (synthRAMs) makeStr + " NVDLA_RAMS=synth" else makeStr
+  require (preproc.! == 0, "Failed to run pre-processing step")
 
   addResource(s"/nvdla_${configName}.preprocessed.v")
 }

@@ -8,6 +8,10 @@ nvdla_blocks_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST))
 NVDLA_TYPE ?= large
 NVDLA_NAME = nvdla_$(NVDLA_TYPE)
 
+# path to use synthesis or fpga rams
+# either "fpga/model" or "synth"
+NVDLA_RAMS ?= fpga/model
+
 # name of output pre-processed verilog file
 PREPROC_VERILOG_DIR = $(nvdla_blocks_dir)/src/main/resources
 PREPROC_VERILOG = $(PREPROC_VERILOG_DIR)/$(NVDLA_NAME).preprocessed.v
@@ -37,7 +41,7 @@ INC_DIRS = $(sort $(dir $(call lookup_srcs,$(VLOG_DIR)/vmod,vh)))
 # pre-process using custom script to replace the includes (but leave rest unaffected)
 #########################################################################################
 
-PREPROC_SCRIPT = $(nvdla_blocks_dir)/../../scripts/insert-includes.py
+PREPROC_SCRIPT = $(nvdla_blocks_dir)/../../../../../scripts/insert-includes.py
 
 $(PREPROC_VERILOG): $(ALL_VSRCS)
 	mkdir -p $(dir $(PREPROC_VERILOG))

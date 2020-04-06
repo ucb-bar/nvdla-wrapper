@@ -14,7 +14,8 @@ import nvidia.blocks.ip.dla._
 
 case class NVDLAParams(
   config: String,
-  raddress: BigInt
+  raddress: BigInt,
+  synthRAMs: Boolean = false
 )
 
 class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
@@ -24,7 +25,7 @@ class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
   val dataWidthAXI = if (params.config == "large") 256 else 64
 
   // DTS
-  val dtsdevice = new SimpleDevice("nvdla",Seq("nvidia,nvdla_2"))
+  val dtsdevice = new SimpleDevice("nvdla",Seq("nvidia,nv_" + params.config))
 
   // dbb TL
   val dbb_tl_node = TLIdentityNode()
@@ -84,7 +85,7 @@ class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
   lazy val module = new LazyModuleImp(this) {
 
-    val u_nvdla = Module(new nvdla(params.config, blackboxName, hasSecondAXI, dataWidthAXI))
+    val u_nvdla = Module(new nvdla(params.config, blackboxName, hasSecondAXI, dataWidthAXI, params.synthRAMs))
 
     u_nvdla.io.core_clk    := clock
     u_nvdla.io.rstn        := ~reset.asBool

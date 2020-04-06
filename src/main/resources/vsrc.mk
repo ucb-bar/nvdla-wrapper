@@ -1,6 +1,8 @@
 # list of srcs for large and small configurations of NVDLA
 # note: bulk includes all files in vsrc/*/ doesn't work since some of the files have syntax errors
 
+NVDLA_RAM_SUBDIR = $(NVDLA_RAMS)
+
 nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/top/NV_NVDLA_partition_o.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/top/NV_NVDLA_partition_c.v \
@@ -227,42 +229,42 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_int_core.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_idx_top.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/nvdla/sdp/NV_NVDLA_SDP_HLS_Y_inp_top.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_256x3.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x11.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x6.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_16x14.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_16x16.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_16x65.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_8x65.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwst_256x8.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_20x4.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_60x21.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x17.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x9.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_16x256.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x1024.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x1088.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_128x257.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x14.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x16.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_256x257.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_32x129.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x129.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x14.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_64x16.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_8x129.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsp_8x257.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_20x16.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_20x32.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_20x8.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_60x168.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_60x42.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_60x84.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_512x256.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x18.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x36.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rwsthp_80x72.v \
-	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/fpga/model/nv_ram_rws_64x116.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_256x3.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x11.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x6.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x14.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x16.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x65.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x65.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwst_256x8.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x4.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x21.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x17.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x9.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_16x256.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_64x1024.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_64x1088.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x257.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x14.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x16.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x257.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_32x129.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x129.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x14.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x16.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x129.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x257.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x16.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x32.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x8.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x168.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x42.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x84.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_512x256.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x18.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x36.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x72.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_64x116.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/HLS_cdp_icvt.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/HLS_cdp_ocvt.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/MUX2HDD2.v \
@@ -503,42 +505,42 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_WDMA_intr.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/sdp/NV_NVDLA_SDP_wdma.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/nvdla/cdp/int_sum_block_tp1.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_128x18.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_256x3.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_128x11.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_128x6.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_16x14.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_16x16.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_16x65.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_8x65.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwst_256x8.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_20x4.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_60x21.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_80x17.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_80x9.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_16x256.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_16x272.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_16x64.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rws_256x64.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_128x257.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x14.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x16.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_256x257.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_32x129.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x129.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x14.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_64x16.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_8x129.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsp_8x257.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_20x16.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_20x32.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_20x8.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_60x168.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_60x42.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_60x84.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_80x18.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_80x36.v \
-	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/fpga/model/nv_ram_rwsthp_80x72.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_128x18.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_256x3.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x11.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x6.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x14.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x16.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_16x65.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x65.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwst_256x8.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x4.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x21.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x17.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x9.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_16x256.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_16x272.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_16x64.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rws_256x64.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_128x257.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x14.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x16.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_256x257.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_32x129.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x129.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x14.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_64x16.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x129.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsp_8x257.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x16.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x32.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_20x8.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x168.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x42.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_60x84.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x18.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x36.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/rams/$(NVDLA_RAM_SUBDIR)/nv_ram_rwsthp_80x72.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/HLS_cdp_icvt.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/HLS_cdp_ocvt.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/MUX2HDD2.v \
