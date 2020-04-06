@@ -50,4 +50,4 @@ $(PREPROC_VERILOG): $(ALL_VSRCS)
 	rm -rf combined.v
 
 clean:
-	rm -rf $(nvdla_blocks_dir)/src/main/resources
+	rm -rf $(nvdla_blocks_dir)/*.preprocessed.v
