@@ -270,6 +270,8 @@ nvdla_large_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/MUX2HDD2.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/nv_assert_no_x.vlib \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SRC0.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_BLKBOX_SRC0_X.v \
+	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/AN2D4PO4.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_HLS_shiftleftsu.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/NV_NVDLA_HLS_shiftrightsatsu.v \
 	$(nvdla_blocks_dir)/vsrc/large/vmod/vlibs/sync3d_c_ppp.v \
@@ -546,6 +548,8 @@ nvdla_small_vsrcs := \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/MUX2HDD2.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/nv_assert_no_x.vlib \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SRC0.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_BLKBOX_SRC0_X.v \
+	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/AN2D4PO4.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftleftsu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/NV_NVDLA_HLS_shiftrightsatsu.v \
 	$(nvdla_blocks_dir)/vsrc/small/vmod/vlibs/sync3d_c_ppp.v \
