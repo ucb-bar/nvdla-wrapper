@@ -10,6 +10,7 @@ case class NVDLABlackBoxParams(
   configName: String,
   hasSecondAXI: Boolean,
   dataWidthAXI: Int,
+  addrWidthAXI: Int,
   synthRAMs: Boolean,
 )
 
@@ -33,7 +34,7 @@ class nvdla(params: NVDLABlackBoxParams)
     val nvdla_core2dbb_aw_awid = Output(UInt((8).W))
     val nvdla_core2dbb_aw_awlen = Output(UInt((4).W))
     val nvdla_core2dbb_aw_awsize = Output(UInt((3).W))
-    val nvdla_core2dbb_aw_awaddr = Output(UInt((64).W))
+    val nvdla_core2dbb_aw_awaddr = Output(UInt((params.addrWidthAXI).W))
 
     val nvdla_core2dbb_w_wvalid = Output(Bool())
     val nvdla_core2dbb_w_wready = Input(Bool())
@@ -46,7 +47,7 @@ class nvdla(params: NVDLABlackBoxParams)
     val nvdla_core2dbb_ar_arid = Output(UInt((8).W))
     val nvdla_core2dbb_ar_arlen = Output(UInt((4).W))
     val nvdla_core2dbb_ar_arsize = Output(UInt((3).W))
-    val nvdla_core2dbb_ar_araddr = Output(UInt((64).W))
+    val nvdla_core2dbb_ar_araddr = Output(UInt((params.addrWidthAXI).W))
 
     val nvdla_core2dbb_b_bvalid = Input(Bool())
     val nvdla_core2dbb_b_bready = Output(Bool())
@@ -65,7 +66,7 @@ class nvdla(params: NVDLABlackBoxParams)
       val aw_awid = Output(UInt((8).W))
       val aw_awlen = Output(UInt((4).W))
       val aw_awsize = Output(UInt((3).W))
-      val aw_awaddr = Output(UInt((64).W))
+      val aw_awaddr = Output(UInt((params.addrWidthAXI).W))
 
       val w_wvalid = Output(Bool())
       val w_wready = Input(Bool())
@@ -78,7 +79,7 @@ class nvdla(params: NVDLABlackBoxParams)
       val ar_arid = Output(UInt((8).W))
       val ar_arlen = Output(UInt((4).W))
       val ar_arsize = Output(UInt((3).W))
-      val ar_araddr = Output(UInt((64).W))
+      val ar_araddr = Output(UInt((params.addrWidthAXI).W))
 
       val b_bvalid = Input(Bool())
       val b_bready = Output(Bool())

@@ -20,15 +20,16 @@ case class NVDLAParams(
 
 class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
-  val (hasSecondAXI, dataWidthAXI) = params.config match {
-    case "large" => (true, 256)
-    case "small" => (false, 64)
+  val (hasSecondAXI, dataWidthAXI, addrWidthAXI) = params.config match {
+    case "large" => (true, 256, 64)
+    case "small" => (false, 64, 32)
     case _ => throw new Exception(s"Illegal NVDLA configuration: ${params.config}")
   }
   val blackBoxParams = NVDLABlackBoxParams(
     configName = params.config,
     hasSecondAXI = hasSecondAXI,
     dataWidthAXI = dataWidthAXI,
+    addrWidthAXI = addrWidthAXI,
     synthRAMs = params.synthRAMs,
   )
 

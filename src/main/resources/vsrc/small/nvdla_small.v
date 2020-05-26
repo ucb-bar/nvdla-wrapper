@@ -19,7 +19,7 @@ module nvdla_small
     output [7:0] nvdla_core2dbb_aw_awid,
     output [3:0] nvdla_core2dbb_aw_awlen,
     output [2:0] nvdla_core2dbb_aw_awsize,
-    output [64 -1:0] nvdla_core2dbb_aw_awaddr,
+    output [32 -1:0] nvdla_core2dbb_aw_awaddr,
     output nvdla_core2dbb_w_wvalid,
     input nvdla_core2dbb_w_wready,
     output [64 -1:0] nvdla_core2dbb_w_wdata,
@@ -30,7 +30,7 @@ module nvdla_small
     output [7:0] nvdla_core2dbb_ar_arid,
     output [3:0] nvdla_core2dbb_ar_arlen,
     output [2:0] nvdla_core2dbb_ar_arsize,
-    output [64 -1:0] nvdla_core2dbb_ar_araddr,
+    output [32 -1:0] nvdla_core2dbb_ar_araddr,
     input nvdla_core2dbb_b_bvalid,
     output nvdla_core2dbb_b_bready,
     input [7:0] nvdla_core2dbb_b_bid,
@@ -101,7 +101,7 @@ NV_nvdla nvdla_top (
   ,.nvdla2csb_wr_complete           () //FIXME: no such port in apb2csb
   ,.nvdla_core2dbb_aw_awvalid       (nvdla_core2dbb_aw_awvalid)
   ,.nvdla_core2dbb_aw_awready       (nvdla_core2dbb_aw_awready)
-  ,.nvdla_core2dbb_aw_awaddr        (nvdla_core2dbb_aw_awaddr[31:0])
+  ,.nvdla_core2dbb_aw_awaddr        (nvdla_core2dbb_aw_awaddr)
   ,.nvdla_core2dbb_aw_awid          (nvdla_core2dbb_aw_awid)
   ,.nvdla_core2dbb_aw_awlen         (nvdla_core2dbb_aw_awlen)
   ,.nvdla_core2dbb_w_wvalid         (nvdla_core2dbb_w_wvalid)
@@ -114,7 +114,7 @@ NV_nvdla nvdla_top (
   ,.nvdla_core2dbb_b_bid            (nvdla_core2dbb_b_bid)
   ,.nvdla_core2dbb_ar_arvalid       (nvdla_core2dbb_ar_arvalid)
   ,.nvdla_core2dbb_ar_arready       (nvdla_core2dbb_ar_arready)
-  ,.nvdla_core2dbb_ar_araddr        (nvdla_core2dbb_ar_araddr[31:0])
+  ,.nvdla_core2dbb_ar_araddr        (nvdla_core2dbb_ar_araddr)
   ,.nvdla_core2dbb_ar_arid          (nvdla_core2dbb_ar_arid)
   ,.nvdla_core2dbb_ar_arlen         (nvdla_core2dbb_ar_arlen)
   ,.nvdla_core2dbb_r_rvalid         (nvdla_core2dbb_r_rvalid)
