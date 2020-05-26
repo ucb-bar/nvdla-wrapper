@@ -30,7 +30,6 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
-`define DESIGNWARE_NOEXIST 1
 `include "NV_HWACC_NVDLA_tick_defines.vh"
 module NV_NVDLA_partition_p (
    cacc2sdp_pd //|< i
