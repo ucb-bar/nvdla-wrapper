@@ -6,12 +6,19 @@ import sys.process._
 import chisel3._
 import chisel3.util._
 
+case class NVDLABlackBoxParams(
+  configName: String,
+  hasSecondAXI: Boolean,
+  dataWidthAXI: Int,
+  synthRAMs: Boolean,
+)
+
 //scalastyle:off
 //turn off linter: blackbox name must match verilog module
-class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dataWidthAXI: Int, synthRAMs: Boolean)
+class nvdla(params: NVDLABlackBoxParams)
   extends BlackBox with HasBlackBoxResource
 {
-  override def desiredName = blackboxName
+  override def desiredName = "nvdla_" + params.configName
 
   val io = IO(new Bundle {
 
@@ -30,8 +37,8 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
 
     val nvdla_core2dbb_w_wvalid = Output(Bool())
     val nvdla_core2dbb_w_wready = Input(Bool())
-    val nvdla_core2dbb_w_wdata = Output(UInt((dataWidthAXI).W))
-    val nvdla_core2dbb_w_wstrb = Output(UInt((dataWidthAXI/8).W))
+    val nvdla_core2dbb_w_wdata = Output(UInt((params.dataWidthAXI).W))
+    val nvdla_core2dbb_w_wstrb = Output(UInt((params.dataWidthAXI/8).W))
     val nvdla_core2dbb_w_wlast = Output(Bool())
 
     val nvdla_core2dbb_ar_arvalid = Output(Bool())
@@ -49,9 +56,9 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
     val nvdla_core2dbb_r_rready = Output(Bool())
     val nvdla_core2dbb_r_rid = Input(UInt((8).W))
     val nvdla_core2dbb_r_rlast = Input(Bool())
-    val nvdla_core2dbb_r_rdata = Input(UInt((dataWidthAXI).W))
+    val nvdla_core2dbb_r_rdata = Input(UInt((params.dataWidthAXI).W))
     // cvsram AXI
-    val nvdla_core2cvsram = if (hasSecondAXI) Some(new Bundle {
+    val nvdla_core2cvsram = if (params.hasSecondAXI) Some(new Bundle {
 
       val aw_awvalid = Output(Bool())
       val aw_awready = Input(Bool())
@@ -62,8 +69,8 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
 
       val w_wvalid = Output(Bool())
       val w_wready = Input(Bool())
-      val w_wdata = Output(UInt((dataWidthAXI).W))
-      val w_wstrb = Output(UInt((dataWidthAXI/8).W))
+      val w_wdata = Output(UInt((params.dataWidthAXI).W))
+      val w_wstrb = Output(UInt((params.dataWidthAXI/8).W))
       val w_wlast = Output(Bool())
 
       val ar_arvalid = Output(Bool())
@@ -81,7 +88,7 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
       val r_rready = Output(Bool())
       val r_rid = Input(UInt((8).W))
       val r_rlast = Input(Bool())
-      val r_rdata = Input(UInt((dataWidthAXI).W))
+      val r_rdata = Input(UInt((params.dataWidthAXI).W))
     }) else None
     // cfg APB
     val psel = Input(Bool())
@@ -93,9 +100,9 @@ class nvdla(configName: String, blackboxName: String, hasSecondAXI: Boolean, dat
     val pready = Output(Bool())
   })
 
-  val makeStr = s"make -C generators/nvdla/src/main/resources default NVDLA_TYPE=${configName}"
-  val preproc = if (synthRAMs) makeStr + " NVDLA_RAMS=synth" else makeStr
+  val makeStr = s"make -C generators/nvdla/src/main/resources default NVDLA_TYPE=${params.configName}"
+  val preproc = if (params.synthRAMs) makeStr + " NVDLA_RAMS=synth" else makeStr
   require (preproc.! == 0, "Failed to run pre-processing step")
 
-  addResource(s"/nvdla_${configName}.preprocessed.v")
+  addResource(s"/nvdla_${params.configName}.preprocessed.v")
 }

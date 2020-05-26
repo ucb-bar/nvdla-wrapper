@@ -20,12 +20,17 @@ case class NVDLAParams(
 
 class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
-  val blackboxName = "nvdla_" + params.config
   val (hasSecondAXI, dataWidthAXI) = params.config match {
     case "large" => (true, 256)
     case "small" => (false, 64)
     case _ => throw new Exception(s"Illegal NVDLA configuration: ${params.config}")
   }
+  val blackBoxParams = NVDLABlackBoxParams(
+    configName = params.config,
+    hasSecondAXI = hasSecondAXI,
+    dataWidthAXI = dataWidthAXI,
+    synthRAMs = params.synthRAMs,
+  )
 
   // DTS
   val dtsdevice = new SimpleDevice("nvdla",Seq("nvidia,nv_" + params.config))
@@ -88,7 +93,7 @@ class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
   lazy val module = new LazyModuleImp(this) {
 
-    val u_nvdla = Module(new nvdla(params.config, blackboxName, hasSecondAXI, dataWidthAXI, params.synthRAMs))
+    val u_nvdla = Module(new nvdla(blackBoxParams))
 
     u_nvdla.io.core_clk    := clock
     u_nvdla.io.rstn        := ~reset.asBool
