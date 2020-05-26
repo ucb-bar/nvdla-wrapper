@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # script to build both the small and large versions of nvdla
 
