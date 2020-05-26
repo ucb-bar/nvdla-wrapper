@@ -21,8 +21,11 @@ case class NVDLAParams(
 class NVDLA(params: NVDLAParams)(implicit p: Parameters) extends LazyModule {
 
   val blackboxName = "nvdla_" + params.config
-  val hasSecondAXI = params.config == "large"
-  val dataWidthAXI = if (params.config == "large") 256 else 64
+  val (hasSecondAXI, dataWidthAXI) = params.config match {
+    case "large" => (true, 256)
+    case "small" => (false, 64)
+    case _ => throw new Exception(s"Illegal NVDLA configuration: ${params.config}")
+  }
 
   // DTS
   val dtsdevice = new SimpleDevice("nvdla",Seq("nvidia,nv_" + params.config))
