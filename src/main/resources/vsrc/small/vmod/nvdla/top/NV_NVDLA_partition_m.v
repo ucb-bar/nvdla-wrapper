@@ -14,7 +14,6 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
-`define DESIGNWARE_NOEXIST 1
 module NV_NVDLA_partition_m (
    csb2cmac_a_req_pd //|< i
   ,csb2cmac_a_req_pvld //|< i

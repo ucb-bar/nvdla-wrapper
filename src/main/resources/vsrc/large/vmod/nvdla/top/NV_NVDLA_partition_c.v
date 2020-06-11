@@ -51,7 +51,6 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
-`define DESIGNWARE_NOEXIST 1
 // ================================================================
 // NVDLA Open Source Project
 // 

@@ -14,7 +14,6 @@
 // this distribution for more information.
 // ================================================================
 // File Name: NV_NVDLA_CMAC.h
-`define DESIGNWARE_NOEXIST 1
 module NV_NVDLA_CMAC_CORE_rt_in (
    nvdla_core_clk
   ,nvdla_core_rstn
