@@ -3,7 +3,7 @@ package nvidia.blocks.dla
 
 import chisel3._
 
-import freechips.rocketchip.config.{Field, Parameters, Config}
+import org.chipsalliance.cde.config.{Field, Parameters, Config}
 
 /**
  * Config fragment to add a NVDLA to the SoC.
