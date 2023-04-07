@@ -2,7 +2,7 @@
 package nvidia.blocks.dla
 
 import chisel3._
-import freechips.rocketchip.config.Field
+import org.chipsalliance.cde.config.Field
 import freechips.rocketchip.subsystem.BaseSubsystem
 import freechips.rocketchip.diplomacy.{LazyModule,BufferParams}
 import freechips.rocketchip.tilelink.{TLBuffer, TLIdentityNode}
