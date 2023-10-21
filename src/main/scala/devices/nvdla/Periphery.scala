@@ -12,11 +12,13 @@ case object NVDLAFrontBusExtraBuffers extends Field[Int](0)
 
 trait CanHavePeripheryNVDLA { this: BaseSubsystem =>
   p(NVDLAKey).map { params =>
-    val nvdla = LazyModule(new NVDLA(params))
-
-    fbus.coupleFrom("nvdla_dbb") { _ := TLBuffer.chainNode(p(NVDLAFrontBusExtraBuffers)) := nvdla.dbb_tl_node }
-    pbus.coupleTo("nvdla_cfg") { nvdla.cfg_tl_node := TLFragmenter(4, pbus.blockBytes) := TLWidthWidget(pbus.beatBytes) := _ }
-
-    ibus.fromSync := nvdla.int_node
+    // assumes pbus/sbus/ibus are on the same clock
+    val nvdlaDomain = sbus.generateSynchronousDomain
+    nvdlaDomain {
+      val nvdla = LazyModule(new NVDLA(params))
+      sbus.coupleFrom("nvdla_dbb") { _ := TLBuffer.chainNode(p(NVDLAFrontBusExtraBuffers)) := nvdla.dbb_tl_node }
+      pbus.coupleTo("nvdla_cfg") { nvdla.cfg_tl_node := TLFragmenter(4, pbus.blockBytes) := TLWidthWidget(pbus.beatBytes) := _ }
+      ibus.fromSync := nvdla.int_node
+    }
   }
 }
