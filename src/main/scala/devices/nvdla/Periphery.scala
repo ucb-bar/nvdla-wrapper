@@ -3,7 +3,7 @@ package nvidia.blocks.dla
 
 import chisel3._
 import org.chipsalliance.cde.config.Field
-import freechips.rocketchip.subsystem.BaseSubsystem
+import freechips.rocketchip.subsystem.{BaseSubsystem, SBUS, PBUS}
 import freechips.rocketchip.diplomacy.{LazyModule,BufferParams}
 import freechips.rocketchip.tilelink.{TLBuffer, TLIdentityNode, TLWidthWidget, TLFragmenter}
 
@@ -13,6 +13,8 @@ case object NVDLAFrontBusExtraBuffers extends Field[Int](0)
 trait CanHavePeripheryNVDLA { this: BaseSubsystem =>
   p(NVDLAKey).map { params =>
     // assumes pbus/sbus/ibus are on the same clock
+    val sbus = locateTLBusWrapper(SBUS)
+    val pbus = locateTLBusWrapper(PBUS)
     val nvdlaDomain = sbus.generateSynchronousDomain
     nvdlaDomain {
       val nvdla = LazyModule(new NVDLA(params))
