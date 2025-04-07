@@ -3,7 +3,8 @@ package nvidia.blocks.dla
 
 import chisel3._
 import org.chipsalliance.cde.config.{Field, Parameters}
-import freechips.rocketchip.subsystem.{BaseSubsystem, SBUS, PBUS, SubsystemInjector}
+import freechips.rocketchip.subsystem.{BaseSubsystem, SBUS, PBUS}
+import testchipip.soc.{SubsystemInjector}
 import freechips.rocketchip.diplomacy.{LazyModule,BufferParams}
 import freechips.rocketchip.tilelink.{TLBuffer, TLIdentityNode, TLWidthWidget, TLFragmenter}
 

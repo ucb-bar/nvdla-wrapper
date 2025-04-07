@@ -4,7 +4,7 @@ package nvidia.blocks.dla
 import chisel3._
 
 import org.chipsalliance.cde.config.{Field, Parameters, Config}
-import freechips.rocketchip.subsystem.{SubsystemInjectorKey}
+import testchipip.soc.{SubsystemInjectorKey}
 
 /**
  * Config fragment to add a NVDLA to the SoC.
